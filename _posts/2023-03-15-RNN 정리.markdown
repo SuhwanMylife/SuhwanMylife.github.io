@@ -1,0 +1,310 @@
+---
+layout: post
+title: "RNN 정리"
+tags:
+  - Basic
+  - RNN
+use_math: true
+---
+
+<br>
+
+RNN 역전파 수식을 이해하고 싶은 분이라면 도움이 될 것이다.
+
+여러 RNN 관련 글을 보았는데 이 글의 설명이 가장 착했다. 앞의 RNN 개념은 여기 글을 긁어온 것이니 여기로 들어가 보고 오는 게 좋다. 나는 아래 글을 축약해서 정리한지라 좀 불친절할 수 있다.
+
+[호다닥 공부해보는 RNN 친구들(1) - RNN(Recurrent Neural Networks)](https://gruuuuu.github.io/machine-learning/lstm-doc/)<br><br>
+
+---
+
+# RNN이란?
+
+- Recurrent한 model
+- input - RNN - output - input - RNN - out과 같은 방식으로 1자로 쭉 이어져서 sequence한 모델
+
+![Untitled](https://user-images.githubusercontent.com/70688382/227448076-8b1525f4-dcd3-4bb8-b925-0b8f5461b326.png)
+
+이전 단계에서의 결과가 다음단계의 입력이 되는 순환적인 구조 
+
+- **연속적인 이벤트**나 **자연어 처리** 용도로 사용
+    - 과거를 토대로 미래를 예측할 수 있게 함<br><br>
+
+# Deep Dive
+
+### 들어가기 전에 알아두어야 할 정보
+
+Input(X), hidden state(h), Output(Y)값 제외하고 모든 변수가 같다.
+
+- 하나의 RNN 모델에서 각 값 계산에 활용되는 가중치값(W), bias(b), 활성화함수(f)는 변하지 않는다. (역전파 시에만 변경!)
+
+### **Input(Initial)**
+
+RNN에서의 Input: 이전 state의 **hidden state**값이 반드시 필요 (첫 Input 제외)
+
+> **hidden state**: 시간 t일 때의 상태. output과 같다 생각할 수 있지만 **hidden state**를 용도에 맞게 정제한 결과가 output이라 생각하면 됨
+> 
+
+![Untitled 1](https://user-images.githubusercontent.com/70688382/227448175-ebf7944b-5038-4008-9300-509c66f886e1.png)
+
+초기 상태(t=0)의 **Input**값: $x_0$, **Input**을 위한 가중치: $W_x$
+
+**hidden state**: 각 변수를 곱하고 활성화 함수(activation function) **f** 적용한 값
+
+<br>
+
+<details>
+<summary><b>Activation Function</b> (갑자기 "어떤 활성화 함수를 써야하지?"라는 궁금증이 들었다면 클릭)</summary>
+<div markdown="1">
+
+어떤 활성화 함수를 사용해야 할까? 궁금해서 더 찾아봤다. ~~(이 부분은 틀린 내용일 수 있음)~~
+
+![Untitled 2](https://user-images.githubusercontent.com/70688382/227448238-58808d51-7760-44a8-9745-fe28fb358623.png)
+
+Sigmoid, tanh: -1 ~ 1 사이에 분포
+
+relu: x축이 양수가 되는 지점에서 y=x 그래프
+
+LSTM, GRU(고급 architecture에서 사용)
+
+**RNN에서 ReLU를 쓰지 않는 이유**
+
+- RNN 구조 상 계속 순환하는 구조로 값이 1보다 크게 되면 Gradient Exploding 문제 발생 가능성이 높다.
+
+**RNN에서 Sigmoid를 쓰지 않는 이유**
+
+- Sigmoid의 미분 최대값이 0.25이기 때문에 Deep해질수록 Gradient Vanishing 문제가 발생한다.
+
+⇒ RNN 내부에서 활성화함수는 tanh가 적절하다!
+
+</div>
+</details>
+
+다음 state(t=1)로 넘어가자.
+
+<br>
+
+### Input(next state)
+
+![Untitled 3](https://user-images.githubusercontent.com/70688382/227448321-a800bf45-9d17-4d8d-9f6c-9ad6776d864e.png)
+
+달라진 점: 0번째 **hidden state** 계산 추가
+
+- **0번째 hidden state**와 그 가중치의 곱 + **1번째** Input값과 그 가중치의 곱 = **1번째 hidden state $h_1$**
+- 각 **hidden state**는 이전 state들의 정보를 모두 포함하고 있음(연속적 이벤트처리, 자연어 처리)
+
+<br>
+
+### Output
+
+softmax를 사용한 분류
+
+![Untitled 4](https://user-images.githubusercontent.com/70688382/227448401-57e5e267-d8d2-455d-8dd4-af9bebf63e69.png)
+
+초기 출력값 $Y_1$: softmax(1번 상태에서의 hidden state $h_1$ * 가중치 $W_y$)
+
+이후 one-hot endoding
+
+<br>
+
+### Generalization
+
+뒤에 수식이 좀 나올 거라서… 미리 일반화한 수식을 보면서 익숙해집시다.
+
+hidden state (h)
+
+$
+h_t=f(h_{t-1}W+x_tW_x)
+$
+
+output (y)
+
+$
+y_t = f(h_tW_y)
+$
+
+<br>
+
+# **순전파와 역전파**
+
+여기부터는 ‘Do it! 딥러닝 입문’이라는 책 저자가 만든 유튜브 영상을 일부 참고하였다. 영상을 보아도 좋지만 본인은 이해에 차질이 생겨 어려움을 겪었다. 여기부터는 본인이 제법 친절하게 설명하고 있으니 영상을 보다 모르겠으면 이 글을 병행해서 보기를 추천한다.
+
+[[Do it! 딥러닝 입문] 9장 텍스트를 분류합니다 - 순환 신경망](https://www.youtube.com/watch?v=iAv6yA7hv2o&list=PLJN246lAkhQgbBx2Kag0wIZedn-P9KcH9&index=21)
+
+### 정방향 계산
+
+![Untitled 9](https://user-images.githubusercontent.com/70688382/227448566-f48d196c-e60b-40cb-aa0d-0adcc2c75d46.png)
+
+$H_p W_{1h}$만 추가된 형태
+
+순환층의 정방향 계산
+
+- $Z_1 = XW_{1x}+H_p W_{1h}+b_1$
+- $H=\tanh(Z_1)$
+
+출력층의 정방향 계산
+
+- $Z_2=HW_2+b_2$
+- $A_2=sigmoid(Z_2)$ (이진 분류 문제 가정)
+
+<br>
+
+### 역방향 계산
+
+gradient가 뒤에서 앞으로 흘러간다고 생각하고 보면 이해가 잘 될거다. 우선, 출력층의 가중치와 절편의 gradient 계산 과정이다.
+
+![Untitled 10](https://user-images.githubusercontent.com/70688382/227448610-467b95a2-392d-4077-90db-dde5d0389b38.png)
+
+우리가 알아야 하는 parameter: ${\partial L \over \partial W_2}$($W_{hy}$), ${\partial L \over \partial b_2}$($b_y$)
+
+Chain Rule에 의해,
+
+$
+{\partial L \over \partial W_2} = {\partial L \over \partial A}{\partial A \over \partial Z_2}{\partial Z_2 \over \partial W_2} = H^T(-(Y-A_2))
+$
+
+$
+{\partial L \over \partial b_2} = {\partial L \over \partial A}{\partial A \over \partial Z_2}{\partial Z_2 \over \partial b_2} = 1^T(-(Y-A_2))
+$
+
+- 여기서 ${\partial L \over \partial Z_2}$는 로지스틱 손실함수($L$) 미분 과정을 보면 이해할 수 있다. 여기서는 생략하겠다.
+
+<br>
+
+다음, hidden state의 가중치와 절편, 입력층의 가중치의 gradient만 계산하면 끝!
+
+<br>
+
+![Untitled 11](https://user-images.githubusercontent.com/70688382/227448642-c059c496-5e36-463f-8313-d09ddca5db66.png)
+
+우리가 알아야 하는 parameter: ${\partial L \over \partial W_{1h}}$($W_{hh}$), ${\partial L \over \partial W_{1x}}$($W_{xh}$), ${\partial L \over \partial W_{b1}}$($b_h$)
+
+여기서는 ${\partial L \over \partial W_{1h}}$만 구해보자. 역시 Chain Rule에 의해,
+
+$
+{\partial L \over \partial W_{1h}} = {\partial L \over \partial Z_2}{\partial Z_2 \over \partial H}{\partial H \over \partial Z_1}{\partial Z_1 \over \partial W_{1h}}
+$
+
+$
+{\partial L \over \partial Z_2} = -(Y-A_2), {\partial Z_2 \over \partial H} = W_2
+$
+
+$
+{\partial H \over \partial Z_1} = {\partial\over \partial Z_1}\tanh(Z_1) = 1-\tanh^2(Z_1)=1-H^2
+$
+
+이제 ${\partial Z_1 \over \partial W_{1h}}$만 구하면 되는데,
+
+<br>
+
+![Untitled 12](https://user-images.githubusercontent.com/70688382/227448790-cadb5093-166b-45bd-8628-d45b42a56217.png)
+
+$H_p$가 상수가 아니라 $W_{1h}$로 이루어진 함수라는 것! 때문에 이를 미분해 주는 복잡한 과정이 아래에 있다. ~~(하지만 쉬울지도?)~~
+
+<br>
+
+![Untitled 13](https://user-images.githubusercontent.com/70688382/227448829-28eaea9f-cde3-4939-bbf3-3d441ca1b58e.png)
+
+위 미분 과정에서 결국 ${\partial \over \partial Z_1}(H_p W_{1h})$만 남는 것은 동일하나, $H_p$를 상수 취급할 수 없다. 따라서 한 번은 $H_p$를 상수취급하고 미분, 한 번은 $W_{1h}$를 상수취급하고 미분하여 더해주어야 한다. 때문에 위 그림의 식처럼 계속 같은 형태의 식이 곱해지는 재귀적인 수식이 나오게 된다. 언제 끝나냐? 역전파는 끝에서 시작하니, 한 번 입력된 데이터의 끝에서 처음까지! (이 문제를 해결하고자 Truncated BPTT 기법을 사용한다.)
+
+![Untitled 14](https://user-images.githubusercontent.com/70688382/227448856-44c5e806-6134-4875-993e-3abf0c346592.png)
+
+![Untitled 15](https://user-images.githubusercontent.com/70688382/227448922-a419d381-9013-4105-bf6f-e74715cbb94e.png)
+
+여튼 위에서 구한 gradient를 활용해 각각의 가중치, 절편을 최신화해주면 역전파가 마무리된다.
+
+- 위 식에서 학습률(Learning Rate)만 추가되면 good
+
+<br>
+
+여기서부터는 아래의 글을 참고하여 정리하였다.
+
+[[ML/NLP] 11. RNN](https://hezma.tistory.com/105)
+
+<br>
+
+# Truncated BPTT
+
+기존의 BPTT(BackPropagation Throgh Time): gradient가 무한대로 발산 혹은 무한히 작아지는 문제 (vanishing & exploding gradients)
+
+Truncated BPTT: RNN 역전파 시, gradient를 일정단위씩 끊어서 계산 ~~(10개면 10개씩, 20개면 20개씩…)~~
+
+- 순전파는 끝까지 진행하되, 역전파 시 끊음. 일정 단위마다 역전파법 수행
+
+<br>
+
+### Minibatch Learning of Truncated BPTT
+
+예) 길이가 1000인 시계열 데이터에 대해 시각의 길이(timestamp)를 10개 단위로 잘라 Truncated BPTT로 학습하는 경우
+
+이 때 미니배치의 수를 2개로 구성한다 가정,
+
+- 첫 번째 미니배치는 처음(0번)부터 순서대로 499번까지 10개씩 묶을 것이고, 두 번째 미니배치는 500번째 데이터를 시작 위치로 정하고 999번까지 10개씩 묶어서 비로소 **배치의 수**가 **2개**인 데이터가 되는 것임
+- 이후 미니배치별로 데이터의 시작위치를 옮겨준다.
+
+![Untitled 16](https://user-images.githubusercontent.com/70688382/227448948-a2444e98-1513-456e-83c1-df153c87e5f2.png)
+
+<br>
+
+# Bidirectional RNN
+
+시퀀스의 과거의 값들 뿐만 아니라 이후의 값들에 의해서도 값이 결정되는 경우
+
+예시)
+
+i) I am _____.
+
+ii) I am _____ hungry.
+
+iii) I am ______ hungry, and I can eat half a pig.
+
+뒤에 오는 단어들에 의해 빈칸에 들어갈 수 있는 단어가 제한된다.
+
+때문에, 시퀀스의 이전부분 뿐만 아니라 이후 부분까지 결합하여 예측하는 Bidirectional RNN 모델 제안
+
+<br>
+
+### Bidirectional RNN 구조
+
+두 개의 RNN이 함께 쌓여 있고, 최종 output은 두 RNN의 은닉 상태를 거쳐 계산된다.
+
+2개의 RNN
+
+- 첫 번째 토큰부터 시작하는 forward mode의 RNN unit
+- 맨 마지막 토큰에서 시작해서 앞으로 가는 backward mode의 RNN unit
+
+![Untitled 17](https://user-images.githubusercontent.com/70688382/227449004-c7ba020e-3a28-44d3-aef6-ff15d58c3889.png)
+
+<br>
+
+# RNN의 한계점 및 대책
+
+장기 의존 관계(Long-Term Dependency) 학습에 한계
+
+- Gradient Vanishing, Gradient Exploding 문제
+
+### 기울기 폭발의 대책
+
+1. 기울기 클리핑(Gradients clipping)
+    - 기울기가 임계값을 넘지 않도록 값을 자르는 기법
+    - RNN에서 유용
+    - 주로 그래디언트의 L2 norm으로 나눠주는 방식 이용
+    
+    ![Untitled 18](https://user-images.githubusercontent.com/70688382/227449039-5fa387c6-2873-404b-a7fa-07ce6e649672.png)
+    
+
+![Untitled 19](https://user-images.githubusercontent.com/70688382/227449088-b9e52de8-de98-4748-a32c-636cb76b0cd9.png)
+
+그래디언트 클리핑을 하지 않으면 전역 최솟값에 도달하지 못하고 발산하는 것을 볼 수 있지만, 그래디언트 클리핑을 하고 나면 방향은 유지하되 적은 값만큼 이동하여 전역 최솟값으로 향하게 됩니다.
+
+2. RNN 계층의 신경망 구성에 게이트를 추가하는 방법
+    
+    **LSTM**(Long Short-Term Memory)과 **GRU**(Gated Recurrent Unit)
+
+<br>
+
+pytorch 코드에서의 RNN (추후 내용 추가)
+
+<br>
+
+LSTM에 대한 정리는 다음 글에서 이어가도록 하겠습니다.
+

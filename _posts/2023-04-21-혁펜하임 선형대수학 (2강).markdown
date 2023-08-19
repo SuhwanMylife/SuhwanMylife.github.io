@@ -1,0 +1,964 @@
+---
+layout: post
+title: "혁펜하임 선형대수학 (2강)"
+tags:
+  - 선형대수
+use_math: true
+---
+
+<br>
+
+유튜브 채널 ‘혁펜하임’의 ‘혁펜하임의 “보이는” 선형대수학’을 공부하며 개인적으로 정리한 글입니다. 당연히 강의를 보는 게 이해하는 데 훨씬 많은 도움이 됩니다.
+
+[[선대] 2-1강. 벡터의 덧셈과 뺄셈 그리고 스칼라배 쉬운 설명](https://www.youtube.com/watch?v=a9WcCSk_LmE&list=PL_iJu012NOxdZDxoGsYidMf2_bERIQaP0&index=3)
+
+2강 중반부까지는 공부할 만했는데, 2-10 ‘Null Space’와 2-11 ‘Ax=b 해의 수 알아내기’는 몇 번 돌려보아도 완벽히 이해하지 못한 느낌이다. 계속 똑같은 부분 보고 있으면 흥미가 떨어지기에 필요할 때 다시 보며 보완해 나갈 것이다.
+
+중간에 이상하게 깨진 행렬이 있는데 아무리 수정해도 깨지는 것을 피할 수 없었다. 추후 방법을 알게 되면 수정할 것이다.
+
+<br>
+
+# 2강 행렬과 벡터
+
+# 2-1 벡터의 덧셈, 뺄셈 그리고 스칼라배
+
+<details>
+<summary>2-1 벡터의 덧셈, 뺄셈 그리고 스칼라배</summary>
+<div markdown="1">
+  
+  ![Untitled](https://user-images.githubusercontent.com/70688382/233465943-9d668977-bef4-4497-b74d-32ed1bb1f456.png)
+
+  벡터는 크기와 방향을 가짐
+
+  방향은 양의 x축과 이루고 있는 각도 $\theta$로 표현 (탄젠트의 역함수 $\tan^{-1}$ 활용)
+
+  <br>
+
+  ![Untitled 1](https://user-images.githubusercontent.com/70688382/233465967-193801a8-147b-4bff-9af5-f6fbb61285ae.png)
+
+  두 벡터의 위치가 달라도 크기와 방향이 같기 때문에 같은 벡터이다.
+
+  <br>
+
+  ![Untitled 2](https://user-images.githubusercontent.com/70688382/233465980-5fd7431e-58b3-41eb-9d1e-cee8445c38bf.png)
+
+  벡터의 덧셈 뺄셈
+
+  <br>
+
+  ![Untitled 3](https://user-images.githubusercontent.com/70688382/233465999-ddc90dbc-fa88-4fe1-9888-436dbe939767.png)
+
+  벡터의 덧셈을 그래프로 표현한 것
+
+  <br>
+
+  ![Untitled 4](https://user-images.githubusercontent.com/70688382/233466011-7490f514-be12-4976-b2a7-3281c1ea3b65.png)
+
+  벡터의 스칼라배
+
+  <br>
+
+  ![Untitled 5](https://user-images.githubusercontent.com/70688382/233466032-56cba35e-219e-4181-bb56-ccceaf745981.png)
+
+  위 벡터 연산을 활용하여 모든 벡터를 표현할 수 있음
+
+  - a, b의 값을 변경시켜가며 모든 벡터를 표현할 수 있다.
+
+</div>
+</details>
+
+<br>
+
+# 2-2 전치(Transpose)
+
+<details>
+<summary>2-2 전치(Transpose)</summary>
+<div markdown="1">
+
+벡터에 수행하는 다음의 작업을 **전치**라고 한다.
+
+$\bf{A}$ ⇒ $\bf{A^T}$
+
+$a_{ij}$ ⇒ $a_{ji}$
+
+![Untitled 6](https://user-images.githubusercontent.com/70688382/233466044-e84fe88a-d836-4885-9889-e78b865b0827.png)
+
+<br>
+
+3x1 벡터를 전치하면 1x3 벡터가 된다.
+
+![Untitled 7](https://user-images.githubusercontent.com/70688382/233466064-20e75eb1-f172-4fca-ae58-630cfb663a16.png)
+
+![Untitled 8](https://user-images.githubusercontent.com/70688382/233466084-147c66eb-0885-4630-bd99-a2bb4189dd3f.png)
+
+<br>
+
+symmetric matrix: 대칭 행렬
+
+![Untitled 9](https://user-images.githubusercontent.com/70688382/233466101-5015cb26-caa0-4924-94ec-ff420c51ece6.png)
+
+<br>
+
+Hermitian matrix: 에르미트 행렬
+
+![Untitled 10](https://user-images.githubusercontent.com/70688382/233466125-a9a8330c-34ee-42f7-8459-9572b0b8890e.png)
+
+1. 복소수를 원소로 가지고 있는 정방 행렬
+2. 가지 자신과 그의 켤레전치(conjugate transpose) 행렬이 같은 행렬
+
+<br>
+
+## 행렬 주요 성질
+
+![Untitled 11](https://user-images.githubusercontent.com/70688382/233466151-3e0f0860-ee8b-437c-ad71-dab28f92c1d2.png)
+
+1. $\bf{(A^T)^T = A}$
+
+2. $\bf{(A+B)^T = A^T + B^T}$
+
+3. $\bf{(AB)^T = B^TA^T}$
+
+4. $\bf{(cA)^T = cA^T}$
+
+5. $\det(\bf{A^T}) = \det(\bf{A})$
+   - 행렬식(determinant): 행렬을 대표하는 값
+   - n x n의 정방행렬 $\bf{A}$
+
+6. $\bf{(A^T)^{-1} = (A^{-1})^T}$
+   - $\bf{A^{-T}}$로 표현하기도 함
+
+<br>
+
+출처
+1. [[Linear Algebra] Lecture 25 대칭 행렬(Symmetric Matrix)과 스펙트럼 정리(Spectral Theorem)](https://twlab.tistory.com/54)
+2. [행렬식](http://www.ktword.co.kr/test/view/view.php?m_temp1=4650)
+
+</div>
+</details>
+
+<br>
+
+# 2-3 내적과 정사영
+
+<details>
+<summary>2-3 내적과 정사영</summary>
+<div markdown="1">
+
+![Untitled 12](https://user-images.githubusercontent.com/70688382/233466172-6c59f6e3-fc2d-460b-af5b-af37699830e7.png)
+
+dot product = scalar product
+
+inner product: 좀 더 일반화된 개념
+
+<br>
+
+연산 과정
+
+![Untitled 13](https://user-images.githubusercontent.com/70688382/233466241-8c1d785e-1bc6-41fe-b6e9-b595fb70d80b.png)
+
+각각을 곱해서 더하면 끝
+
+- 연산 결과: 스칼라 (8)
+- a와 b의 내적을 수식으로 했을 때: $\bf{a^Tb}$ = $\bf{b^Ta}$
+
+<br>
+
+![Untitled 14](https://user-images.githubusercontent.com/70688382/233466266-721f4bcc-d76c-497f-aa5f-25968922a50a.png)
+
+$\bf{a^Tb = \vert\vert a\vert\vert \cdot\vert\vert b\vert\vert cos\theta}$
+- $\bf{\vert\vert a\vert\vert}$: 벡터 a의 크기
+- $\bf{\vert\vert a\vert\vert\cos\theta}$ 또는 $\bf{\vert\vert b\vert\vert\cos\theta}$: 각 벡터 b, a에 정사영 내린 벡터의 크기
+- 내적은 정사영이다~ 내적은 정사영이다~
+
+<br>
+
+![Untitled 15](https://user-images.githubusercontent.com/70688382/233466288-d228e34b-875c-4fe1-9585-a6d888435486.png)
+
+내적 구하는 과정을 시각화한 이미지
+
+- 그럼 $\bf{\vert\vert b\vert\vert\cos\theta}$(?)의 결과물 [ 0.8 2.4]은 어떻게 나온거지?
+
+<br>
+
+![Untitled 16](https://user-images.githubusercontent.com/70688382/233466342-b9a7be09-1f96-41f9-b165-3b2b053286d9.png)
+
+$\bf{a^Ta} = \bf{\vert\vert a\vert\vert\cdot\vert\vert a\vert\vert} = \bf{\vert\vert a\vert\vert^2}$
+
+$\therefore$ 벡터 a의 크기 $\bf{\vert\vert a\vert\vert} = \bf{\sqrt{a^Ta}}$
+
+단위 벡터 unit vector: 크기가 1인 벡터
+
+a와 방향은 같고 크기가 1인 단위 벡터: $\bf{a\over\sqrt{a^Ta}}$ (Normalize)
+
+<br>
+
+![Untitled 17](https://user-images.githubusercontent.com/70688382/233466356-9a949b3b-4359-4c4e-9d4e-f60f311f4d3c.png)
+
+내적은 **닮은 정도**를 나타내는 방식이다!
+
+- 어떤 특정 벡터를 단위 벡터(unit vector)와 내적한다고 했을 때, 그 **특정 벡터가 단위 벡터와 얼마나 닮았는가?**를 내적의 결과값을 통해 알 수 있다!
+    - 두 벡터의 방향이 일치할 때 가장 값이 크다 = 가장 닮았다
+    - 두 벡터가 이루는 각이 0일 때 = 특정 벡터는 특정 단위 벡터의 성분이 전혀 없다
+    - 반대 방향일 때 = 음으로 닮았다
+
+아래 이미지: 내적의 닮은 정도 시각화
+
+![Untitled 18](https://user-images.githubusercontent.com/70688382/233466371-bb03a386-ca2a-48af-963c-1d1ad5672eeb.png)
+
+![Untitled 19](https://user-images.githubusercontent.com/70688382/233466394-a85f335f-f042-493c-926f-6e3e0ce83108.png)
+
+![Untitled 20](https://user-images.githubusercontent.com/70688382/233466424-d2fe1357-929b-430a-9888-5e9b317a39df.png)
+
+![Untitled 21](https://user-images.githubusercontent.com/70688382/233466447-652fd300-d95f-490c-8927-d8cba0942dc8.png)
+
+![Untitled 22](https://user-images.githubusercontent.com/70688382/233466471-a83b93d2-2935-4acf-beb9-8d9798df0b4d.png)
+
+<br>
+
+정사영된 벡터 구하기
+
+![Untitled 1](https://user-images.githubusercontent.com/70688382/233465177-e74941ee-f74a-4fe2-9e35-c385d63f0d6c.jpeg)
+
+급한대로 따로 필기한 이미지 넣은 건데 악필에 비스듬하게 적었네;
+
+- 무튼 담에 또 보면 알겠지?
+
+<br>
+
+정사영된 벡터 구하기 (기하학적 방법)
+
+![Untitled](https://user-images.githubusercontent.com/70688382/233465207-3685c6d4-ad76-4736-ba48-35084233863e.jpeg)
+
+<br>
+
+정사영된 벡터 구하기 (단위 벡터 이용)
+
+![Untitled 23](https://user-images.githubusercontent.com/70688382/233466496-a7cb7ac4-4bb7-451b-81da-a5c3824a1ece.png)
+
+- a와 b의 단위 벡터 내적하여 a가 b 방향을 얼마나 가지고 있는지 알아낸 후 b방향 unit vector와 곱하여 좌표를 알아내보자~ 이렇게 생각할 수도 있다!
+
+</div>
+</details>
+
+<br>
+
+# 2-4 벡터의 norm
+
+<details>
+<summary>2-4 벡터의 norm</summary>
+<div markdown="1">
+
+norm: 크기를 나타냄 ⇒ 항상 0 or 양수의 스칼라
+
+벡터의 길이, 두 벡터 간의 거리를 이야기할 때 사용되는 개념
+
+다양한 방법으로 벡터의 크기를 나타낼 수 있다.
+
+<br>
+
+### 1. 2-norm
+
+![Untitled 24](https://user-images.githubusercontent.com/70688382/235811145-5a63df94-60e5-45b3-bb3b-e6cedb3fd336.png)
+
+각 요소에 **절대값**의 제곱의 합의 제곱근하는 방식
+
+- 놀랍게도 제곱에 올라가는 모든 숫자에 숫자 2가 들어간다. 그래서 **2-norm.**
+- **복소수 있을 때 절대값 여부에 따라 값 다름!**
+
+<br>
+
+2-norm을 두 벡터 사이의 거리를 구하는 데에 적용시켜보자.
+
+![Untitled 25](https://user-images.githubusercontent.com/70688382/235811170-01907705-b23e-415e-9457-d1ddc751512a.png)
+
+2-norm 표기: $\bf{\vert\vert a\vert\vert}_2$
+
+$l_2$-norm이라 부름
+
+<br>
+
+### 2. 1-norm
+
+![Untitled 26](https://user-images.githubusercontent.com/70688382/235811200-ffbb8a4d-491f-4eb4-8352-e72d7205d054.png)
+
+![Untitled 27](https://user-images.githubusercontent.com/70688382/235811218-58513f49-310f-4659-879f-fe13d482621d.png)
+
+1-norm 표기: $\bf{\vert\vert a\vert\vert}_1$
+
+$l_1$-norm이라 부름
+
+<br>
+
+### 3. P-norm
+
+![Untitled 28](https://user-images.githubusercontent.com/70688382/235811224-e23bba16-4208-4e1e-8b71-7ec5d54867bc.png)
+
+![Untitled 29](https://user-images.githubusercontent.com/70688382/235811300-de208ec2-1de4-46f2-ad9b-905b6a50b069.png)
+
+세모등호: equal by definition 정의상 같다는 의미
+
+<br>
+
+### 4. infinity norm
+
+![Untitled 30](https://user-images.githubusercontent.com/70688382/235811321-449740a4-c7f7-4043-ac24-73c783093bf9.png)
+
+무한대로 보내면 **절대값이 가장 큰 녀석**만 남게 됨 
+
+![Untitled 31](https://user-images.githubusercontent.com/70688382/235811364-b33d1085-ae50-4f7a-970e-7856e92f5efc.png)
+
+<br>
+
+### 세 norm을 비교
+
+![Untitled 32](https://user-images.githubusercontent.com/70688382/235811374-71784c6d-1b0c-480e-b5b4-94957913aa8d.png)
+
+파란색: 2-norm, 빨간색: 1-norm, 노란색: infinity norm
+
+$$
+\begin{matrix}
+3  \\
+4  \\
+\end{matrix}
+$$ 벡터에 대한 각 norm을 따져보면,
+
+- 1-norm: 7
+- 2-norm: 5
+- infinity norm: 4
+
+⇒ 1-norm > 2-norm > infinity norm
+
+<br>
+
+### 세 norm을 비교(시각화)
+
+![Untitled 33](https://user-images.githubusercontent.com/70688382/235811388-8636e3f2-70d9-4f74-a65b-dafd72959865.png)
+
+![Untitled 34](https://user-images.githubusercontent.com/70688382/235811403-0276c325-a77e-47b2-9370-2b165529c93b.png)
+
+![Untitled 35](https://user-images.githubusercontent.com/70688382/235811409-b47a6780-6350-4f88-908a-4a2c0e824d5f.png)
+
+</div>
+</details>
+
+<br>
+
+# 2-5 행렬의 곱셈과 네 가지 관점
+
+<details>
+<summary>2-5 행렬의 곱셈과 네 가지 관점</summary>
+<div markdown="1">
+
+행렬과 행렬의 곱셈 마스터!
+
+![Untitled 36](https://user-images.githubusercontent.com/70688382/235811435-e3d062c4-ea68-41ff-abfc-ea775c12eed4.png)
+
+왼쪽 행렬의 열과 오른쪽 행렬의 행의 수가 딱 맞아야 곱셈(?) 연산이 가능함을 알 수 있다
+
+![Untitled 37](https://user-images.githubusercontent.com/70688382/235811445-323bced6-c167-4d20-a8cf-832b42c5e467.png)
+
+<br>
+
+### 행렬의 곱셈 네 가지 관점
+
+**1.** 내적으로 바라보기
+
+![Untitled 38](https://user-images.githubusercontent.com/70688382/235811454-e186eaaa-443c-4684-9380-848783e667e8.png)
+
+행렬의 곱셈을 내적으로 바라보기
+
+![Untitled 39](https://user-images.githubusercontent.com/70688382/235811464-0012a34e-57f5-4737-abc0-99f36a446a99.png)
+
+A와 B를 각각 위 그림처럼 a를 행 벡터로, b를 열 벡터로 바라봤을 때 제일 위에 있는 그림처럼 내적으로 바라볼 수 있음
+
+- 여기서 헷갈린 건데, 3x1 행렬과 1x3 행렬을 곱하니까 결과는 3x3 행렬!
+
+<br>
+
+**2.** rank-1 matrix의 합
+
+행렬과 행렬의 더하기로 나타내는 방법. 이번엔 반대로 a는 열 벡터로, b는 행 벡터로 나타내보자.
+
+![Untitled 40](https://user-images.githubusercontent.com/70688382/235811482-cc2313b1-6f00-4a90-9ed1-d817125e07f1.png)
+
+결과적으로 3x3 행렬 탄생
+
+- 행렬의 곱을 rank-1 matrix의 합으로 나타낼 수 있다는 것 정도로 알고 넘어가
+
+<br>
+
+**3.** **(중요!) Column space로 바라보기**
+
+행렬과 **벡터**의 곱을 바라보는 관점
+
+![Untitled 41](https://user-images.githubusercontent.com/70688382/235811496-5913fbfa-d217-4618-a2ac-3383eec6272e.png)
+
+A(행렬)와 x(벡터) 곱하기
+
+- ai 벡터에 xi만큼 스칼라배한 결과(벡터)를 모두 더함
+
+![Untitled 42](https://user-images.githubusercontent.com/70688382/235811506-2049a2a1-92f9-4d90-95c5-04b86431653b.png)
+
+앞서 $\left[
+\begin{matrix}
+1 & 0 \\
+\end{matrix}
+\right]$과 $\left[
+\begin{matrix}
+0 & 1 \\
+\end{matrix}
+\right]$벡터가 있으면 여기에 스칼라배를 해서 더하면 2차원 평면에 놓인 벡터 모두를 표현 가능. 그런데 이 두 벡터가 어떤 행렬의 column들이라면
+$$
+\begin{matrix}
+1 & 0 \\
+0 & 1 \\
+\end{matrix}
+$$
+각 colmun에 곱해지는 값을 바꾸며 더해준 결과 벡터들이 나타내는 공간이 **column space**.
+
+$$
+\begin{matrix}
+1 & 0 \\
+0 & 1 \\
+\end{matrix}
+$$
+
+: 2차원 평면 전체
+
+$$
+\begin{matrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1\\
+\end{matrix}
+$$
+
+: 3차원 평면 전체
+
+<br>
+
+**4.** Row space로 바라보기
+
+![Untitled 43](https://user-images.githubusercontent.com/70688382/235811513-dad96726-897c-4554-8092-0f2d966a8e6c.png)
+
+이번엔 3번에서 $\bf{Ax}$를 본 것과 반대로 $\bf{x^tA}$
+
+- 딥러닝 transpose 공부할 때 도움되는 관점
+
+</div>
+</details>
+
+<br>
+
+# 2-6 span과 column space(열공간)
+
+<details>
+<summary>span과 column space(열공간)</summary>
+<div markdown="1">
+
+span: 벡터들의 linear combination으로 나타낼 수 있는 모든 벡터를 모은 집합
+
+여기서,
+
+![Untitled 44](https://user-images.githubusercontent.com/70688382/235811539-11ee5426-ee93-4967-8274-6a02fbfd3569.png)
+
+- linear: 벡터에 스칼라배를 한 것
+- linear combination: linear한 것들을 더한 결과물
+
+<br>
+
+![Untitled 45](https://user-images.githubusercontent.com/70688382/235811608-8db869ba-93e6-4b35-9d1c-f8a41c73e6eb.png)
+
+v1, v2 각각에 곱해져 있는 수를 바꿔가며 봅시다.
+
+![Untitled 46](https://user-images.githubusercontent.com/70688382/235811619-c098a281-aa6a-4309-bcba-ab954df811ce.png)
+
+3차원 공간에서 두 개의 벡터만을 가지고 linear combination을 할 경우 **평면 위로만 흔적**이 남음!
+
+<br>
+
+![Untitled 44](https://user-images.githubusercontent.com/70688382/235811539-11ee5426-ee93-4967-8274-6a02fbfd3569.png)
+
+다시 보면, v1을 a1만큼 쓰고, v2는 a2만큼, v3는 a3만큼 써서 조합을 할 수 있다.
+
+![Untitled 47](https://user-images.githubusercontent.com/70688382/235811631-66629735-387a-49af-a9a9-0d52ea2334fc.png)
+
+가지고 있는 벡터의 성질에 따라 표현 가능한 범위가 달라짐. 심지어 $\left[
+\begin{matrix}
+0 \\
+0  \\
+\end{matrix}
+\right]$벡터인 경우 한 점만 표현 가능.
+
+- 점일 수도, 선일 수도, 면일 수도 있다! (4D, 5D, …)
+
+<br>
+
+### 용어 정리
+
+특정 vector space를 특정 vector들이 span한다.
+
+**column space**는 행렬의 열들이 span하는 vector space다. (2-5강 참고)
+
+표기
+
+- C(A): A의 Column space
+- range(A): A의 range
+
+</div>
+</details>
+
+<br>
+
+# 2-7 선형 독립과 기저 (linearly independent & basis)
+
+<details>
+<summary>2-7 선형 독립과 기저 (linearly independent & basis)</summary>
+<div markdown="1">
+
+### 더 고차원을 span하려면?
+
+어떤 벡터를 가지고 있냐에 따라 표현할 수 있는 영역이 달라짐!
+
+많은 영역을 표현할 수 있는 벡터는 뭘까? - linearly independent
+
+<br>
+
+![Untitled 48](https://user-images.githubusercontent.com/70688382/235811645-c55fe268-48d2-4975-819d-7ea580c6c297.png)
+
+위 그림의 두 벡터를 가지고는 1차원 선밖에 만들지 못함
+
+<br>
+
+![Untitled 49](https://user-images.githubusercontent.com/70688382/235811655-b44f0a38-8bf2-4d4b-b374-7867117ebfe2.png)
+
+위 두 벡터를 가지고는 더 고차원을 span할 수 있게 됨! (linearly independent)
+
+<br>
+
+![Untitled 50](https://user-images.githubusercontent.com/70688382/235811668-4cc299dd-01ff-4d61-bdf4-daf9c33951e5.png)
+
+두 벡터가 약간이라도 어긋나 있으면 linearly independent하다고 할 수 있음
+
+<br>
+
+![Untitled 51](https://user-images.githubusercontent.com/70688382/235811681-2e50e456-2f75-48fa-a0ef-ca18ed7b36b9.png)
+
+orthogonal: 서로 완전 다른 성질을 가져 어느 한 부분에서 다른 부분을 전혀 대신하지 못함
+
+- independent 안에 orthogonal
+
+<br>
+
+![Untitled 52](https://user-images.githubusercontent.com/70688382/235811691-1f08ffa7-e8f4-49ee-85e6-03f47ef686ca.png)
+
+세 벡터를 활용해 3차원 공간 전체를 span할 수 있다!
+
+<br>
+
+### linearly independent(선형 독립)의 수학적 정의
+
+![Untitled 53](https://user-images.githubusercontent.com/70688382/235811705-abe8787e-2260-4d3c-8ca2-6f5d3190cfbb.png)
+
+어떤 벡터들(v1, v2, …) 각각에 스칼라를 곱하여 다 더한 결과가 0이 되게끔 하는 a1, a2, …가 모두 0인 경우만 존재하는 경우 그 벡터들을 lineary independent하다고 한다. (↔ linearly dependent)
+
+<br>
+
+### basis 기저
+
+basis: 주어진 space에 대해 그 space를 span하는 linearly independent한 벡터들
+
+⇒ **어떤 공간을 이루는 필수적인 구성요소**
+
+![Untitled 54](https://user-images.githubusercontent.com/70688382/235811718-a659f07d-fb48-4948-b854-4f243fc6132b.png)
+
+![Untitled 55](https://user-images.githubusercontent.com/70688382/235811732-14061a58-81c8-4eb8-8048-d0abf5fef2cb.png)
+
+첫 번째 예시: 2차원 평면을 span하는 orthogonal basis
+
+두 번째 예시: 2차원 평면을 span하는 basis
+
+세 번째 예시: basis가 아니다
+
+</div>
+</details>
+
+<br>
+
+# 2-8 항등행렬, 역행렬, 직교행렬 (identity matrix & inverse & orthogonal matrix)
+
+<details>
+<summary>2-8 항등행렬, 역행렬, 직교행렬 (identity matrix & inverse & orthogonal matrix)</summary>
+<div markdown="1">
+
+![Untitled 56](https://user-images.githubusercontent.com/70688382/235811777-fbf9e30c-0d55-4601-9b96-31a0e08a7fde.png)
+
+역행렬을 활용하여 위 연립방정식을 빠르게 풀 수 있다!
+
+<br>
+
+### 항등행렬 (identity matrix)
+
+항등원: 곱했을 때 자기자신 그대로 튀어나오게 하는 수
+
+⇒ 항등행렬: 곱했을 때 자기자신 그대로 튀어나오게 하는 행렬
+
+정사각행렬에 대해서만 정의
+
+<br>
+
+![Untitled 57](https://user-images.githubusercontent.com/70688382/235811787-ca3afad4-9d5d-4e8b-803c-08e84ed7d38d.png)
+
+![Untitled 58](https://user-images.githubusercontent.com/70688382/235811793-309e4f93-ab56-43dd-a30e-8ed64a267efa.png)
+
+위 그림: 3x3 항등행렬
+
+정사각 행렬: 행과 열의 수가 똑같은 행렬
+
+<br>
+
+![Untitled 59](https://user-images.githubusercontent.com/70688382/235811801-2c5cca02-29b0-46e8-b695-256cbe65a095.png)
+
+여기에 column space 적용하는 연습!
+
+- 행렬과 벡터 곱한 것을 여러 번 쌓은 것으로 바라보기
+
+<br>
+
+![Untitled 60](https://user-images.githubusercontent.com/70688382/235811819-be3d7fbe-f620-4105-920b-98fe3df77569.png)
+
+![Untitled 61](https://user-images.githubusercontent.com/70688382/235811833-44cbd50f-269b-4647-a227-8d8eb4ad4fd8.png)
+
+이번엔 앞에 항등행렬을 곱할 경우 어떤 행렬을 곱해야 하나?
+
+- 해당 행렬의 행의 개수를 따라 (행의 개수) x (행의 개수) 형태의 항등행렬을 만들어주자.
+- 여기서는 row space로 바라봅시다.
+- 첫 번째 행 끄집어 내서 첫 번째 행에 놓고, 두 번째 행 끄집어 내서 두 번째 행에 놓고, …
+- 사고 전환(?)이 빨리빨리 되지는 않네…
+
+<br>
+
+표기법
+
+- 3x3 행렬: $\bf{I_3}$, 2x2 행렬: $\bf{I_2}$
+
+<br>
+
+### 역행렬
+
+![Untitled 62](https://user-images.githubusercontent.com/70688382/235811845-01472da8-dddc-41a1-9ff1-9e4d48ccdf13.png)
+
+역원: 곱해서 1이 나오게 하는 수
+
+역행렬($\bf{A^{-1}}$): 곱해서 $\bf{I}$가 나오게 하는 행렬
+
+정사각행렬에 대해서만 정의. 행렬 $\bf{A}$의 형태에 따라서 역행렬($\bf{A^{-1}}$) 존재 여부가 갈린다.
+
+- 역행렬이 존재하는 $\bf{A}$에 대해 ‘$\bf{A}$는 invertable하다’라고 말함
+
+<br>
+
+![Untitled 63](https://user-images.githubusercontent.com/70688382/235811855-022671b4-3b05-48a0-8896-54939db2faa8.png)
+
+정리: $\bf{x = A^{-1}b}$
+
+<br>
+
+### 대각행렬 (Diagonal matrix)
+
+![Untitled 64](https://user-images.githubusercontent.com/70688382/235811871-49a047b9-1c7a-4a6a-bfb2-009e056f0e04.png)
+
+대각행렬: 대각 성분 이외(off-diagonal)에 전부 0으로 채워져 있는 행렬
+
+- 항등행렬도 대각행렬!
+- 정사각행렬이 아니어도 가능(rectangular diagonal matrix). 주로 대각행렬이라 함은 정사각행렬(square matrix)을 가리킴.
+- $\bf{D} = diag(a)$: 벡터 $\bf{a}$의 값들을 대각성분에 쓴 대각행렬 $\bf{D}$
+
+![Untitled 65](https://user-images.githubusercontent.com/70688382/235811877-7a68540c-6b84-4ed1-b834-73fb1d69cd72.png)
+
+- $\bf{diag(D)}$: $\bf{D}$ 행렬의 대각성분만 가져온 대각행렬
+- 논문에서 where?
+
+<br>
+
+### 직교행렬 (Orthogonal matrix)
+
+직교행렬: 행렬의 모든 column이 서로 직교하는(orthonormal) 행렬
+
+- normalize: 크기를 1로 만들어줌
+- 정사각행렬에 대해서만 정의
+
+<br>
+
+![Untitled 66](https://user-images.githubusercontent.com/70688382/235811885-1fa9f8f5-46ff-4662-8ba5-c9f46931a347.png)
+
+직교행렬 $\bf{Q}$의 역행렬은 뭘까?
+
+- 행렬의 곱을 내적으로 해석하기 (첫 번째 관점)
+- $\bf{A}$의 첫 번째 행과
+- $\bf{Q}$의 첫 번째 열 내적은 1, 두 번째 열 내적하면 0, 세 번째 열 내적하면 0
+⇒ $\bf{A}$의 첫 번째 행은 $\bf{Q}$의 열들 중에서 첫 번째 열 빼고는 모두와 수직이다.
+- 그러면 $\bf{A}$가 $\bf{Q}$의 열들을 행으로 가지고 있다고 가정해보고 곱해보자.
+- 이 경우, $\bf{A}$의 첫 번째 행과
+- $\bf{Q}$의 첫 번째 열이 같은 벡터이기 때문에 각이 0 ⇒ 내적도 1,
+- 두 번째 열과는 직교행렬의 특성때문에 서로 수직 ⇒ 내적 0
+- 세 번째 열도 마찬가지로 서로 수직 ⇒ 내적 0
+
+⇒ $\bf{A}$는 $\bf{Q^T}$
+
+위 내용의 이해를 위해 직교행렬의 예시를 구글링했는데, 직교행렬의 요소들이 대체로 0 또는 1, -1, 복소수로 이루어져 있는 것을 확인했다. 내적 시에 이런 값들이 아니면 내적이 0 또는 1로 될 수가 없다고 생각해서 이해하기 힘들었는데, 예시들을 가정하고 다시 설명을 듣고 이해가 되어 넘어가려 한다.
+
+- DFT matrix, unitary matrix 이해 시 도움되는 개념.
+
+</div>
+</details>
+
+<br>
+
+# 2-9 rank (행렬의 계수)
+
+<details>
+<summary>2-9 rank (행렬의 계수)</summary>
+<div markdown="1">
+
+이 행렬의 rank가 몇이니까 column space가 span할 수 있는 dimension은 몇이고, null space의 dimension은 몇이니까 해가 무한하겠구나~를 이해하는 데에 도움되는 개념
+
+<br>
+
+rank: 행렬이 가지는 independent한 column의 수 = **column space**의 **dimension**
+
+- 행렬이 가지는 independent한 column의 수만큼 span할 수 있는 dimension이 늘어남
+
+  ⇒ rank만 파악하면 이 행렬의 column들이 span할 수 있는 dimension의 차원을 알 수 있음
+
+<br>
+
+(중요!) **independent한 column의 수** = **independent한 row의 수**
+
+- $\bf{rank(A) = rank(A^T)}$
+
+![Untitled 67](https://user-images.githubusercontent.com/70688382/235811914-97ae400a-93f5-4cec-b717-1101f14f36e9.png)
+
+행렬의 행과 열의 수 중 낮은 수에 따라 그 행렬의 최대 rank가 결정됨 
+
+- full row rank, full column rank, full rank, rank-deficient
+
+</div>
+</details>
+
+<br>
+
+# 2-10 Null space (영공간)
+
+<details>
+<summary>2-10 Null space (영공간)</summary>
+<div markdown="1">
+
+### Null space
+
+- $\bf{Ax = 0}$을 만족하는 $\bf{x}$의 집합
+- $\bf{x}$: column들의 linear combination이 0이 되게끔 하는 계수 $\bf{x}$의 집합
+
+<br>
+
+![Untitled 68](https://user-images.githubusercontent.com/70688382/235811942-cf587560-6a81-44dc-9b81-ab51e4bb9888.png)
+
+행렬 $\bf{A}$와 벡터 $\bf{x}$의 곱을 column들의 linear combination으로 바꾸어 생각해보자. 이를 만족하는 $\bf{x}$를 찾아보자.
+
+- $\left[
+\begin{matrix}
+1 \\
+1 \\
+-1 \\
+\end{matrix}
+\right]$하나를 찾으니 계속 나온다. 여기에 스칼라배를 해도 성립. 따라서,
+- $\bf{Ax * c = 0 * c}$
+- 행렬 $\bf{A}$의 null space: $\bf{x_n =}c\left[
+\begin{matrix}
+1 \\
+1 \\
+-1 \\
+\end{matrix}
+\right]$
+
+⇒ $\bf{x}$는 행렬 $\bf{A}$의 row 벡터의 차원을 따름
+
+<br>
+
+![Untitled 69](https://user-images.githubusercontent.com/70688382/235811957-1fb81e31-f666-4de4-b6e6-d24a5ae474bc.png)
+
+다른 예시 $\bf{A}$
+
+- $\bf{A(c_1x_1+c_2x_2) = 0}$
+- linear combination
+- $\bf{x_1}$과 $\bf{x_2}$는 linearly independent
+
+⇒ **null space**의 차원: 2차원(두 개의 벡터만을 가지고 있으니까)
+
+- 3차원 공간 안에서 평면을 span하는 형태
+
+<br>
+
+### 영공간의 차원
+
+rank와 null space의 dimension을 더하면 column의 수가 됨
+
+따라서 다음 결론에 도달
+
+![Untitled 70](https://user-images.githubusercontent.com/70688382/235811981-15b8431b-fcb1-4e98-b5cd-15974e30ee1a.png)
+
+- r: rank $\bf{A}$, n: column의 수
+- 다음의 경우는 null space의 차원이 0이다
+
+![Untitled 71](https://user-images.githubusercontent.com/70688382/235811986-3d03c9b3-75db-44c5-892d-84f92a3578a4.png)
+
+<br>
+
+### 행공간과 수직하다
+
+Null space는 row space와 수직한 space이다
+
+![Untitled 72](https://user-images.githubusercontent.com/70688382/235811991-35319a63-16a8-4d97-adc8-b9e914ffd679.png)
+
+A의 row vector와 x 각각 내적한 결과
+
+→ 첫 번째 행과 x 내적해서 0, 두 번째 행과 x 내적해서 0
+
+→ 첫 번째 행과 두 번째 행 linear combination한 것과 x 내적해서 0
+
+→ row space 전체와 x는 항상 수직
+
+→ row space와 null space는 항상 수직
+
+rank: row space의 dimension
+
+![Untitled 73](https://user-images.githubusercontent.com/70688382/235811996-f2e831af-ebeb-4edc-9b93-3756c68ba490.png)
+
+⇒ n 차원: row space의 dimension + null space의 dimension을 합한 것
+
+<br>
+
+### left null space
+
+$\bf{x^TA=0^T}$ 만족하는 $\bf{x}$의 집합
+
+null space에서 행과 열을 반대로 생각하면 됨
+
+![Untitled 74](https://user-images.githubusercontent.com/70688382/235812008-ce794c74-793b-4801-b9e2-1891db87a891.png)
+
+![Untitled 75](https://user-images.githubusercontent.com/70688382/235812020-08ec38a1-d472-4135-96cf-ca749796769c.png)
+
+left null space는 column space와 수직
+
+$\bf{x}$: m 차원에 놓인 벡터
+
+null space의 dimension: m - r
+
+![Untitled 76](https://user-images.githubusercontent.com/70688382/235812039-1bb220ec-b9a3-49ce-a285-39ab3fc4781f.png)
+
+<br>
+
+### 공간이동 그림
+
+![Untitled 77](https://user-images.githubusercontent.com/70688382/235812052-7b2f00ae-a371-4788-8931-383f21f3572f.png)
+
+![Untitled 78](https://user-images.githubusercontent.com/70688382/235812061-1e717aad-3a87-4902-9ee8-e1ccf5e2cd11.png)
+
+row space에 놓인 벡터 x에 A를 곱하면(Ax) column space로 간다?
+
+- Ax 자체가 열들의 linear combination을 나타내기 때문!
+
+$\bf{A(x_r+x_n) = Ax_r+Ax_n = Ax_r = b}$
+
+</div>
+</details>
+
+<br>
+
+# 2-11 Ax=b의 해의 수 알아내기
+
+<details>
+<summary>2-11 Ax=b의 해의 수 알아내기</summary>
+<div markdown="1">
+
+$\bf{Ax = b}$
+
+A: 연립일차방정식의 계수들을 담은 형태
+
+b: 우변의 값들을 세로로 쌓은 형태
+
+x: 찾고싶은 변수들을 세로로 쌓은 형태
+
+<br>
+
+### full column rank일 때
+
+![Untitled 79](https://user-images.githubusercontent.com/70688382/235812077-0336e81c-3665-41c9-8af2-18692ef5340f.png)
+
+![Untitled 80](https://user-images.githubusercontent.com/70688382/235812090-b57d3bd2-2c6d-4cf8-b5f7-7673d154af8d.png)
+
+A는 세로로 긴 형태. b도 A를 따라 세로로 긴 형태
+
+위 예시에서 A: 10차원 공간(Column space)에서 3차원을 span
+
+- A: 10차원 공간, C(A): 3차원 공간
+
+<br>
+
+![Untitled 81](https://user-images.githubusercontent.com/70688382/235812098-28c7d3f8-21c9-4ce9-b183-5cb934b98fe8.png)
+
+b도 10차원인데,
+
+- 만약 b가 C(A) 안에 놓여있다면, Ax가 b를 표현해줄 수 있음 (해 1개)
+- 만약 b가 다른 곳을 향한다면, Ax는 C(A) 위에서만 놀 수 있음 (해가 없다)
+
+⇒ full column rank일 때: 해가 없거나 한 개 존재
+
+<br>
+
+### full row rank일 때
+
+column space C(A): 3차원에서 만들어지고 rank는 3 ⇒ 3차원 전부 표현이 가능
+
+⇒ b가 column space 밖에 있을 순 없음
+
+⇒ 해가 무한함
+
+- b: 3차원 공간 안의 한 점
+- **column space**는 행렬의 열들이 span하는 vector space
+
+<br>
+
+해가 무한함
+
+왜냐? - null space가 7차원이기 때문 (여기 이해 안 됨. 왜??)
+
+1. Ax_n = 0
+- Ax = 0을 만족하는 x가 7차원이나 span 가능
+- x_n: null space의 임의의 벡터
+2. Ax_p = b
+1. x_p(particular solution): Ax = b를 만족하는 어떤 x
+
+위 두 성질로 A(x_n+x_p) = b 성립
+
+- x_n+x_p: Complete solution
+- x_n이 무한하기 때문에 해가 무한함 (여기가 결정적으로 이해 안 됨)
+
+<br>
+
+### full rank (square matrix)일 때
+
+full rank는 invertable
+
+⇒ 해가 한 개 있다. ($\bf{x = A^{-1}b}$)
+
+- full rank의 null space는 영벡터만 존재 ⇒ A(x_n+x_p) = b 성립 안 함
+
+<br>
+
+### rank-deficient일 때
+
+b가 C(A)에 들어있다면 무한, 들어있지 않다면 해가 없다
+
+</div>
+</details>

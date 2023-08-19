@@ -1,0 +1,34 @@
+---
+layout: post
+title: "혁펜하임 선형대수학 (1강)"
+tags:
+  - 선형대수
+---
+
+<br>
+
+유튜브 채널 ‘혁펜하임’의 ‘혁펜하임의 “보이는” 선형대수학’을 공부하며 개인적으로 정리한 글입니다.
+
+[[선대] 1-1강. 혁펜하임의 "보이는" 선형대수학 (Linear Algebra)](https://www.youtube.com/watch?v=7vV2SF8DyQE&list=PL_iJu012NOxdZDxoGsYidMf2_bERIQaP0)
+
+<br>
+
+# 1강 모든 것의 시작, 연립일차방정식
+
+선형대수학에서는 선형방정식만 다룰 것임
+
+선형대수학에서 선형방정식을 주로 **행렬**과 **벡터**로 나타낸다. 
+
+⇒ 고로 우리는 이 **행렬**과 **벡터**에 대해 공부할 것임
+
+<br>
+
+![Untitled](https://user-images.githubusercontent.com/70688382/233463848-7cc61588-00bc-431a-bc3a-3cd94ed90262.png)
+
+방정식을 행렬과 벡터로 다시 표현한 이미지. 이렇게 보니까 엄청 간단해보이네
+
+<br>
+
+![Untitled 1](https://user-images.githubusercontent.com/70688382/233463885-fe56d59e-2036-4b1b-85f5-07525a602b2c.png)
+
+행렬과 벡터로 이루어진 식의 이해를 위해 $A$(행렬)와 $x$(벡터)를 곱한 이미지. 그 결과로 아래의 2 x 1 벡터가 나왔다.
