@@ -1,10 +1,14 @@
 ---
 layout: post
-title: "그래프 관련 논문 훑어보기 (그래프 오마카세)"
+title: "그래프 관련 연구 동향 파악"
 tags:
   - Graph
   - paper review
 ---
+
+<br>
+
+Graph 관련 연구 동향 파악 목적으로 작성한 글입니다. 내용은 전적으로 아래의 사이트를 참고했습니다. [GraphOmakase 그래프 오마카세](https://www.graphusergroup.com/tag/graphomakase/)
 
 <br>
 
@@ -18,15 +22,15 @@ tags:
   
   **Social Recommendation System Based on Hypergraph Attention Network** [[https://downloads.hindawi.com/journals/cin/2021/7716214.pdf](https://downloads.hindawi.com/journals/cin/2021/7716214.pdf?ref=graphusergroup.com)]
   
-  social 분야에서 hypergraph 를 적용한 논문
+  social 분야에서 hypergraph를 적용한 논문
   
-  - 기존 graph 는 user-item, user-user 와 같이 pair-wise 하게 관계를 설정하고 추론하기에 복잡한 관계에 대해서는 한계점이 있다고 지적을 합니다. 그를 극복하기 위해 hypergraph를 활용
+  - 기존 graph 는 user-item, user-user와 같이 pair-wise하게 관계를 설정하고 추론하기에 복잡한 관계에 대해서는 한계점이 있다고 지적을 합니다. 그를 극복하기 위해 hypergraph 활용
   
   **Towards Better Link Prediction in Dynamic Graphs** [[https://medium.com/@shenyanghuang1996/towards-better-link-prediction-in-dynamic-graphs-cdb8bb1e24e9](https://medium.com/@shenyanghuang1996/towards-better-link-prediction-in-dynamic-graphs-cdb8bb1e24e9?ref=graphusergroup.com)]
   
-  viz → dynamic network 에서 엣지의 분포를 어떻게 시각화할지 고민하시던 분들에게 도움
+  viz → dynamic network에서 엣지의 분포를 어떻게 시각화할지 고민하시던 분들에게 도움
   
-  - TEA , TET plot 각각 2가지 시각화를 통해 dynamic network 의 edge distribution 을 파악
+  - TEA, TET plot 각각 2가지 시각화를 통해 dynamic network의 edge distribution 파악
   - 이를 통해, sampling strategy 를 기획하는것도 좋아보임
   - Dynamic network - link prediction 에 관심이 많으신 분들에게 도움
   
@@ -34,23 +38,23 @@ tags:
   
   expressive-power, isomorphism checking
   
-  그래프 데이터 특성상 모두 vertex 그리고 edge 로 표현되기에, 직관적으로 바라보면 vertex가 내가 분석하려는 vertex 인지, edge 가 내가 분석하려는 edge인지 구별하기가 어렵습니다. 이 때 , unique labeling , color 등 으로 판별을 할 수 있는 요소를 넣어줍니다.
+  그래프 데이터 특성상 모두 vertex 그리고 edge로 표현되기에, 직관적으로 바라보면 vertex가 내가 분석하려는 vertex인지, edge가 내가 분석하려는 edge인지 구별하기가 어렵습니다. 이 때, unique labeling, color 등 으로 판별을 할 수 있는 요소를 넣어줍니다.
   
-  - isomorphism 에 대해 궁금하셨으며 , heterogeneous(이종그래프) modeling 에 대해 기획하고 있으신 분들이면 도움
+  - isomorphism에 대해 궁금하셨으며, heterogeneous(이종그래프) modeling 에 대해 기획하고 있으신 분들이면 도움
   
   **Generalized Laplacian Positional Encoding for Graph Representation Learning** [[https://arxiv.org/pdf/2210.15956.pdf](https://arxiv.org/pdf/2210.15956.pdf?ref=graphusergroup.com)]
   
-  임베딩 공간 , 컴퓨터가 해당 데이터를 이해할 때, 정보손실없이 잘 이해하게끔 돕기 위해 고안된 여러 방법 중 하나인 positional-encoding 에 대해 이야기
+  임베딩 공간, 컴퓨터가 해당 데이터를 이해할 때 정보손실없이 잘 이해하게끔 돕기 위해 고안된 여러 방법 중 하나인 positional-encoding에 대해 이야기
   
   **A diffusion model for protein design** [[https://www.bakerlab.org/2022/11/30/diffusion-model-for-protein-design/](https://www.bakerlab.org/2022/11/30/diffusion-model-for-protein-design/?ref=graphusergroup.com)]
   
-  60여장 가까이되는 백서를 통해 DDPM 즉 , diffusion model with Graph(protein)을 설명
+  60여장 가까이되는 백서를 통해 DDPM 즉, diffusion model with Graph(protein) 설명
   
-  - Protein 관련해서 generated-model 에 관심있으신 분들은 본 레퍼런스를 참조하셔서 진행하시면 많은 도움
+  - Protein 관련해서 generated-model에 관심있으신 분들은 본 레퍼런스를 참조하셔서 진행하시면 많은 도움
   
   **LOG conference** [[https://logconference.org/](https://logconference.org/?ref=graphusergroup.com)]
   
-  log conference , machine learning on graph 에 특화된 컨퍼런스
+  log conference, machine learning on graph에 특화된 컨퍼런스
   
   튜토리얼들을 주목해보시면 좋을것 같습니다. scalable-gnn , TF-GNN , symbol reasoning gnn 등 굉장히 practical 한 튜토리얼들이 여러분들을 기다리고 있습니다.
 
@@ -740,3 +744,4 @@ tags:
   <br>
 </div>
 </details>
+
