@@ -1,0 +1,742 @@
+---
+layout: post
+title: "그래프 관련 논문 훑어보기 (그래프 오마카세)"
+tags:
+  - Graph
+  - paper review
+---
+
+<br>
+
+<details>
+<summary><b>22년 12월 1주차</b></summary>
+<div markdown="1">
+    
+  **Fair Multi-Stakeholder News Recommender System with Hypergraph ranking** [[https://arxiv.org/pdf/2012.00387.pdf](https://arxiv.org/pdf/2012.00387.pdf?ref=graphusergroup.com)]
+  
+  추천 시스템의 popularity bias라는 문제를 hypergraph 형태의 관계에 치중한 데이터를 활용해서 해소해보고자 시도한 논문
+  
+  **Social Recommendation System Based on Hypergraph Attention Network** [[https://downloads.hindawi.com/journals/cin/2021/7716214.pdf](https://downloads.hindawi.com/journals/cin/2021/7716214.pdf?ref=graphusergroup.com)]
+  
+  social 분야에서 hypergraph 를 적용한 논문
+  
+  - 기존 graph 는 user-item, user-user 와 같이 pair-wise 하게 관계를 설정하고 추론하기에 복잡한 관계에 대해서는 한계점이 있다고 지적을 합니다. 그를 극복하기 위해 hypergraph를 활용
+  
+  **Towards Better Link Prediction in Dynamic Graphs** [[https://medium.com/@shenyanghuang1996/towards-better-link-prediction-in-dynamic-graphs-cdb8bb1e24e9](https://medium.com/@shenyanghuang1996/towards-better-link-prediction-in-dynamic-graphs-cdb8bb1e24e9?ref=graphusergroup.com)]
+  
+  viz → dynamic network 에서 엣지의 분포를 어떻게 시각화할지 고민하시던 분들에게 도움
+  
+  - TEA , TET plot 각각 2가지 시각화를 통해 dynamic network 의 edge distribution 을 파악
+  - 이를 통해, sampling strategy 를 기획하는것도 좋아보임
+  - Dynamic network - link prediction 에 관심이 많으신 분들에게 도움
+  
+  **Weisfeiler and Leman Go Relational** [[https://arxiv.org/pdf/2211.17113.pdf](https://arxiv.org/pdf/2211.17113.pdf?ref=graphusergroup.com)]
+  
+  expressive-power, isomorphism checking
+  
+  그래프 데이터 특성상 모두 vertex 그리고 edge 로 표현되기에, 직관적으로 바라보면 vertex가 내가 분석하려는 vertex 인지, edge 가 내가 분석하려는 edge인지 구별하기가 어렵습니다. 이 때 , unique labeling , color 등 으로 판별을 할 수 있는 요소를 넣어줍니다.
+  
+  - isomorphism 에 대해 궁금하셨으며 , heterogeneous(이종그래프) modeling 에 대해 기획하고 있으신 분들이면 도움
+  
+  **Generalized Laplacian Positional Encoding for Graph Representation Learning** [[https://arxiv.org/pdf/2210.15956.pdf](https://arxiv.org/pdf/2210.15956.pdf?ref=graphusergroup.com)]
+  
+  임베딩 공간 , 컴퓨터가 해당 데이터를 이해할 때, 정보손실없이 잘 이해하게끔 돕기 위해 고안된 여러 방법 중 하나인 positional-encoding 에 대해 이야기
+  
+  **A diffusion model for protein design** [[https://www.bakerlab.org/2022/11/30/diffusion-model-for-protein-design/](https://www.bakerlab.org/2022/11/30/diffusion-model-for-protein-design/?ref=graphusergroup.com)]
+  
+  60여장 가까이되는 백서를 통해 DDPM 즉 , diffusion model with Graph(protein)을 설명
+  
+  - Protein 관련해서 generated-model 에 관심있으신 분들은 본 레퍼런스를 참조하셔서 진행하시면 많은 도움
+  
+  **LOG conference** [[https://logconference.org/](https://logconference.org/?ref=graphusergroup.com)]
+  
+  log conference , machine learning on graph 에 특화된 컨퍼런스
+  
+  튜토리얼들을 주목해보시면 좋을것 같습니다. scalable-gnn , TF-GNN , symbol reasoning gnn 등 굉장히 practical 한 튜토리얼들이 여러분들을 기다리고 있습니다.
+
+  <br>
+    
+</div>
+</details>
+
+<details>
+<summary><b>22년 12월 2주차</b></summary>
+<div markdown="1">    
+    
+  **Sequential Recommendation System 카카오 서비스 적용기** [[https://if.kakao.com/2022/session/8](https://if.kakao.com/2022/session/8?ref=graphusergroup.com)]
+  
+  웹툰(만화) , 브런치(글) 플랫폼에서 ‘sequential한 정보를 바탕으로 유저에게 추천을 해준다’라는 관점을 다룬 이야기
+  
+  - 웹툰, 브런치 각각의 도메인에 따라 time window 파라미터에 따라 모델의 성능이 좋아지고, 나빠지는지에 대한 이야기
+  - 아래 GNN 을 접목한 추천시스템 레포가 있어 추가 전달드립니다. 도움되셨으면 합니다.
+      - GNN with recsys [[https://github.com/wusw14/GNN-in-RS](https://github.com/wusw14/GNN-in-RS?ref=graphusergroup.com)]
+  
+  **Motifs-based Recommender System via Hypergraph Convolution and Contrastive Learning** [[https://arxiv.org/pdf/2109.00676.pdf](https://arxiv.org/pdf/2109.00676.pdf?ref=graphusergroup.com)]
+  
+  기존의 node-node(pair-wise) pattern mining이 아닌, node-(mutli)node pattern mining의 장점을 recommender system에서 활용해보고자 시도한 논문
+  
+  - purchase(특정 아이템을 동시에 구매하였으나, 교류가 없는 유저) , joint(특정 아이템을 동시에 구매하였으며, 교류가 있는 유저), social(평소 교류가 있는 유저들 모임) 3가지 종류의 모티프에서 발생하는 정보를 활용해서 추천시스템에 적용
+  - 준지도학습 , 모티프 , 하이퍼그래프, 추천시스템 그리고 gnn 에 대해 관심있으신분들은 본 논문을 통해 컴팩트하게 이해하실 수 있을거라 생각되어 추천
+  
+  **Mining Social-Network Graphs** [[http://infolab.stanford.edu/~ullman/mmds/ch10n.pdf](http://infolab.stanford.edu/~ullman/mmds/ch10n.pdf?ref=graphusergroup.com)]
+  
+  practical graph mining , 복잡계 네트워크 혹은 그래프마이닝의 원론적인 테크닉으로부터 발생한 수치들이 어떻게 해석되는지에 대해 이해하고 싶으신 분들. (특히, 커뮤니티 디텍션 알고리즘 및 spectral clustering , lapalcian matrix 가 어떻게 활용되는지 궁금하신분들)
+  
+  - 양이 상당합니다. 마지막 부분의 conclusion 요약 버전을 읽어보신후, 관심있는 부분을 골라보시는걸 추천
+  
+  **Session-based Recommendation with Hypergraph Attention Networks** [[https://arxiv.org/abs/2112.14266](https://arxiv.org/abs/2112.14266?ref=graphusergroup.com)]
+  
+  세션마다의 정보들을 하이퍼그래프 형태로 만들어 준 뒤, 추천시스템에 활용해보는 논문
+  
+  - Session-based task: 유저가 다음 세션에 어떤 행동 (구매 , 찜 등) 을 할지 이전 세션에서의 유저 행동을 분석해서 추론하는 문제
+  - 이 때 세션에서 발생하는 정보를 contextual information이라 부름
+  - Session-based 과 hypergraph combinatioin, dynamic graph vs. hypergraph 관점에 대해 호기심이 있으신 분들에게 추천
+  
+  **You Can Have Better Graph Neural Networks by Not Training Weights at All: Finding Untrained GNNs Tickets** [[https://openreview.net/forum?id=dF6aEW3_62O](https://openreview.net/forum?id=dF6aEW3_62O&ref=graphusergroup.com)]
+  
+  untrained subnetwork 를 efficient 하게 추출하는 방법을 제안한 논문
+  
+  모델의 weight가 잘 학습된 subnetwork를 찾는 방식에 대해 언급
+  
+  - graph 데이터 측면에서의 한계점인 sparsity 을 극복하면서 어떻게 성능을 유지하는지에 대한 방법 또한 언급
+  
+  **굉장히 흥미로운 논문인지라 관심사 불문하고 한 번 읽어보시는 것을 추천드립니다.**
+  
+  - 현업에서 GNN 을 적용하기 위해 최적의 network 만을 추출하는 것에 관심있으신분들 , over-smoothing 문제 때문에 골머리를 앓고 계시는 분들 에게 추천
+  
+  **Neighborhood-aware Scalable Temporal Network Representation Learning** [[https://openreview.net/pdf?id=EPUtNe7a9ta](https://openreview.net/pdf?id=EPUtNe7a9ta&ref=graphusergroup.com)]
+  
+  - link prediction 에서 고질적인 문제죠. temporary, time-wise 등 시간에 따라 변형되는 그래프의 structural information 을 어떻게 다룰것인지에 대해 다룬 논문
+  - dynamic graph representation learning 그리고 link prediction task 에 대해 관심있으신분들에게 추천
+
+  <br>
+    
+</div>
+</details>
+
+<details>
+<summary><b>22년 12월 4주차</b></summary>
+<div markdown="1">     
+    
+  **TGL: A General Framework for Temporal GNN Training on Billion-Scale Graphs**
+  
+  billion-scale 을 가진 그래프들을 어떻게 학습하고 추론할지에 대해 많이 고민하실텐데요. 그 가이드라인 , 레퍼런스로써 좋은 참고서가 될 논문
+  
+  - node memory, attention aggregator, temporal sampler 그리고 multi-gpu(parallel-sampling)을 어떻게 하는지등 현업에서 마주하실 많은 고민들을 본 논문에서 명쾌하게 풀어내고 있습니다.
+  - 논문을 읽다보시면, binary search, pointer 등의 데이터 자료구조 측면에서 접근하는 섹션이 간간이 있기에 디테일한 이해를 원하신다면 잠시 데이터 자료구조를 복습하고 오시는걸 추천
+  
+  **APAN: Asynchronous Propagation Attention Network for Real-time Temporal Graph Embedding**
+  
+  MLops 관련 lecture 인 cs329S 공부 중 발견한 논문입니다. 저도 내년 사이드 프로젝트로 gnn with web deployment해보는 게 목표라 되게 반가웠고, 독자분들 절반가까이 현업에 계신분들이시기에 도움되실거라 생각되어 준비
+  
+  ‘since users cannot tolerate the high latency of neighbor query in a giant graph database, deploying a synchronous CTDG model in online payment platform is almost worthless’ 라는 어절을 논문에 명시해놓은만큼 산업 관점에서 잘 풀어낸 논문
+  
+  **Residual Network and Embedding Usage: New Tricks of Node Classification with Graph Convolutional Networks**
+  
+  node-classification 에서의 Efficiency trick들을 모아놓은 논문
+  
+  baseline 을 구현 후 성능이 마음에 들지 않을 때 참고하시면 좋을 논문
+  
+  **Pay Attention to MLPs**
+  
+  transformer 구조가 딥러닝 model에서 hegemony 를 가지고 있다고 표현해도 과언이 아닐만큼 많은 산업에서 활용되고 있음
+  
+  transformer의 핵심 정보인 positional encoding을 spatial gating unit이라는 개념으로 대체한다는 아이디어가 주인 논문
+  
+  **Large Scale Learning on Non-Homophilous Graphs: New Benchmarks and Strong Simple Methods**
+  
+  복잡계 네트워크에서 네트워크 데이터 분석할 때, 주로 활용되는 지표 중 하나인 homophily를 large scale gnn에 차용한 논문
+  
+  homophily에 의존적인 데이터들은 주변 이웃의 정보로부터 많은 영향을 받는다는 문제를 해결하기위해, 노드의 정보와 그래프 구조적 정보를 각각 독립 적용한다는게 본 아이디어의 핵심
+  
+  - **homophily**를 간단하게 말씀드리면, ‘유유상종’ 이라고 보시면 되겠습니다. 이를 네트워크 데이터에서 생각해보면 ‘비슷한 사람(노드)들 끼리는 연결(link)되어 있을것이다.’ 라고 가정하며 측정하는 지표
+
+  <br>
+    
+</div>
+</details>
+
+<details>
+<summary><b>23년 1월 1주차</b></summary>
+<div markdown="1">    
+    
+  **Scalable Graph Transformers for Million Nodes**
+  
+  message passing을 hopbyhop으로 진행하며 information resort 가 필요한 gnn 대비(local feature aggregation), all feature aggregation이 가능한 graph transformer는 local + global feature aggregation이 모두 가능하단 거죠. 이를 통해, “over-squashing 문제와 graph task flexibility 에서 강력하다.”라고 말합니다.
+  
+  - 논문을 구체적으로 이해하기 위해서는 Transformer, Performer, gumble-softmax, etc.. 수학적인 테크닉이 많이 반영되어있기에, ‘이런 아키텍쳐가 있구나~ 그래프의 global feature를 반영하기 위해 다양한 시도들이 있구나’라는 측면으로 가볍게 보시는 걸 추천
+  
+  **BGL: GPU-Efficient GNN Training by Optimizing Graph Data I/O and Preprocessing**
+  
+  GPU-efficient를 위해 feature retrieving과 subgraph sampling(neighborhood sampling)을 어떻게 할 것인가에 대해 기술한 논문
+  
+  - data I/O size (batch 마다 subgraph 를 가져오고 , 그 subgraph 의 node feature를 가져와야 함)는 굉장히 큰 반면에, 모델 (GraphSAGE는 node sampling 이후 mean 등 parameter가 적음.)은 가볍다. 그렇기에 huge gap이 발생하면서 효율적으로 연산하지 못한다는 것을 문제로 정의하고, 그것을 해결하기 위한 방식을 제안
+  - 내용이 워낙 방대하고, 컴퓨터 공학에 대한 사전 지식이 많이 필요하여 읽으실 때 다소 지루하시고 어렵다고 생각하실 수도 있겠습니다. 허나, 그만큼 최적화에 대한 지식을 잘 나타낸 아이디어로써 충분한 가치가 있기에 graph, scalability 등에 관심 있으신 분들은 읽어보시는 걸 추천
+  
+  **Using Graph Learning for Personalization**
+  
+  Graph를 Recommender system 에 적용하면 어떤 점이 유리한지 그리고 해외 유수 기업들은 어떻게 적용을 하고 있는지에 대해 친절하게 설명
+  
+  - GNN이 많은 관심을 받고 있는데 왜 유독 추천 시스템에서 많이 언급되는가?라는 호기심이 있으신 분들에게 추천
+  
+  **Chartalist: Labeled Graph Datasets for UTXO and Account-based Blockchains**
+  
+  블록체인의 transparency database의 형태가 결국 linked list 이기에, 연결로써 자산들의 흐름을 분석할 수 있다는 거죠. 그리하여, graph 의 장점인 노드-노드를 지갑-지갑 등으로 맵핑해서 활용하면 효율적이기에 주로 graph 측면으로 접근하곤 합니다.
+  
+  - financial network analysis를 해보고 싶었으나 여러 한계들 때문에 보류하셨던 분들에게 좋을 것 같습니다.
+  
+  **ItemSage: Learning Product Embeddings for Shopping Recommendations at Pinterest**
+  
+  산업에서 적용하고 있는 gnn 의 대표적 사례인 ‘PINSAGE’에 대해 다들 알고 계실텐데요. 그 모델을 좀 더 향상시키기 위해 트랜스포머 구조를 차용한 아이디어
+  
+  **Next-item Recommendation with Sequential Hypergraphs**
+  
+  추천 영역에서 하이퍼그래프가 어떤식으로 활용이 되는지를 기술
+  
+  - 유저의 행동 발생 전/후에 대해서의 중요성에 대해 언급하며, 그 전/후(window , Time Granularity) 를 파악하는게 핵심이며, 그 context를 하이퍼그래프를 통해 추출하는것이 좋다 라고 주장
+
+  <br>
+    
+</div>
+</details>
+
+<details>
+<summary><b>23년 1월 2주차</b></summary>
+<div markdown="1">
+    
+  **Anomaly Detection in Multiplex Dynamic Networks: from Blockchain Security to Brain Disease Prediction** [[https://openreview.net/pdf?id=UDGZDfwmay](https://openreview.net/pdf?id=UDGZDfwmay&ref=graphusergroup.com)]
+  
+  Anomaly detection with GNN 아이디어 입니다. brain, blockchain, 추천, 협업 에서 발생하는 anomaly edge interaction을 unsupervised manner로 해결해본다가 논문의 노벨티
+  
+  - 되게 심플한 아이디어 입니다. 현업에서 구현하기에도 별 무리없어보이기에, anomaly deteciton with gnn에 대한 니즈가 있으신분들을 이를 베이스라인으로 잡고 진행해보시는게 어떨까 싶네요.
+  
+  **Influencer Detection with Dynamic Graph Neural Networks** [[https://openreview.net/pdf?id=LJeEO2lC_6](https://openreview.net/pdf?id=LJeEO2lC_6&ref=graphusergroup.com)]
+  
+  비즈니스 관점에서 dynamic graph를 어떻게 활용해볼 것인지에 대한 고민을 토대로 gnn을 활용한 사례 및 아이디어
+  
+  **Time-Evolving Conditional Character-centric Graphs for Movie Understanding** [[https://openreview.net/pdf?id=NXnSr_uXgh](https://openreview.net/pdf?id=NXnSr_uXgh&ref=graphusergroup.com)]
+  
+  데이터 적용 도메인이 특이한 논문입니다. ‘특정 비디오 내에서 사물 과 사람 간의 관계’를 그래프로 표현하여 VQA(video question answering) 문제를 해결해보고자 접근한 논문
+  
+  - 그래프 형식의 데이터 뿐만 아니라, 텍스트 이미지 등의 데이터로부터 관계를 부여하여 성능향상을 꾀하는 아이디어들이 유명 학회에서 심심치 않게 보이곤 하는데요. 그만큼 데이터 간의 edge(관계)를 어떻게 부여해야 합리적인지 효과적인지에 대한 논의 또한 중요해 보입니다. 주로 attention score를 통해 그 중요도를 산출하고 edge를 generation해주곤 하는데요. 관심있으신분들은 [zero-shot knowledge graph vqa] 키워드로 검색해보시는걸 추천드립니다.
+  
+  **Hypernetwork science via high-order hypergraph walks** [[https://epjdatascience.springeropen.com/articles/10.1140/epjds/s13688-020-00231-0](https://epjdatascience.springeropen.com/articles/10.1140/epjds/s13688-020-00231-0?ref=graphusergroup.com)]
+  
+  하루에 모두 정독하기보다 하이퍼그래프를 분석 그리고 예측으로 활용해보고 싶다 하실때, 필요한 부분만 보시는걸 추천
+  
+  - network science 측면에서 자주 언급되는 centrality measurement, component 등과 같은 요소들이 그대로 적용되어 있으며, 그 요소들의 값이 산출되었을 때 어느 의미를 가지고 있는지, 그리고 pair-wise(vanilla network)일 때랑 어느 차이가 있는지 등을 잘 설명
+  
+  **PyTorch + Rapids RMM: Maximize the Memory Efficiency of your Workflows** [[https://medium.com/rapids-ai/pytorch-rapids-rmm-maximize-the-memory-efficiency-of-your-workflows-f475107ba4d4](https://medium.com/rapids-ai/pytorch-rapids-rmm-maximize-the-memory-efficiency-of-your-workflows-f475107ba4d4?ref=graphusergroup.com)]
+  
+  Rapids 계열 라이브러리를 활용하곤 있으나, 간간이 등장하는 OOM 문제를 겪는 분들에게 도움이 될만한 글
+  
+  - 특히, gnn를 활용해서 multi-modal learning를 진행하시려는 분들은 각기 다른 feature들을 node feature혹은 edge feature로 주입하는과정을 겪으실 텐데요. 이 때, 활용하시면 좋을 것 같습니다.
+
+  <br>
+    
+</div>
+</details>
+
+<details>
+<summary><b>23년 1월 3주차</b></summary>
+<div markdown="1">
+    
+  **Examining graph neural networks for crystal structures: limitations and opportunities for capturing periodicity** [[https://arxiv.org/abs/2208.05039](https://arxiv.org/abs/2208.05039?ref=graphusergroup.com)]
+  
+  원자 배열의 중요성에 대해 강조하며 material 산업에서의 GNN의 역할에 대해 논의
+  
+  - 과연 GNN이 기존 human-designed descriptors의 특성 정량화를 잘 할 것인지가 주 research question
+  - material, physics에 관심있는 분들이 보시면 좋을 논문 같습니다. 왜 gnn이 lattice 구조에서 강한가부터 시작해서 어떤 요소들이 prediction에 유리한지와 같은 전반적인 청사진을 파악하기에 좋은 논문이라 생각
+  
+  **On the Ability of Graph Neural Networks to Model Interactions Between Vertices** [[https://arxiv.org/abs/2211.16494](https://arxiv.org/abs/2211.16494?ref=graphusergroup.com)]
+  
+  기존에는 어떤 vertex가 removed되었을 때, prediction performance가 오르고 내리고를 관찰하며 중요도를 산정했다면, 본 논문에서는 verte를 연결하는 edge의 중요도를 산정하기 위한 아이디어를 제시
+  
+  - Walk Index Sparsification(WIS) 라는 아이디어
+  - large graph dataset (w GNN model training) 을 효율적으로 적용하기 위해 고민하고 계신 분들에게 도움
+  
+  **Temporal Graph Learning in 2023** [[https://towardsdatascience.com/temporal-graph-learning-in-2023-d28d1640dbf2](https://towardsdatascience.com/temporal-graph-learning-in-2023-d28d1640dbf2?ref=graphusergroup.com)]
+  
+  dynamic, temporal graph의 기본서라 생각해도 될만큼 핵심 내용들을 잘 정리해놓은 포스팅입니다.
+  
+  - 그래프 형태의 데이터에서 시간에 대한 정보도 반영되어 있을 때, 어떤 접근법이 좋을지 고민하고 계신 분들에게 도움
+  
+  **Multi-behavior Recommendation with Graph Convolutional Networks** [[https://peterjin.me/Multi-behaviour](https://peterjin.me/Multi-behaviour?ref=graphusergroup.com) Recommendation with Graph Convolutional Networks.pdf]
+  
+  유저의 다양한 행동들을 그래프 형태로 표현하여 추천시스템에 활용
+  
+  - 다양한 행동들이라 함은 정의하기에 따라 무수히 많겠으나 여기에선 click, cart, purchase 3가지만을 선정하여 적용
+  - 이 논문에서 주의깊게 보면 좋을 포인트는 1. 다양한 행동들이 유저의 추천에 어떻게 기여하는가에 대한 논리 전개 2. user-item graph 뿐만아니라, item-item graph를 설계하여 대체재, 보완재 측면으로 접근하는 논리 이상 두 가지를 유의깊게 보시고 적용하시면 좋을 것 같습니다.
+
+  <br>
+    
+</div>
+</details>
+    
+<details>
+<summary><b>23년 1월 4주차</b></summary>
+<div markdown="1">    
+    
+  **Static and dynamic robustness**(출처 : Boccaletti, Stefano, et al. "Complex networks: Structure and dynamics." *Physics reports* 424.4-5 (2006): 175-308.APA)
+  
+  네트워크 지식 중 ‘robustness’에 대한 설명 
+  
+  **Graph Fusion in Reciprocal Recommender Systems** [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10025747](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10025747&ref=graphusergroup.com)]
+  
+  reciprocal recommender system
+  
+  이커머스에서의 추천시스템은 유저-아이템 간의 ‘클릭’ 여부를 label로 두고 prediction 했다면, reciprocal recommender system 는 유저-유저 간의 ‘matching’ 여부를 label 로 둡니다. 상호작용이 발생하느냐 아니냐 로 구별하실수 있을거 같네요.
+  
+  - 아이디어가 심플하고 흥미로워서 소개시켜 드립니다. 특히, negative sampling 을 여기에선 어떻게 했을지 유념하시면서 논문 보시는걸 추천
+  
+  **Feature selection: Key to enhance node classification with graph neural networks** [[https://ietresearch.onlinelibrary.wiley.com/doi/pdf/10.1049/cit2.12166](https://ietresearch.onlinelibrary.wiley.com/doi/pdf/10.1049/cit2.12166?ref=graphusergroup.com)]
+  
+  GNN의 성능을 높이고자 selector과 classifier model를 joint learning하는 아키텍쳐를 제안
+  
+  - 본 논문의 재미 포인트는 머신러닝 입문에서 주로 배우는 lasso RFE 등을 feature selection baseline 으로 두고 실험비교를 하는 파트
+  - 참고로 future work에서 저자가 한계점을 언급하는 부분이 있는데, 한 번 재미삼아 구현해보시는 걸 추천
+  
+  **Everything is Connected: Graph Neural Networks** [[https://arxiv.org/pdf/2301.08210.pdf](https://arxiv.org/pdf/2301.08210.pdf?ref=graphusergroup.com)]
+  
+  GNN 의 핵심을 담아놓은 논문입니다. 평소 주변분들에게 GNN이 무엇인지 설명하고 싶으셨던 분들이 참고하시면 너무나도 좋을 리소스
+  
+  - GNN의 한계점부터 왜 graph data 인지 그리고 gnn 을 공부하고 있는데 자꾸 expressive power 라는 단어가 나오는지 의문이 있으셨던 분들이시라면 그 호기심을 단번에 해소해 줄 논문
+  - 역시 고수답게 어려운 개념들을 명쾌하고 간결하고 무엇보다도 쉽게 설명되어 있어 두고 두고 되새김할 논문이라 생각
+  
+  **Understanding Graph based similarity: Simrank, Simrank++** [[https://medium.com/@ksdave/understanding-graph-based-similarity-simrank-simrank-91619c88c336](https://medium.com/@ksdave/understanding-graph-based-similarity-simrank-simrank-91619c88c336?ref=graphusergroup.com)]
+  
+  structural similarity의 대명사 Simrank가 업그레이드
+  
+  **Simrank**: 노드간 neighbor/connection 가 얼마나 비슷한지 측정
+  
+  - link analysis 하실때, pagerank 를 baseline 으로 importance 측정하셨던 분들에게 재미난 소식이 될 수도 있겠네요! Simrank 한 번 적용해보시는 걸 추천
+  
+  **conference** [[https://www2023.thewebconf.org/program/tutorials/](https://www2023.thewebconf.org/program/tutorials/?ref=graphusergroup.com)]
+  
+  너무나도 재밌는 튜토리얼들이 한가득인 WWW2023 소식
+  
+  하이퍼그래프 definition부터 application까지 broadly한 범위를 다룹니다
+  
+  추가로, Continual graph learning. , Lifelong learning Cross-domain Recommender Systems. Towards Out-of-Distiribution Generalization on Graphs. 튜토리얼까지
+  
+  **시즌한정메뉴. BIG GRAPH DATA with PyG** [[https://towardsdatascience.com/building-efficient-custom-datasets-in-pytorch-2563b946fd9f](https://towardsdatascience.com/building-efficient-custom-datasets-in-pytorch-2563b946fd9f?ref=graphusergroup.com)]
+  
+  1. 노드와 노드가 어떻게 연결되어있는지 src, dst 2가지 컬럼으로 구성되어있는 edge csv 파일
+  2. 노드가 어떤 feature 을 가지고 있는지 node csv 파일
+  
+  간단하지만, 대용량 파일을 한꺼번에 올리려고 시도하실때 OOM 오류와 만나게 됩니다.
+  
+  이전 load csv 에서는 load 해주고 Data 형태로 바꿔주는 과정에서 OOM이 발생하는데요. 그 과정을 효율적으로 진행하기 위해 InMemoryDataset방식을 활용합니다.
+  
+  - customized dataset이 이해가 잘 안된다 싶으시면 이 블로그를 추천드립니다. 특히 Dataset, Dataloader 이 뭐가 다르며, 무슨 요소때문에 memory efficient가 되는지 유념하시면서 보시는 걸 추천
+
+  <br>
+    
+</div>
+</details>
+
+<details>
+<summary><b>23년 2월 1주차</b></summary>
+<div markdown="1">
+    
+  static and dynamic robustness Dynamic 편
+  
+  **NodeAug: Semi-Supervised Node Classification with Data Augmentation** [[https://dl.acm.org/doi/abs/10.1145/3394486.3403063](https://dl.acm.org/doi/abs/10.1145/3394486.3403063?ref=graphusergroup.com)]
+  
+  그래프에서의 데이터 증강
+  
+  - node attribute와 graph structure를 변형해주며 graph augmentation 진행
+  - subgraph mini-batch training을 통해 large graph에서 어떤 식으로 training하면 좋을지에 대한 이야기
+  - 모든 data agumentation 이 만능이 아니라는 관점을 견지하시고 보시면 재밌는 아이디어까지 이어질 것 같습니다 🙂
+  
+  **ByteGraph: A Graph Database for TikTok**
+  
+  [[https://www.mydistributed.systems/2023/01/bytegraph-graph-database-for-tiktok.html?m=1](https://www.mydistributed.systems/2023/01/bytegraph-graph-database-for-tiktok.html?m=1&ref=graphusergroup.com)]
+  
+  많은 실시간 데이터를 관리하기 위해 직접 만든 데이터베이스 소개 **(ByteGraph)**
+  
+  - Low latency, high scalability 두 조건들을 만족하기 위해 1. Edge-tree 2. Adaptive optimization 3. geographic replication 요소들을 중점으로 데이터베이스 설계
+  - Production 레벨에서 중요한 high scalablilty , low latency 요소를 어떻게 설계하는지 궁금하셨던 분들에게 유용한 레퍼런스
+  
+  **NFT Wash Trading in the Ethereum Blockchain** [[https://arxiv.org/pdf/2212.01225.pdf](https://arxiv.org/pdf/2212.01225.pdf?ref=graphusergroup.com)]
+  
+  유저 간 담합을 통해 NFT의 가격을 상승시키는 행위가 주로 어떤 식으로 나타나는지에 대해 다룬 논문
+  
+  - 복잡계 네트워크 지식 활용됨
+  - overview를 잘 기술한 논문
+  
+  **ZeRO: Memory Optimizations Toward Training Trillion Parameter Models** [[https://arxiv.org/pdf/1910.02054.pdf](https://arxiv.org/pdf/1910.02054.pdf?ref=graphusergroup.com)]
+  
+  parallelism에 대해 논의하며 과연 data parallelism이 model training에 긍정적인 영향을 줄 것인가에 대해 논의하는 논문
+  
+  - Pipeline parallelism , Model parallelism , Cpu offloading 등 전문가들의 다양한 실험과 해석들이 총 집합
+  
+  **big graph with 모델**
+  
+  모델을 통해 big graph 를 다루는 방식
+  
+  **Recent Advances in Efficient and Scalable Graph Neural Networks** [[https://www.chaitjo.com/post/efficient-gnns/#scalable-and-resource-efficient-gnn-architectures](https://www.chaitjo.com/post/efficient-gnns/?ref=graphusergroup.com#scalable-and-resource-efficient-gnn-architectures)]
+  
+  feature aggregation 에서 과도한 memory overhead 가 발생하므로 그것들을 pre-computation 해서 MLP (linear-layer) 에 태우면 light 하다 라는 맥락
+  
+  - GNN ML 엔지니어가 목표라면 필독 해야할 블로그
+      - 다양한 엔지니어링 스킬 그리고 practical 그래프 임베딩 논문들 수록
+
+  <br>
+    
+</div>
+</details>
+    
+<details>
+<summary><b>23년 2월 2주차</b></summary>
+<div markdown="1">    
+    
+  **Unleashing ML Innovation at Spotify with Ray** [[https://engineering.atspotify.com/2023/02/unleashing-ml-innovation-at-spotify-with-ray/](https://engineering.atspotify.com/2023/02/unleashing-ml-innovation-at-spotify-with-ray/?ref=graphusergroup.com)]
+  
+  Graph learning 을 recommendation system 에 어떻게 적용하고 있는지 궁금하고 계셨을 분들에게 도움이 되겠네요. RAY + PyG 의 형태로 활용됩니다.
+  
+  - Production level에서 GNN이 활용되기 어려울거라 생각했던 이유들인 subgraph sampling, batch training이 Ray를 통해 해결해서 실제 배포까지 된다는 사실
+  
+  **Search behavior prediction: A hypergraph perspective** [[https://www.amazon.science/publications/search-behavior-prediction-a-hypergraph-perspective](https://www.amazon.science/publications/search-behavior-prediction-a-hypergraph-perspective?ref=graphusergroup.com)]
+  
+  bipartite graph: 고객이 쇼핑을 하며 무슨 행동을 하는지 표현할 때 효과적인 구조
+  
+  - Disassortative, Long-Tail Distribution 문제를 해결하고자 시도
+  - 추천시스템에서 hypergraph를 도입하는 추세
+  
+  **Kumo - why graph is advantage in FDS industry** [[https://kumo.ai/ns-newsarticle-using-graph-learning-to-combat-fraud-and-abuse](https://kumo.ai/ns-newsarticle-using-graph-learning-to-combat-fraud-and-abuse?ref=graphusergroup.com)]
+  
+  Kumo, FDS에서 왜 Graph가 적절한지에 대해 이야기
+  
+  - Rule based → traditiaonl ML → Graph 까지 기술이 잘 되어있습니다.
+  
+  **T2-GNN: Graph Neural Networks for Graphs with Incomplete Features and Structure via Teacher-Student Distillation** [[https://arxiv.org/pdf/2212.12738.pdf](https://arxiv.org/pdf/2212.12738.pdf?ref=graphusergroup.com)]
+  
+  경량화 엔지니어링 스킬 중 Knowledge distillation를 GNN에 어떻게 대입하는지에 대해 이야기
+  
+  - knowledge distillation task에서는 node feature를 잘 나타내는게 중요하다라는 사실을 실험 결과를 근거로 알 수 있습니다.
+  
+  **Complex systems in the spotlight: next steps after the 2021 Nobel Prize in Physics** [[https://iopscience.iop.org/article/10.1088/2632-072X/ac7f75/pdf](https://iopscience.iop.org/article/10.1088/2632-072X/ac7f75/pdf?ref=graphusergroup.com)]
+  
+  재미로 보시면 좋을거 같네요. 복잡계 네트워크의 next step 에 대해 물리학계에서 저명한 분들이 언급하신 내용입니다.
+  
+  - 향후 학계가 어떤식으로 흘러갈지 유추할 수 있는 힌트들이 마구마구 적혀있기에, 연구 방향성을 잡으실 때 유용하실거라 생각되네요.
+  
+  **Big graph with 리소스**
+  
+  **Quiver** [[https://github.com/quiver-team/torch-quiver](https://github.com/quiver-team/torch-quiver?ref=graphusergroup.com)] [[https://www-fourier.ujf-grenoble.fr/~mbrion/notes_quivers_rev.pdf](https://www-fourier.ujf-grenoble.fr/~mbrion/notes_quivers_rev.pdf?ref=graphusergroup.com)]
+  
+  PyG base performance 를 대폭 향상시킨 프로젝트
+  
+  - 1. GPU accelerated(NVIDIA 네트워크 통신 최적화) 2. torch-Quiver 만의 그래프 데이터 구조 3. 효율적인 aggregation 을 위한 알고리즘 4. 최적화된 그래프 알고리즘 등이 그 성능 향상의 비법
+  
+  **PyG-lib** [[https://pyg-lib.readthedocs.io/en/latest/modules/ops.html](https://pyg-lib.readthedocs.io/en/latest/modules/ops.html?ref=graphusergroup.com)]
+  
+  pyg-lib 와 torch-scatter, gather 은 모두 pip install 로 설치하면 적용되는 low-level module입니다. 허나 pyg-lib를 활용하게 된다면 더욱 gpu 친화적인 low-level로써 성능 향상을 기대할 수 있습니다.
+  
+  **Memory-Efficient Aggregations** [[https://pytorch-geometric.readthedocs.io/en/latest/advanced/sparse_tensor.html](https://pytorch-geometric.readthedocs.io/en/latest/advanced/sparse_tensor.html?ref=graphusergroup.com)]
+  
+  dense-graph 나 large-graph 에서 gather-scatter 은 물리적으로 메모리 공간을 많이 차지합니다. 이를 sparse-tensor[[https://arxiv.org/abs/1803.08601](https://arxiv.org/abs/1803.08601?ref=graphusergroup.com)] 활용해서 해결합니다.
+  
+  **EXACT: Scalable Graph Neural Networks Training via Extreme Activation Compression** 
+  
+  [[https://openreview.net/forum?id=vkaMaq95_rX](https://openreview.net/forum?id=vkaMaq95_rX&ref=graphusergroup.com)] [code: [https://github.com/warai-0toko/Exact](https://github.com/warai-0toko/Exact?ref=graphusergroup.com)]
+  
+  Quantized를 통해 데이터를 압축시켜줌으로서, 성능 개선을 이끌어냅니다.
+
+  <br>
+    
+</div>
+</details>
+    
+<details>
+<summary><b>23년 2월 3주차</b></summary>
+<div markdown="1">     
+    
+  **Graph Neural Networks Go Forward-Forward modeling** [[https://arxiv.org/pdf/2302.05282.pdf](https://arxiv.org/pdf/2302.05282.pdf?ref=graphusergroup.com)]
+  
+  ‘Backward 를 Forward 로 대체한다’라는 참신한 아이디어를 적용한 논문
+  
+  - 본 논문의 핵심: 1. label encoding 2. Goodness function of a graph 3. Inference without backprop
+  - large , big 같은 대용량 학습 트렌드에서 새로운 관점을 제시할 수 있는 논문
+  
+  **On the Connection Between MPNN and Graph Transformer** [[https://arxiv.org/abs/2301.11956](https://arxiv.org/abs/2301.11956?ref=graphusergroup.com)]
+  
+  Why graph transformer? 라는 질문에 답할 수 있는 여러 테크닉들이 담겨있습니다. 더불어, Graph Transformer 관점들을 적용한 GPS , Graphhormer 등 sota 들과 비교한 부분이 흥미롭습니다.
+  
+  - graph transformer 를 기반으로 논문을 작성하고 싶으시거나 , 왜 Transformer 에서 positional encoding , self attention 가 중요한지 궁금하거나 수학적으로 음미하고 싶으신 분들께서 보시면 좋을 논문
+  
+  **A GENERALIZATION OF VIT/MLP-MIXER TO GRAPHS** [[https://arxiv.org/pdf/2212.13350.pdf](https://arxiv.org/pdf/2212.13350.pdf?ref=graphusergroup.com)]
+  
+  graph 분야에서 중요하게 생각되는 over-squashing , long-range dependency 두가지 문제를 MLP mixer 기술로 해결해보고자 시도
+  
+  - 여러모로 기발한 기술들이 많이 들어간 논문
+  
+  **An Introduction to Topological Data Analysis: Fundamental and Practical Aspects for Data Scientists** [[https://www.frontiersin.org/articles/10.3389/frai.2021.667963/full](https://www.frontiersin.org/articles/10.3389/frai.2021.667963/full?ref=graphusergroup.com)]
+  
+  네트워크 분석을 통해 topology를 해석하는 방식이 아닌 위상 수학 topology analysis를 통해 topology를 어떻게 접근하는지에 대한 자료
+  
+  - 아마도 3D + graph를 공부하시는 분들에게 많은 도움
+
+  <br>
+    
+</div>
+</details>
+
+<details>
+<summary><b>23년 2월 4주차</b></summary>
+<div markdown="1">
+    
+  **Breaking the Limit of Graph Neural Networks by Improving the Assortativity of Graphs with Local Mixing Patterns** [[https://arxiv.org/pdf/2106.06586.pdf](https://arxiv.org/pdf/2106.06586.pdf?ref=graphusergroup.com)]
+  
+  동질성(Assortativity)
+  
+  - data-centric 관점에서 잘 풀어 놓은 논문입니다. 다 읽어보고 나시면 graph embedding model이 아닌 graph pattern, graph distribution 그리고 graph modeling이 얼마나 중요한지에 대해 체감하시게 될 거라 생각됩니다.
+  - GNN vs. local assortativity라는 섹션에서 모델 vs. 데이터 관점에서 접근한 굉장히 흥미로운 부분도 존재
+  - GNN도 좋지만, 학습하는 데이터에 대한 중요성 garbage in, garbage out을 다시 한 번 깨닫게 하는 논문
+  
+  **GraphPrompt: Unifying Pre-Training and Downstream Tasks for Graph Neural Networks** [[https://arxiv.org/pdf/2302.08043.pdf](https://arxiv.org/pdf/2302.08043.pdf?ref=graphusergroup.com)]
+  
+  chatGPT 붐으로 인해 프롬프트 엔지니어링이 이전 대비 굉장한 관심을 받고 있는 추세인 가운데 그래프 분야에서도 프롬프트 엔지니어링 스킬을 적용한 논문이 등장
+  
+  - Pre-training weight를 활용하기 위한 스킬인 fine-tuning 이 자연어 처리 분야에서는 잘 작동하나, 그래프 분야에서는 만족할만한 성능을 이끌어내지 못했음을 한계점으로 언급하며 prompt 컨셉을 제시
+  - 그래프 분야에서 pretraining 이란 MPNN 모델 기반으로 모든 노드 링크 그래프 3가지 방식을 모두 학습해주는 방식이 정석처럼 여겨지곤 했었는데요. 여기에서도 노드 링크 그래프 structure wise 라는 관점을 동일하나, pattern specific 을 위해 vector similarity 를 활용한 아이디어가 참신하다고 생각되는 논문입니다.
+  
+  **Simplifying Subgraph Representation Learning for Scalable Link Prediction** [[https://arxiv.org/pdf/2301.12562.pdf](https://arxiv.org/pdf/2301.12562.pdf?ref=graphusergroup.com)]
+  
+  링크 예측 작업에서 발생하는 확장성 문제를 해결하기 위해, 서브그래프 및 확산 연산자를 활용
+  
+  - 서브그래프 추출을 통해 예측할 링크가 서브그래프에 존재하는지, 존재하지 않는지 그리고 존재한다면 근처 k-hop과 교류(diffusion)가 발생할 때, 임베딩 값이 어떻게 변화되는지를 중점적으로 확인
+  - 메시지 패싱을 확산 연산자로 대체한다는 관점에서 매우 흥미로웠던 논문
+  - 또한 샘플링 전략에서 PoS(power of subgraph)와 SoP(subgraph of power)를 언급하며 각각의 차이와 장단점에 대해 언급한 부분도 흥미로웠습니다.
+  
+  **LINE: Large-scale Information Network Embedding** [[https://arxiv.org/pdf/1503.03578.pdf](https://arxiv.org/pdf/1503.03578.pdf?ref=graphusergroup.com)]
+  
+  대표적인 large-scale graph embedding 기술인 LINE은 네트워크 내에서 직접적으로 연결되어 있는 노드뿐만 아니라, 공통 이웃을 가지고 있는 간접연결 노드들의 구조적 특성을 모두 임베딩에 담고자 시도한 논문
+  
+  - First-order와 second-order라는 단어를 통해 기술들을 설명
+  - second-order에서 negative sampling을 적용해서 model optimization까지 어떻게 이루어지는지를 살펴보는 것이 흥미로울 것입니다. optimization시에는 asynchronous stochastic gradient algorithm을 활용하는데, 이때 continuous weight → discrete weight로 전환하는 방식이 굉장히 흥미롭습니다.
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 3월 1주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 3월 2주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 3월 3주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 3월 4주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 3월 5주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 4월 1주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 4월 2주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 4월 3주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 4월 4주차</b></summary>
+<div markdown="1">
+    
+  **Scalable Spatio-temporal Graph Neural Networks** [[https://arxiv.org/pdf/2209.06520.pdf](https://arxiv.org/pdf/2209.06520.pdf?ref=graphusergroup.com)]
+  
+  spatio-temporal GNN에서 큰 한계점이었던 spatio-temporal feature training에서 발생하는 막대한 연산량 절감을 위해 접목한 방식 ESN(Echo State Network)
+  
+  **Graph Neural Networks Designed for Different Graph Types: A Survey** [[https://openreview.net/pdf?id=h4BYtZ79uy](https://openreview.net/pdf?id=h4BYtZ79uy&ref=graphusergroup.com)]
+  
+  그래프 종류마다의 다양한 접근 방식에 대한 survey 논문
+  
+  - 1. 그래프 데이터 개요부터 시작해서 2. GNN에 대한 개요, 3. 각 그래프 카테고리마다 적용할 시나리오 4. 그래프 데이터에 걸맞은 GNN 모델 모든 게 체계적으로 정리되어 있음
+  - Graph Model Problem Data category 4가지 필수적인 요소들만 잘 간추려놓은 테이블
+  
+  GNN, Graph data 연계하여 연구하는 분들에게 꼭 추천하는 서베이 논문
+  
+  **Higher order assortativity for directed weighted networks and Markov chains** [[https://arxiv.org/pdf/2304.01737.pdf](https://arxiv.org/pdf/2304.01737.pdf?ref=graphusergroup.com)]
+  
+  higher order graph(hypergraph) 로 가정한 상황(trade network)에서 어떤 식으로 assortativity 를 측정하는지에 대해 이야기한 논문
+  
+  **Getting started with PyTorch Geometric (PyG) on Graphcore IPUs** [[https://medium.com/graphcore/getting-started-with-pytorch-geometric-pyg-on-graphcore-ipus-9e842a0bac1e](https://medium.com/graphcore/getting-started-with-pytorch-geometric-pyg-on-graphcore-ipus-9e842a0bac1e?ref=graphusergroup.com)]
+  
+  IPU를 활용하여 TPU, GPU의 한계 극복
+  <br>
+</div>
+</details>
+    
+<details>
+<summary><b>23년 5월 1주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 5월 2주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 5월 3주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 5월 4주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 6월 1주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 6월 2주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 6월 3주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 6월 4주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 7월 1주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 7월 2주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 7월 3주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 7월 4주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 8월 1주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 8월 2주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 8월 3주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
+
+<details>
+<summary><b>23년 8월 4주차</b></summary>
+<div markdown="1">
+
+  <br>
+</div>
+</details>
