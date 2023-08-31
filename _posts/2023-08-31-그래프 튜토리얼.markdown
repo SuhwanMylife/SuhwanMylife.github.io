@@ -14,9 +14,9 @@ Graph에 대한 기초 지식을 얻고자 아래 사이트를 공부하면서 �
 
 <br>
 
-[1. Graph 기초](https://www.graphusergroup.com/tag/graphomakase/)
+[1. Graph 기초](https://suhwanmylife.github.io/Graph-Travel-1%ED%99%94-Graph-%EA%B8%B0%EC%B4%88/)
 
-[2. DeepWalk 활용한 Node Classification](https://www.graphusergroup.com/tag/graphomakase/)
+[2. DeepWalk 활용한 Node Classification](https://suhwanmylife.github.io/Graph-Travel-2%ED%99%94-DeepWalk-%ED%99%9C%EC%9A%A9%ED%95%9C-Node-Classification/)
 
-[3. Node2vec 활용한 Node Classification](https://www.graphusergroup.com/tag/graphomakase/)
+[3. Node2vec 활용한 Node Classification](https://suhwanmylife.github.io/Graph-Travel-3%ED%99%94-Node2vec-%ED%99%9C%EC%9A%A9%ED%95%9C-Node-Classification/)
 
