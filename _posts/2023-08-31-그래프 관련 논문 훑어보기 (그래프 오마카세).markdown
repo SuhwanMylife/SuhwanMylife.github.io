@@ -1,10 +1,11 @@
 ---
 layout: post
-title:  "그래프 관련 연구 동향 파악"
+title: "그래프 관련 연구 동향 파악"
 tags:
   - Graph
   - paper review
 ---
+
 <br>
 
 Graph 관련 연구 동향 파악 목적으로 작성한 글입니다. 내용은 전적으로 아래의 사이트를 참고했습니다. [GraphOmakase 그래프 오마카세](https://www.graphusergroup.com/tag/graphomakase/)
@@ -747,3 +748,4 @@ Graph 관련 연구 동향 파악 목적으로 작성한 글입니다. 내용은
 [jekyll-docs]: https://jekyllrb.com/docs/home
 [jekyll-gh]:   https://github.com/jekyll/jekyll
 [jekyll-talk]: https://talk.jekyllrb.com/
+
