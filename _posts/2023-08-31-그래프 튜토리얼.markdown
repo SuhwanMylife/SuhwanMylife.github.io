@@ -1,0 +1,22 @@
+---
+layout: post
+title: "그래프 튜토리얼"
+tags:
+  - Graph
+  - Tutorial
+---
+
+<br>
+
+Graph에 대한 기초 지식을 얻고자 아래 사이트를 공부하면서 따로 정리한 글입니다.
+
+[그래프 오마카세 - Graph Travel](https://www.graphusergroup.com/tag/graphtravel-2/)
+
+<br>
+
+[1. Graph 기초](https://www.graphusergroup.com/tag/graphomakase/)
+
+[2. DeepWalk 활용한 Node Classification](https://www.graphusergroup.com/tag/graphomakase/)
+
+[3. Node2vec 활용한 Node Classification](https://www.graphusergroup.com/tag/graphomakase/)
+
