@@ -8,7 +8,7 @@ tags:
 
 <br>
 
-Graph 관련 연구 동향 파악 목적으로 작성한 글입니다. 내용은 전적으로 아래의 사이트를 참고했습니다. [GraphOmakase 그래프 오마카세](https://www.graphusergroup.com/tag/graphomakase/)
+Graph 관련 연구 동향 파악 목적으로 작성했습니다. 주요 키워드 위주로 보고자 했습니다. 내용은 전적으로 아래의 사이트를 참고했습니다. [GraphOmakase 그래프 오마카세](https://www.graphusergroup.com/tag/graphomakase/)
 
 <br>
 
