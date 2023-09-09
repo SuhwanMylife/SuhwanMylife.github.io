@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "차원 축소 (PCA, 주성분분석)"
+title: "PCA (차원 축소, 주성분분석)"
 tags:
   - ML 기타
 use_math: true
