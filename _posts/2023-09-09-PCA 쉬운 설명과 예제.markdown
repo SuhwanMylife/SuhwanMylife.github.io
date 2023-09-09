@@ -1,0 +1,140 @@
+---
+layout: post
+title: "PCA 쉬운 설명과 예제"
+tags:
+  - ML 기타
+---
+
+<br>
+
+# 1. PCA를 쓰는 경우
+
+변수가 너무 많아 이들 중 중요하다고 판단되는 변수들 몇 개만 뽑아 모델링을 하려고 할 때 주로 사용
+
+이 때, 중요함의 기준은 전체 데이터(독립변수들, 모든 차원)의 변산을 얼마나 잘 설명하냐에 있다.
+
+⇒ PCA의 본질: 차원 축소
+원본 데이터가 아니라 변환(projection)된 데이터==주성분을 이용해 분석 혹은 모델링을 진행하겠다는 의미!!!
+
+<br>
+
+# 2. 코드 적용
+
+## 데이터 불러오기
+
+Iris 데이터 불러오기
+
+```python
+import pandas as pd
+url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+df = pd.read_csv(url, names=['sepal length','sepal width','petal length','petal width','target'])
+df.head()
+```
+
+<br>
+
+## 표준화
+
+pca를 하기 전에 데이터 스케일링을 하는 이유는 데이터의 스케일에 따라 주성분의 설명 가능한 분산량이 달라질 수 있기 때문이다.
+
+```python
+from sklearn.preprocessing import StandardScaler  # 표준화 패키지 라이브러리 
+x = df.drop(['target'], axis=1).values # 독립변인들의 value값만 추출
+y = df['target'].values # 종속변인 추출
+
+x = StandardScaler().fit_transform(x) # x객체에 x를 표준화한 데이터를 저장
+
+features = ['sepal length', 'sepal width', 'petal length', 'petal width']
+pd.DataFrame(x, columns=features).head()
+```
+
+![Untitled](https://github.com/SuhwanMylife/CJDaehan_competition/assets/70688382/442d87bb-b88e-450a-8228-7bcd22318e7e)
+
+코드 실행 후 위와 같이 표준화된 결과를 얻을 수 있다.
+
+<br>
+
+## PCA 실행
+
+```python
+from sklearn.decomposition import PCA
+pca = PCA(n_components=2) # 주성분을 몇 개로 할지 결정
+printcipalComponents = pca.fit_transform(x)
+principalDf = pd.DataFrame(data=printcipalComponents, columns = ['principal component1', 'principal component2'])
+# 주성분으로 이루어진 데이터 프레임 구성
+```
+
+주성분의 개수를 정할 때, **어떤 이유를 근거로 결정**해야 하는가?
+
+PCA를 단계적으로 진행할 경우, 공분산 행렬을 통해 고윳값(eigenvalue)과 고유벡터(eigenvector)를 구할 수 있다.
+이 때, 고윳값이 설명 가능한 분산량에 해당한다.
+
+![Untitled 1](https://github.com/SuhwanMylife/CJDaehan_competition/assets/70688382/841c3338-be5d-45a2-948b-f3889a0b7852)
+
+위의 그래프는 주성분 각각의 고윳값을 고윳값들을 모두 더한 값으로 나눠 준 것이다.
+즉, 전체에서 해당 주성분의 고윳값이 차지하는 비율을 알아보는 것이다.
+그래서 그 비율을 가지고 주로 다음과 같이 표현한다.
+
+“본 그래프에서 주성분 6개일 때 누적 설명 분산량이 73%이기 때문에 주성분을 6개로 결정하였다.”
+
+```python
+pca.explained_variance_ratio_
+```
+
+![Untitled 2](https://github.com/SuhwanMylife/CJDaehan_competition/assets/70688382/5dfad3d6-efd6-47b1-b178-557a466e9df7)
+
+```python
+sum(pca.explained_variance_ratio_)
+```
+
+![Untitled 3](https://github.com/SuhwanMylife/CJDaehan_competition/assets/70688382/755fd4ca-ad90-4f24-b641-63a603aba52d)
+
+참고로 sklearn에서 언더바(_)는 분석이 진행된 이후의 결괏값을 나타낸다.
+
+Iris 데이터의 경우 두 개의 주성분이 전체 분산의 약 96%를 설명한다.
+
+```python
+pca = PCA(n_components=3)
+
+printcipalComponents = pca.fit_transform(x)
+
+principalDf = pd.DataFrame(data=printcipalComponents, columns = ['principal component1', 'principal component2', '3'])
+
+pca.explained_variance_ratio_
+```
+
+![Untitled 4](https://github.com/SuhwanMylife/CJDaehan_competition/assets/70688382/e428560c-662a-4a76-b162-8bd0a618ea9e)
+
+n_components=3으로 분석 결과, 3번째 주성분의 분산 설명량은 0.03밖에 되지 않는다는 것을 알 수 있다. 따라서, 추가적인 주성분을 투입하더라도 설명 가능한 분산량이 얼마 증가하지 않기 때문에 주성분은 두 개로 결정하는 것이 적절하다고 할 수 있다.
+
+<br>
+
+## 두 개의 주성분을 이용한 Iris species 시각화
+
+이제 두 개의 주성분을 이용하여 iris 데이터의 species가 어떤 식으로 표현되는지 그래프를 이용하여 확인해보자.
+
+```python
+import matplotlib.pyplot as plt
+
+fig = plt.figure(figsize = (8, 8))
+ax = fig.add_subplot(1, 1, 1)
+ax.set_xlabel('Principal Component 1', fontsize = 15)
+ax.set_ylabel('Principal Component 2', fontsize = 15)
+ax.set_title('2 component PCA', fontsize=20)
+
+targets = ['Iris-setosa', 'Iris-versicolor', 'Iris-virginica']
+colors = ['r', 'g', 'b']
+for target, color in zip(targets,colors):
+    indicesToKeep = finalDf['target'] == target
+    ax.scatter(finalDf.loc[indicesToKeep, 'principal component1']
+               , finalDf.loc[indicesToKeep, 'principal component2']
+               , c = color
+               , s = 50)
+ax.legend(targets)
+ax.grid()
+```
+
+![Untitled 5](https://github.com/SuhwanMylife/CJDaehan_competition/assets/70688382/4bf31147-e0fc-4bbd-9fce-5d00ae55abe5)
+
+확인 결과, 두 개의 주성분으로도 iris 전체 데이터를 어느 정도 잘 표현할 수 있음을 알 수 있다.
+

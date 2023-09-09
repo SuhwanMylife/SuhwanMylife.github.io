@@ -1,0 +1,177 @@
+---
+layout: post
+title: "차원 축소 (PCA, 주성분분석)"
+tags:
+  - ML 기타
+use_math: true
+---
+
+<br>
+
+직접 수식을 작성해가며 정리하였는데, 수식을 100% 이해하지는 못했습니다. PCA가 어떤 역할을 하는지 알고 어떤 식으로 동작하는지 대략 알기 위해 정리하였습니다.
+
+<br>
+
+# 1. 차원 축소를 위한 접근 방법
+
+- 투영(projection)
+- 매니폴드 학습(manifold learning)
+
+<br>
+
+## 투영 Projection
+
+일반적으로 모든 데이터의 특성(차원)이 고르게 분포되어 있지 않음
+
+학습 dataset은 고차원 공간 안에서 저차원 부분 공간(subspace)에 위치
+⇒ 고차원의 데이터의 특성 중 일부 특성으로 데이터를 표현할 수 있다는 의미
+
+<br>
+
+## 매니폴드 학습 Manifold Learning
+
+다양체라고도 한다. 국소적으로 유클리드 공간과 닮은 위상 공간
+
+매니폴드가 뭔지에 대한 설명이 있지만, 다소 내용이 어려워 생략.
+
+무튼, 기계학습에서는 분류나 회귀같은 작업을 하기 전에 학습 dataset을 저차원의 매니폴드 공간으로 표현하면 더 간단하게 문제를 해결할 수 있다라는 가정을 한다.
+
+![Untitled](https://github.com/SuhwanMylife/CJDaehan_competition/assets/70688382/fc6cc312-8e20-4d47-afe6-b2b565b64e20)
+
+물론, 이러한 가정이 항상 통하지는 않는다. 아래의 그림처럼 저차원 매니폴드가 오히려 결정 경계(decision boundary)를 찾는 것이 더 어려운 경우가 있다.
+
+![Untitled 1](https://github.com/SuhwanMylife/CJDaehan_competition/assets/70688382/d7767f3a-203f-4ef3-bca5-519e7268f140)
+
+따라서, 모델 학습 이전에 dataset의 차원을 감소시키면 학습 속도는 빨라지지만 모델의 성능이 항상 더 낫거나 간단한 모델이 되는 것은 아니다. 이것은 dataset이 어떤 모양을 하고 있냐에 따라 달라진다.
+
+<br>
+
+# 2. PCA Principal Component Analysis
+
+가장 대표적인 차원 축소 알고리즘. 먼저 데이터에 가장 가까운 초평면(hyperplane)을 구한 다음, 데이터를 이 초평면에 투영(projection)시킨다.
+
+<br>
+
+## 2.1 분산 보존
+
+저차원의 초평면에 데이터를 투영하기 전에 먼저 적절한 초평면을 선택해야 한다. PCA는 데이터의 분산이 최대가 되는, 원본 데이터셋과 투영된 데이터셋 간의 평균제곱거리를 최소화하는 축을 찾는다. 아래의 그림에서 왼쪽 2차원 데이터셋을 오른쪽 그림처럼 투영했을 때 $C_1$축으로 투영한 데이터가 분산이 최대로 보존되는 것을 확인할 수 있다.
+
+![Untitled 2](https://github.com/SuhwanMylife/CJDaehan_competition/assets/70688382/2c2a7fcf-e0b0-41e3-b12b-fec38365aee0)
+
+<br>
+
+## 2.2 주성분 Principal Component
+
+PCA는 다음과 같은 단계로 이루어진다. 
+
+1. 학습 데이터셋에서 분산이 최대인 축(axis)을 찾는다.
+2. 이렇게 찾은 첫번째 축과 직교(orthogonal)하면서 분산이 최대인 두 번째 축을 찾는다.
+3. 첫 번째 축과 두 번째 축에 직교하고 분산을 최대한 보존하는 세 번째 축을 찾는다.
+4. `1~3`과 같은 방법으로 데이터셋의 차원(특성 수)만큼의 축을 찾는다.
+
+이렇게 $i-$번째 축을 정의하는 **단위 벡터**(unit vector)를 $i-$번째 **주성분**(PC, Principal Component)이라고 한다.
+
+예를들어, 위의 그림에서는 2차원 dataset이므로 PCA는 분산을 최대로 보존하는 단위벡터 $c_1$이 구성하는 축과 이 축에 직교하는 $c_2$가 구성하는 축을 찾게 된다.
+
+<br>
+
+## 2.3 PCA 구하는 과정
+
+### 1) 공분산 Covariance
+
+먼저, 주성분(PC)을 구하기 위해서는 공분산에 대해 알아야 한다.
+
+**공분산(covariance)**은 2개의 특성(또는 변수)간의 상관정도를 나타낸 값이다.
+
+예를 들어, 아래의 그림과 같이 X, Y 두 개의 특성에 대해 공분산을 구하면 다음과 같다.
+
+![Untitled 3](https://github.com/SuhwanMylife/CJDaehan_competition/assets/70688382/18ab85f3-4048-44c5-a48c-6d61f931ae19)
+
+- X, Y에 대한 각 기댓값
+
+$
+E[X] = \mu, E[Y] = v
+$
+
+<br>
+
+- 공분산 $cov(X, Y)$는 다음과 같이 나타낼 수 있다.
+
+![Untitled 4](https://github.com/SuhwanMylife/CJDaehan_competition/assets/70688382/a96d5cb4-253c-4073-9688-731d0bd9875e)
+
+<br>
+
+- 위 공분산 식을 벡터로 나타내면 다음과 같다.
+
+![Untitled 5](https://github.com/SuhwanMylife/CJDaehan_competition/assets/70688382/0a02306b-7f36-4a34-9344-9e4c5184436a)
+
+<br>
+
+- 다음은 n개의 특성(feature)과 m개의 관측치로 구성된 데이터에 대한 공분산 $cov(X)$을 구해보자. 오른쪽 데이터 행렬에서 각 열벡터의 평균은 $E[X_i - \mu_i] = E[X_i] - \mu_i = \mu_i - \mu_i = 0$이다. $X_i - \mu_i$를 편차라 한다.
+
+![Untitled 6](https://github.com/SuhwanMylife/CJDaehan_competition/assets/70688382/85f815b9-ed3f-4e38-b3df-e9ab740f5286)
+
+<br>
+
+### 2) PCA 계산
+
+PCA의 목적은 원 데이터(original data)의 분산을 최대한 보존하는 축을 찾아 투영(projection)하는 것이다. 예를 들어, 평균 0으로 조정한(편차를 구한) 데dataset X를 단위벡터 $\vec{e}$인 임의의 축 P에 투영한다고 했을 때, X의 투영된 결과는 $X\vec{e}$로 표현할 수 있다. 이때의 분산은 다음과 같이 나타낼 수 있다.
+
+![Untitled 7](https://github.com/SuhwanMylife/CJDaehan_competition/assets/70688382/8280bb3a-38a4-4ec3-99aa-7fbf1f4dea75)
+
+<br>
+
+따라서, PCA는 $Var[X\vec{e}] = \vec{e}^TC\vec{e}$를 목적함수로 하는 최대화 문제이며 이때 제약조건은 $\vert\vert\vec{e}\vert\vert^2=1$이다.
+
+![Untitled 8](https://github.com/SuhwanMylife/CJDaehan_competition/assets/70688382/e16aabc3-a09b-4915-aefb-116451d43dd4)
+
+<br>
+
+위의 식을 서포트벡터머신(SVM)에서 살펴 본 라그랑제 승수법을 이용하여 계산할 수 있다. 위의 식을 라그랑지안 함수 L로 나타내면 다음과 같다.
+
+$
+L(\vec{e}, \lambda) = \vec{e}^TC\vec{e} - \lambda(\vec{e}^T\vec{e} - 1)
+$
+
+<br>
+
+라그랑지한 함수 $L$을 $\vec{e}$에 대해 편미분하면 다음과 같다.
+
+$
+\frac{\partial L}{\partial \vec{e}} = (C + C^T)\vec{e} - 2\lambda\vec{e} \\= 2C\vec{e} - 2\lambda\vec{e} = 0\\\therefore C\vec{e} = \lambda\vec{e} \\\therefore C = \vec{e}\lambda\vec{e}^T
+$
+
+<br>
+
+즉, $C\vec{e} = \lambda\vec{e}$를 만족하는 $\vec{e}$가 바로 분산 $Var[X\vec{e}]$를 최대화한다.
+
+위의 식에서 $\vec{e}$는 공분산 $C$의 고유벡터(eigenvector)이며, $\lambda$는 $C$의 고윳값(eigenvalue)이자 eigenvector로 투영했을 때의 분산(variance)이다. 이 때, 고유벡터의 열벡터를 주성분(PC, principal component)이라고 한다. 따라서, 고유벡터(eigenvector)에 투영하는 것이 분산의 최대가 된다.
+
+<br>
+
+## 2.4 Scikit-Learn에서의 PCA 계산
+
+Scikit-Learn에서는 PCA를 계산할 때, dataset에 대한 공분산의 고윳값 분해(eigenvalue-decomposition)이 아닌 특잇값 분해(SVD, Singular Value Decomposition)를 이용해 계산한다. (SVD에 대한 자세한 내용: [https://darkpgmr.tistory.com/106](https://darkpgmr.tistory.com/106))
+
+dataset $X$에 대한 SVD는 다음과 같이 나타낼 수 있다.
+
+$
+X = U\sum  V^T
+$
+
+<br>
+
+- $U$: $m \times m$ 직교행렬 → $XX^T$의 eigenvector, $X$의 left singular vector
+- $V$: $n\times n$ 직교행렬 → $X^TX$의 eigenvector, $X$의 right singular vector라 하며, PCA의 주성분행렬
+- $\sum$: $m\times n$ 대각행렬 → $XX^T$ 또는 $X^TX$의 eigenvalue의 제곱근을 대각원소로 하는 행렬
+
+<br>
+
+그렇다면 왜 Scikit-Learn은 PCA에서 SVD를 사용하는 것일까? 그 이유는 정확히 모르지만 eigenvalue-decomposition에서는 공분산 행렬을 메모리상에 가지고 있어야하는 반면 SVD는 공분산 행렬을 따로 메모리에 저장할 필요가 없으므로 효율적이기 때문이다. (?)
+
+<br>
+
+참고 블로그
+
+[차원 축소 - PCA, 주성분분석 (1)](https://excelsior-cjh.tistory.com/167)
+

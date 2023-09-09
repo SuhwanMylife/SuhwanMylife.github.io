@@ -1,0 +1,43 @@
+---
+layout: post
+title: "연구 주제 선정 및 관련 논문 찾기"
+---
+
+<br>
+
+연구 주제: 특정 축구 팀의 경기력 향상 목적의 데이터 분석 방법
+
+23년 1월부터 한 달 간 UNIST에서 인턴 생활을 할 수 있는 기회가 있었습니다. 그 때 연구실에 있던  연구실장님의 도움을 받아 Sports Analytics 관련 논문을 찾고 정리해보는 시간을 가졌습니다. 덕분에 연구자들이 특정 주제에 주로 어떤 방식으로 접근하는지 어느 정도 이해할 수 있었습니다.
+
+만약 지금 이 논문들을 찾아본다면 Abstract에서 나아가 핵심이 되는 기술이 어떤 건지까지는 찾아서 간략하게 정리를 하지 않았을까 싶습니다. 그래도 대부분의 논문들이 어떤 식으로 쓰여지는지 전체적인 구조를 알기에는 충분했습니다.
+
+현재는 여기서 더 나아가 연구를 해볼 생각은 일단 없습니다.
+
+아래는 관련 논문들에 대한 대략적인 정보를 엑셀로 정리한 것의 일부를 가져온 것입니다.
+
+<br>
+
+| 번호                                               | 연도 | 유형                                                                           | 논문 제목                                                                                          | citation | 서론 요약                                                                                                                                                                                                                                                                                                                                                                         |
+| -------------------------------------------------- | ---- | ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1                                                  | 2014 | 시각화                                                                         | Feature-driven visual analytics of soccer data                                                     | 106      | 위치 기반 축구 데이터 분석 시스템 <br>- 축구 분석가들이 경기에서 가장 중요하고 흥미로운 이벤트를 찾는 것을 돕는 목적<br>- 이동 기능과 게임 이벤트를 위해 대화식으로 탐색하고 분석 가능<br>- Single Player Analysis, Multi Player Analysis, Event-Based Analysis                                                                                                                   |
+| 2                                                  | 2016 | 공격 성능                                                                      | Real Time Quantification of Dangerousity in Football Using Spatiotemporal Tracking Data            | 110      | 축구에서 공격 성능의 정량화에 대한 접근 방식Dangerousity(DA): 플레이어가 공을 소유하고 있는 모든 시점에 대해 골이 득점될 확률을 정량적으로 표현                                                                                                                                                                                                                                   |
+| 3                                                  | 2018 | 공간                                                                           | Wide Open Spaces: A statistical technique for measuring space creation in professional soccer      | 140      | 오프더볼 상황에서 특정 선수의 공간 창출에 초점을 맞춘 연구 <br>- 오프더볼 움직임의 중요성                                                                                                                                                                                                                                                                                         |
+| 4 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 2019 | 종합적 고려 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Decomposing the Immeasurable Sport: A deep learning expected possession value framework for soccer | 122      | 모든 EPV(Expected Possession Value, 예상 소유값)를 프레임 단위로 정량화할 수 있는 모델 제시(EPV framework) <br>- 다양한 위치, 동작 및 상황적 특징과 필드의 모든 위치의 상대적 가치를 포착하여 공간에서의 플레이어 상호 작용 이해를 처리할 수 있음 <br>- 모델의 분리된 특성: 모든 상황에 대한 심도 있는 시각적 및 정량적 해석 가능케 하여 ML 모델의 블랙박스를 들여다볼 수 있게 함 |
+
+<br>
+
+[Sports Analytics 관련 논문.xlsx](https://github.com/SuhwanMylife/CJDaehan_competition/files/12565468/Sports.Analytics.xlsx)
+
+아래는 흥미로운 몇 개의 논문을 선정하여 좀 더 자세히 들여다보고 워드로 정리한 파일 일부와 파일 목록을 가져온 것입니다.
+
+![Untitled](https://github.com/SuhwanMylife/CJDaehan_competition/assets/70688382/620880db-a29b-468b-b74b-4e866fa40235)
+
+[Real_Time_Quantification_of_Dangerousity_in_Football_Using_Spatiotemporal_Tracking_Data.docx](https://github.com/SuhwanMylife/CJDaehan_competition/files/12565459/Real_Time_Quantification_of_Dangerousity_in_Football_Using_Spatiotemporal_Tracking_Data.docx)
+
+
+[Feature-Driven_Visual_Analytics_of_Soccer_Data.docx](https://github.com/SuhwanMylife/CJDaehan_competition/files/12565458/Feature-Driven_Visual_Analytics_of_Soccer_Data.docx)
+
+
+[Deep_soccer_analytics__learning_an_action-value_function_for_evaluating_soccer_players.docx](https://github.com/SuhwanMylife/CJDaehan_competition/files/12565456/Deep_soccer_analytics__learning_an_action-value_function_for_evaluating_soccer_players.docx)
+
+<br>

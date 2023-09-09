@@ -1,0 +1,92 @@
+---
+layout: post
+title: "축구 경기 결과 예측 모델을 활용한 커뮤니티 (졸업작품)"
+---
+
+<br>
+
+원하는 모델 구현을 목적으로 데이터 수집(크롤링 포함)부터 데이터 전처리, 모델링까지 전부 진행해 봤던 프로젝트입니다.
+
+모델의 input으로 경기마다의 각 팀을 one-hot encoding하여 추가했는데, 이 과정에서 차원이 매우 늘어나 학습 시 좋지 않은 결과를 초래한다는 것을 지금은 알고 있습니다. 만약 지금 모델을 만든다면 다음의 방식들을 고려할 것입니다.
+
+1. 경기마다 각 팀의 특징을 가장 잘 나타낼 수 있는 feature 고려
+2. 딥러닝 모델 고집하지 않고 다른 ML 모델 고려
+    - optuna 프레임워크 사용하여 다양한 모델 & 하이퍼파라미터 실험
+3. 전처리한 팀명 모델 input에서 제외
+4. 좀 더 전문적인 축구 통계 사이트(예: OPTA)에서 데이터 확보 방안 물색
+
+<br>
+
+힘들었지만 개인적으로 흥미있던 분야와 관련된 작업이기도 하고, 승부 예측 자체가 어려운 문제이기도 해서 시간만 허락한다면 더 시간을 투자하고 싶은 프로젝트입니다.
+
+<br>
+
+### 프로젝트명: **머신러닝 기반의 축구 경기 승부예측 모델을 활용한 커뮤니티 서비스**
+
+축구 승부예측 모델을 활용하여 축구 경기 관련 유의미한 자료를 제공하고, 사용자들 간에 소통할 수 있는 커뮤니티 형식의 웹 서비스 구축
+
+- **축구 승부예측 모델링 및 예측 결과 전송 API 제작** 담당
+
+<br>
+
+### 수행 작업
+
+세모를 클릭하면 세부 내용 확인이 가능합니다.
+
+<br>
+
+**데이터 수집**
+
+<details>
+<summary><b>경기 결과 csv 파일 다운로드</b></summary>
+<div markdown="1">
+
+경기 전반적인 데이터는 모 베팅업체[(Football-Data.co.uk)](http://football-data.co.uk/)에서 관리하는 csv 파일을 다운받아 활용합니다. 전반적인 경기 지표에 대한 정보를 담고 있고, 무엇보다 누락된 데이터가 없어 질이 좋은 데이터로 판단되어 사용하기로 했습니다.
+
+<br>
+    
+</div>
+</details>
+
+<details>
+<summary><b>경기당 팀별 xG값 크롤링</b></summary>
+<div markdown="1">
+    
+위에서 취득한 csv 파일에 있는 지표 외에 **xG(기대득점)**라는 지표를 모델 성능 향상에 활용하기 위해 크롤링을 활용하여 관련 데이터를 취득하고자 했습니다. 크롤링 툴로 **셀레니움(selenium)**을 활용하였습니다. 자세한 코드는 아래 링크에서 확인 가능합니다. 아래 캡처 사진은 크로링한 xG 지표를 출력한 결과입니다.
+
+[xG값 크롤링 (Github)](https://github.com/SuhwanMylife/Soccer-match-prediction_Graduation-project/blob/master/crawling/FinalCrawling.ipynb)
+
+![Untitled](https://github.com/SuhwanMylife/CJDaehan_competition/assets/70688382/34a41fe2-790a-4530-845c-72afccf92006)
+
+<br>
+    
+</div>
+</details>
+
+<br>
+
+**모델링**
+
+관련 코드
+
+[Soccer-match-prediction_Graduation-project (Github)](https://github.com/mylife3904/Soccer-match-prediction_Graduation-project/blob/master/Final_Script.ipynb)
+
+<details>
+<summary><b>데이터 전처리</b></summary>
+<div markdown="1">
+
+전처리 과정에서 특별한 점은 모델 학습 시에 원본 데이터 일부를 그대로 사용하지 않았다는 것입니다. 각 경기마다 스코어가 feature로 존재하게 되는데, 이를 X에 두고, y에 승/무/패를 배치하게 되면 **모델이 예측 이전에 이미 스코어를 알고 결과를 예측하는 꼴**이 됩니다. 때문에 스코어 feature에는 이전 경기 결과를 배치하여 올바른 모델이 되도록 작업했습니다.
+<br>
+    
+</div>
+</details>
+
+<details>
+<summary><b>모델링</b></summary>
+<div markdown="1">
+    
+시계열 모델(LSTM, GRU) 외에도 SVM, xgboost, 로지스틱회귀, GaussianNB 등 여러 모델을 테스트해보았습니다. 아쉬운 점은 시계열 모델이 로지스틱회귀에서 나온 f1-score인 0.55를 뛰어넘는 결과를 잘 보여주지 못했다는 것입니다.
+<br>
+    
+</div>
+</details>
