@@ -1,0 +1,269 @@
+---
+layout: post
+title: "USG+ AI 문제해결 제조혁신 경진대회"
+---
+
+<br>
+
+**대회 링크**
+
+[(안내) 2022 USG+ AI·데이터 문제해결 제조혁신 경진대회](https://www.all-mice.co.kr/mice/view.php?cl_srl=3044&stx=%ED%98%81%EC%8B%A0&sst=cl_is_end0DESC%2Ccl_reg_date&page=1)
+
+<br>
+
+총 두 문제를 제시해 주고, 각 문제별로 주최측에서 정해준 평가 방법에 따라 높은 점수를 얻은 모델을 만드는 대회입니다. 문제는 대략 다음과 같습니다.
+
+- 초급: 몰드의 종류와 곡률을 바탕으로 결과물의 특성값 예측
+    - 평가 메트릭: RMSE
+- 중급: 설비의 서로 다른 위치에 부착된 센서들로부터 수집된 진동값을 바탕으로 장비의 이상 상태(총 4종류) 판단
+    - 평가 메트릭: F1-Score
+
+<br>
+
+
+## 초급 문제 풀이 과정
+
+<details>
+<summary><b>초급: 몰드의 종류와 곡률을 바탕으로 결과물의 특성값 예측</b></summary>
+<div markdown="1">
+    
+![Untitled](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/2b115916-6852-463d-a579-299e494e8fb7)
+
+<br>
+
+### 데이터 구성
+
+- **MACHINE_NO:** 설비 번호. 단, 기본적으로 모든 설비는 동일한 규격을 갖고 있음
+- **EQUIP1~4:** 압축성형에 사용되는 몰드를 나타내는 값. 1개 제품 생산에 상2, 하2로 총 4개의 몰드가 조합. 아이템 이름에 사용되는 숫자는 단순 인덱스로 몰드의 특성과 관계가 없음. 서로 다른 이름의 몰드는 서로 다른 특성을 가짐
+- **VAL1, VAL2:** 몰드 조합과 재료 특성을 통하여 결정되는 몰드의 곡률값
+- **OUT:** 최종 생산 결과의 특성값으로, 모델은 위의 값들을 입력받아 OUT 열의 값을 예측해야 함
+
+<br>
+
+### 데이터 전처리
+
+- MACHINE NO, EQUIP1, EQUIP2, EQUIP3, EQUIP4번을 OneHotEncoding으로 처리
+- EQUIP3의 경우 train_set과 test_set의 장비 개수가 51, 54개로 각각 달라서 합쳐서 처리한 후 다시 나눠서 train_set에 붙임
+- 최종적으로 MACHINE NO, EQUIP1, EQUIP2 EQUIP3, EQUIP4,을 one-hot encoding하고 val1, val2를 그대로 활용하여 총 189개의 변수가 학습에 투입
+
+```python
+temp_x_scale_val1 = train_data[['VAL1']]
+temp_x_scale_val2 = train_data[['VAL2']]
+
+temp_x_scale_val1_test = test_data[['VAL1']]
+temp_x_scale_val2_test = test_data[['VAL2']]
+
+temp_y_scale = train_data[['OUT']]
+temp_x_test_scale = train_data[['VAL1', 'VAL2']]
+
+temp_1 = (temp_x_scale_val1.values - temp_x_scale_val1.values.min(axis=0)) / (temp_x_scale_val1.values.max(axis=0) - temp_x_scale_val1.values.min(axis=0))
+temp_2 = (temp_x_scale_val2.values - temp_x_scale_val2.values.min(axis=0)) / (temp_x_scale_val2.values.max(axis=0) - temp_x_scale_val2.values.min(axis=0))
+
+temp_1_test = (temp_x_scale_val1_test.values - temp_x_scale_val1_test.values.min(axis=0)) / (temp_x_scale_val1_test.values.max(axis=0) - temp_x_scale_val1_test.values.min(axis=0))
+temp_2_test = (temp_x_scale_val2_test.values - temp_x_scale_val2_test.values.min(axis=0)) / (temp_x_scale_val2_test.values.max(axis=0) - temp_x_scale_val2_test.values.min(axis=0))
+
+temp_1 = pd.DataFrame(temp_1)
+temp_2 = pd.DataFrame(temp_2)
+
+temp_1_test = pd.DataFrame(temp_1_test)
+temp_2_test = pd.DataFrame(temp_2_test)
+```
+
+```python
+onehot_equip_3_test = test_data['EQUIP3']
+onehot_equip_3 = train_data['EQUIP3']
+
+onehot_equip_3_total = pd.concat([onehot_equip_3, onehot_equip_3_test])
+onehot_equip_3_total = pd.DataFrame(onehot_equip_3_total)
+encoder_equip_3_total = OneHotEncoder(categories='auto')
+encoder_equip_3_total.fit(onehot_equip_3_total)
+onehot_equip_3_total = onehot_equip_3_total = encoder_equip_3_total.transform(onehot_equip_3_total).toarray()
+onehot_equip_3_total = onehot_equip_3_total.astype('int')
+onehot_equip_3_total = pd.DataFrame(onehot_equip_3_total)
+
+onehot_equip_3 = onehot_equip_3_total.loc[:len(onehot_equip_3)-1]
+onehot_equip_3_test = onehot_equip_3_total.loc[len(onehot_equip_3):]
+
+onehot_equip_3_test.reset_index(inplace=True)
+onehot_equip_3_test = onehot_equip_3_test.drop(columns=['index'])
+```
+
+```python
+onehot_machine = train_data['MACHINE_NO']
+onehot_equip_1 = train_data['EQUIP1']
+onehot_equip_2 = train_data['EQUIP2']
+onehot_equip_4 = train_data['EQUIP4']
+
+onehot_machine = pd.DataFrame(onehot_machine)
+onehot_equip_1 = pd.DataFrame(onehot_equip_1)
+onehot_equip_2 = pd.DataFrame(onehot_equip_2)
+onehot_equip_4 = pd.DataFrame(onehot_equip_4)
+
+encoder_machine = OneHotEncoder(categories='auto')
+encoder_equip_1 = OneHotEncoder(categories='auto')
+encoder_equip_2 = OneHotEncoder(categories='auto')
+encoder_equip_4 = OneHotEncoder(categories='auto')
+
+encoder_machine.fit(onehot_machine)
+encoder_equip_1.fit(onehot_equip_1)
+encoder_equip_2.fit(onehot_equip_2)
+encoder_equip_4.fit(onehot_equip_4)
+
+onehot_machine = encoder_machine.transform(onehot_machine).toarray()
+onehot_equip_1 = encoder_equip_1.transform(onehot_equip_1).toarray()
+onehot_equip_2 = encoder_equip_2.transform(onehot_equip_2).toarray()
+onehot_equip_4 = encoder_equip_4.transform(onehot_equip_4).toarray()
+
+onehot_machine = onehot_machine.astype('int')
+onehot_equip_1 = onehot_equip_1.astype('int')
+onehot_equip_2 = onehot_equip_2.astype('int')
+onehot_equip_4 = onehot_equip_4.astype('int')
+
+onehot_machine = pd.DataFrame(onehot_machine)
+onehot_equip_1 = pd.DataFrame(onehot_equip_1)
+onehot_equip_2 = pd.DataFrame(onehot_equip_2)
+onehot_equip_4 = pd.DataFrame(onehot_equip_4)
+
+train_onehot = pd.concat([onehot_machine, onehot_equip_1, onehot_equip_2, onehot_equip_3, onehot_equip_4], axis=1)
+
+train_val = pd.concat([temp_x_scale_val1, temp_x_scale_val2], axis=1)
+train_final = pd.concat([train_onehot, train_val], axis=1)
+```
+
+<br>
+
+### 모델 구축 및 학습
+
+- KNeighborsRegressor를 활용하였고, 전처리 데이터를 suffle하여 모델 학습에 투입
+- n_neighbors=5로 지정해 가장 이웃한 5개의 최근접 데이터 포인트를 구한 후, 각 포인트 사이 거리의 역수를 가중치로 타겟 값을 산정
+
+<br>
+
+### 결과 및 결언
+
+이 부분에서는 최종 10위로 마무리였고 다양한 모델을 적용시켜 보지 못해 아쉬웠습니다.
+
+<br>
+
+### 느낀점
+
+현장에 입상하러 간 날, 옆자리에 대상받는 분에게 어떤 모델 쓰셨냐고 했더니 단순히 Dense층을 많이 쌓았다고 하였습니다. 허무하긴 했으나 특정 모델이 좋다고 해서 모든 곳에 적용되지 않고, 안 좋다고 해서 아예 안 쓰이지는 않는다는 것을 다시 한 번 깨닫는 계기가 되었습니다.
+    
+  <br>
+    
+</div>
+</details>
+
+<br>
+
+## 중급 문제 풀이 과정
+
+<details>
+<summary><b>중급: 설비의 서로 다른 위치에 부착된 센서들로부터 수집된 진동값을 바탕으로 장비의 이상 상태(총 4종류) 판단</b></summary>
+<div markdown="1">
+
+![Untitled 1](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/76c375f0-0edc-4892-b0eb-580a9af24c33)
+
+<br>
+
+### 데이터 구성
+
+- 입력데이터는 A, B, C 3개의 센서에서 동시에 측정된 진동값으로 이루어져 있음
+- 개별 샘플은 131 길이의 시계열로 이루어져 있으며, 총 8960개의 샘플이 학습 데이터로, 2240개의 샘플이 검증 데이터로 제공
+- ID는 각 샘플의 ID로, 하나의 시계열에 해당하는 값은 같은 ID를 가지며, 각 ID(샘플) 내부의 시계열은 위에서 아래로 시간순서대로 배치
+- ID 번호는 샘플 구분을 위해 무작위로 부여된 것으로, 샘플 사이의 시간적 전후와 무관
+
+<br>
+
+### 데이터 전처리
+
+입력 데이터
+
+- 393개의 feature 생성
+- Reshape() 활용하여 CNN 입력층에 맞게 전처리
+
+출력 데이터
+
+- one-hot encoding 활용하여 총 4개의 경우에 맞게 4개의 label 생성
+
+<br>
+
+### 탐색적 자료 분석
+
+- 신호 데이터임을 확인하기 위해 matplotlib.pyplot 활용하여 그래프 생성plt.plot(train_data_edit.iloc[0,1:394])
+- 신호 데이터임을 알 수 있음
+
+![Untitled 2](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/4f91051b-4d8d-4f66-bc88-446405000e37)
+
+<br>
+
+### 모델 구축 및 학습
+
+- CNN 모델 사용
+    - 입력층: 입력 feature 개수에 맞게 설정 (X_train.shape[1])
+    - 출력 filter 수, 커널 크기, 활성화함수(relu)를 설정하여 크게 3개의 컨볼루션 생성
+- Flatten층 활용하여 Dense층 입력할 수 있도록 1차원 배열로 변환
+- 총 3개의 Dense층 활용하여 마지막 활성화 함수로 softmax 선택하여 분류에 용이하게 설계
+- epoch 50, 배치 사이즈 32로 설정하여 학습
+- 검증 세트 따로 두지 않고 훈련세트 구성
+
+```python
+im_shape = (X_train.shape[1], 1)
+inputs_cnn = Input(shape=(im_shape), name='inputs_cnn')
+
+conv1_1 = Convolution1D(64, (6), activation='relu', input_shape=im_shape)(inputs_cnn)
+conv1_1 = BatchNormalization()(conv1_1)
+pool1 = MaxPool1D(pool_size=(3), strides=(2), padding='same')(conv1_1)
+
+conv2_1=Convolution1D(64, (3), activation='relu', input_shape=im_shape)(pool1)
+conv2_1=BatchNormalization()(conv2_1)
+pool2=MaxPool1D(pool_size=(2), strides=(2), padding="same")(conv2_1)
+
+conv3_1=Convolution1D(64, (3), activation='relu', input_shape=im_shape)(pool2)
+conv3_1=BatchNormalization()(conv3_1)
+pool3=MaxPool1D(pool_size=(2), strides=(2), padding="same")(conv3_1)
+
+flatten=Flatten()(pool3)
+
+dense_end1 = Dense(64, activation='relu')(flatten)
+dense_end2 = Dense(32, activation='relu')(dense_end1)
+main_output = Dense(4, activation='softmax', name='main_output')(dense_end2)
+
+model = Model(inputs= inputs_cnn, outputs=main_output)
+model.compile(optimizer='adam', loss='categorical_crossentropy',metrics = ['accuracy'])
+
+history=model.fit(X_train, y_train, epochs=50, batch_size=32)
+```
+
+<br>
+
+### 결과 및 결언
+
+- 정확도 1로 모델 학습이 마무리될 때까지 반복 학습하여 제출
+- 이전에 심전도 분석 시 CNN을 활용했던 경험이 있어 쉽게 해결할 수 있었음
+- 원본 데이터의 자료형, feature 수 등을 파악하여 알맞은 전처리 방법을 알 수 있었음
+
+```
+Epoch 1/50
+8960/8960 [==============================] - 6s 693us/step - loss: 0.0706 - acc: 0.9739
+Epoch 2/50
+8960/8960 [==============================] - 5s 565us/step - loss: 0.0068 - acc: 0.9982
+Epoch 3/50
+8960/8960 [==============================] - 5s 561us/step - loss: 0.0102 - acc: 0.9965
+Epoch 4/50
+8960/8960 [==============================] - 5s 571us/step - loss: 0.0066 - acc: 0.9987
+Epoch 5/50
+8960/8960 [==============================] - 5s 574us/step - loss: 0.0015 - acc: 0.9994
+
+Epoch 47/50
+8960/8960 [==============================] - 5s 577us/step - loss: 1.6230e-07 - acc: 1.0000
+Epoch 48/50
+8960/8960 [==============================] - 5s 571us/step - loss: 2.2762e-07 - acc: 1.0000
+Epoch 49/50
+8960/8960 [==============================] - 5s 564us/step - loss: 2.5197e-06 - acc: 1.0000
+Epoch 50/50
+8960/8960 [==============================] - 5s 563us/step - loss: 1.1935e-07 - acc: 1.0000
+```
+<br>
+</div>
+</details>
