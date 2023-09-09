@@ -26,8 +26,8 @@ title: "ML 관련 수행 과제"
 7. 그 외
     1. Kaggle
     2. [ML](https://suhwanmylife.github.io/ML-%EA%B4%80%EB%A0%A8-%EC%B6%94%EA%B0%80-%ED%95%99%EC%8A%B5/)
-    3. [Time Series](https://suhwanmylife.github.io/ML-%EA%B4%80%EB%A0%A8-%ED%95%99%EC%8A%B5/)
-    4. [Server](https://suhwanmylife.github.io/ML-%EA%B4%80%EB%A0%A8-%ED%95%99%EC%8A%B5/)
+    3. [Time Series](https://suhwanmylife.github.io/%EC%8B%9C%EA%B3%84%EC%97%B4-%EA%B4%80%EB%A0%A8-%ED%95%99%EC%8A%B5/)
+    4. [Server](https://suhwanmylife.github.io/%EC%84%9C%EB%B2%84-%EA%B4%80%EB%A0%A8-%EC%A7%80%EC%8B%9D-%ED%95%99%EC%8A%B5/)
 
 <br>
 
