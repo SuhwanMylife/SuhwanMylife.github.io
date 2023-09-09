@@ -9,6 +9,6 @@ title: "ML 관련 추가 학습"
 
 - [INTERPOLATION-PREDICTION NETWORKS FOR IRREGULARLY SAMPLED TIME SERIES 요약](https://suhwanmylife.github.io/INTERPOLATION-PREDICTION-NETWORKS-FOR-IRREGULARLY-SAMPLED-TIME-SERIES-%EC%9A%94%EC%95%BD/)
 - [RNN 정리](https://suhwanmylife.github.io/RNN-%EC%A0%95%EB%A6%AC/)
-- [PCA (차원 축소, 주성분분석)](https://suhwanmylife.github.io/%EC%B0%A8%EC%9B%90-%EC%B6%95%EC%86%8C-(PCA,-%EC%A3%BC%EC%84%B1%EB%B6%84%EB%B6%84%EC%84%9D)/)
+- [PCA (차원 축소, 주성분분석)](https://suhwanmylife.github.io/PCA-(%EC%B0%A8%EC%9B%90-%EC%B6%95%EC%86%8C,-%EC%A3%BC%EC%84%B1%EB%B6%84%EB%B6%84%EC%84%9D)/)
 - [PCA 쉬운 설명과 예제](https://suhwanmylife.github.io/PCA-%EC%89%AC%EC%9A%B4-%EC%84%A4%EB%AA%85%EA%B3%BC-%EC%98%88%EC%A0%9C/)
 
