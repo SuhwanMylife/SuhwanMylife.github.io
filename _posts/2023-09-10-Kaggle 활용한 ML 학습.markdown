@@ -7,11 +7,11 @@ title: "Kaggle 활용한 ML 학습"
 
 이전부터 Kaggle에서 열리는 competitions에 흥미가 있었고, 근래에 시간을 들여 시계열 데이터를 다루는 competition을 찾아 다른 사람의 notebooks을 필사해보았습니다. 필사하면서 맞닥뜨리는 새로운 개념들은 구글링하여 따로 정리해보았습니다. 시간이 난다면 당장 Kaggle notebook을 활용하여 다른 모델을 적용시켜 학습시키는 등 여러가지 실험을 하며 모델링하는 연습을 해보고 싶다는 생각이 있습니다.
 
-- Competition with spatiotemporal data (Tabular Playground Series - Mar 2022)
+- [Competition with spatiotemporal data (Tabular Playground Series - Mar 2022)](https://suhwanmylife.github.io/Competition-with-spatiotemporal-data-(Tabular-Playground-Series-Mar-2022)/)
 
-- 왜 EDA를 해야할까?
-- 앙상블의 종류 / 블렌딩이란?
-- Grubb’s test란?
-- Z-score란?
-- Mutual Information란?
+- [왜 EDA를 해야할까?](https://suhwanmylife.github.io/%EC%99%9C-EDA%EB%A5%BC-%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C/)
+- [앙상블의 종류 / 블렌딩이란?](https://suhwanmylife.github.io/%EC%95%99%EC%83%81%EB%B8%94%EC%9D%98-%EC%A2%85%EB%A5%98-&-%EB%B8%94%EB%A0%8C%EB%94%A9%EC%9D%B4%EB%9E%80/)
+- [Grubb’s test란?](https://suhwanmylife.github.io/Grubb-s-test%EB%9E%80/)
+- [Z-score란?](https://suhwanmylife.github.io/Z-score%EB%9E%80/)
+- [Mutual Information란?](https://suhwanmylife.github.io/Mutual-Information%EB%9E%80/)
 

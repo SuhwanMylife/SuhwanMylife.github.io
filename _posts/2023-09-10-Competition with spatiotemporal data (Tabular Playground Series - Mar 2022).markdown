@@ -7,8 +7,9 @@ title: "Competition with spatiotemporal data (Tabular Playground Series - Mar 20
 
 # 필사한 노트북
 
-**TPS Mar22 - Top 6% Solution - EDA / FE / Blending 블로그 링크**
-**TPS-Mar-22, FE, model selection 블로그 링크**
+[**TPS Mar22 - Top 6% Solution - EDA / FE / Blending**](https://suhwanmylife.github.io/Kaggle-%EB%85%B8%ED%8A%B8%EB%B6%81-%ED%95%84%EC%82%AC-(TPS-Mar22-Top-6-Solution)/)
+
+[**TPS-Mar-22, FE, model selection**](https://suhwanmylife.github.io/TPS-Mar-22,-FE,-model-selection/)
 
 <br>
 
