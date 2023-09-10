@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Kaggle 노트북 필사(TPS Mar22 - Top 6% Solution - EDA / FE / Blending)"
+title: "Kaggle 노트북 필사 (TPS Mar22 - Top 6% Solution - EDA / FE / Blending)"
 tags:
   - Kaggle
   - Time Series
@@ -223,7 +223,7 @@ df_data = df_data.set_index('time')
 df_data
 ```
 
-![Untitled](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/be100860-3b1a-452a-b007-cf8dd850b408)
+![Untitled](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/3c755f90-b731-453d-932b-ab26f981a5ec)
 
 <br><br>
 
@@ -250,7 +250,7 @@ df_data = load_data()
 pp.ProfileReport(df_data)
 ```
 
-![Untitled 1](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/b4e018e0-807e-43a2-bb1c-8b83dec133ee)
+![Untitled 1](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/7fb0b870-9321-4829-b2cd-351a19dfcdbe)
 
 <br>
 
@@ -395,13 +395,11 @@ fig.update_layout(height=1100, bargap=0.2,
                   showlegend=False)
 ```
 
-![Untitled 2](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/ab7de927-b787-458b-88b5-499e56064c85)
+![Untitled 2](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/ec21d748-4ccc-4042-91fc-9687d80f6dda)
 
+![Untitled 3](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/acc75606-3de5-4863-bf51-bf0b2c14c33c)
 
-![Untitled 3](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/d0c3aa2b-aaf7-4ec9-b341-05bba10a5f2e)
-
-
-![Untitled 4](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/11ab3202-6e3c-4401-bc56-b5e1b4769bda)
+![Untitled 4](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/d988d3a5-6e29-40a7-9c20-e4375e15c764)
 
 <br>
 
@@ -497,8 +495,7 @@ fig.update_layout(height=750, bargap=0.2,
                   showlegend=False)
 ```
 
-![Untitled 5](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/ec1ec9c4-5847-4b90-9211-a3f985559677)
-
+![Untitled 5](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/b926e624-c1cf-4046-9c6f-ee339bf3c289)
 
 <br>
 
@@ -562,7 +559,7 @@ fig.update_layout(height=400, bargap=0.2,
                   showlegend=False)
 ```
 
-![Untitled 6](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/c03d058b-b929-4223-acb2-fd9bebf1d3d0)
+![Untitled 6](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/aeae8afb-60b5-4c37-bd39-006e4d015f10)
 
 <br>
 
@@ -580,8 +577,7 @@ fig.update_layout(height=400, bargap=0.2,
 
 **Grubbs' test(그럽스 검정)**: dataset 안의 이상치 판별 시 사용
 
-![Untitled 7](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/f05e74f0-5af0-4780-b2a7-a67b2835eca1)
-
+![Untitled 7](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/aafa8e2a-f82b-4262-9e7a-0c760ca2e963)
 
 Grubbs’ test 관련 추가적인 구글링 필요
 
@@ -607,7 +603,7 @@ def grubbs_test(x):
 grubbs_test(df_data[df_data.congestion.isnull()==False]['congestion'])
 ```
 
-![Untitled 8](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/c482c907-1aa2-4ff1-820e-89dc57e7851e)
+![Untitled 8](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/4eaf1d88-2b46-4034-bdec-37c95998f383)
 
 <br>
 
@@ -650,7 +646,7 @@ fig.update_yaxes(showgrid=False, gridcolor='gray', gridwidth=.5, zeroline=False)
                   showlegend=False)
 ```
 
-![Untitled 9](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/ba5b27b1-9502-4f0c-bf9a-de3e6458c354)
+![Untitled 9](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/6b07f386-c43a-4fa9-8e49-9f8b08e84de9)
 
 노란색이 outliers
 
@@ -699,11 +695,9 @@ baseline_score = score_dataset(x, y)
 print(f"Baseline score: {baseline_score:.5f} MAE")
 ```
 
-![Untitled 10](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/2fdb5824-0ec2-42f2-9500-1e793d785f61)
+![Untitled 10](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/7455b257-57ca-432d-b0d5-11c44b1a45ff)
 
-
-![Untitled 11](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/14d5b78b-8838-49b2-be8b-7378fbc5d475)
-
+![Untitled 11](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/de321021-54d9-4ff8-8bff-985197675b5e)
 
 첫 Baseline model에서 사용된 데이터 columns: 총 12개
 
@@ -767,11 +761,9 @@ baseline_score = score_dataset(x, y)
 print(f"Baseline score:{baseline_score:.5f} MAE")
 ```
 
-![Untitled 12](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/68f53b63-9706-4645-a719-b1e6187b0a65)
+![Untitled 12](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/1e6f2cc6-5e69-41ef-82a6-aa7c3b614c2e)
 
-
-![Untitled 13](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/7fc1f5e5-45db-4b30-b2c2-88eb3a079d87)
-
+![Untitled 13](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/473aa356-5db4-42c1-ac5c-77a627ecedcc)
 
 두 번째 Baseline model에서 사용된 데이터 columns: 총 14개 
 
@@ -784,8 +776,7 @@ df_data['roadway'] = df_data.x.astype(str) + df_data.y.astype(str) + df_data.dir
 px.box(df_data[df_data.congestion.isnull()==False], x="roadway", y="congestion", color='roadway')
 ```
 
-![Untitled 14](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/2df83001-7dd7-4ddf-a815-5c04309c56cc)
-
+![Untitled 14](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/210386ab-f1f5-4dc2-a559-9d75089d86a1)
 
 위에서 만든 feature를 활용하면 각 위치의 congestion으로 잘 구분할 수 있어서 사용 가능한 feature라고 하는데, 고르게 분포하고 있어서 그렇다고 일단 이해해놓긴 함.
 
@@ -807,15 +798,13 @@ baseline_score = score_dataset(x, y)
 print(f"Baseline score: {baseline_score:.5f} MAE")
 ```
 
-![Untitled 15](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/e01bb0a3-9c6b-40d8-8102-a2a369273389)
-
+![Untitled 15](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/88d2cc94-1dcc-4114-bef9-5c869be20d0d)
 
 여기서 궁금한 점: hour를 왜 곱하지?
 
 - hour를 곱하지 않고 돌렸을 때 baseline score가 좋지 않긴 함. 왜지???
 
-![Untitled 16](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/374f5bf2-9658-45a3-90a8-61fb843a0e6d)
-
+![Untitled 16](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/9afdc3b7-be34-4631-a415-de1dfcd52e4b)
 
 세 번째 Baseline model에서 사용된 데이터 columns: 총 13개
 
@@ -863,11 +852,9 @@ baseline_score = score_dataset(x, y)
 print(f"Baseline score: {baseline_score:.5f} MAE")
 ```
 
-![Untitled 17](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/907dd085-ebe6-4c59-a92b-d9d3b0b0290a)
+![Untitled 17](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/5abfc5aa-cc8f-4c58-9e55-f77eabab6a87)
 
-
-![Untitled 18](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/1b9687ca-a487-439f-84bd-818a78691911)
-
+![Untitled 18](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/7f59645e-4853-4f1c-a015-1ead9889cc39)
 
 네 번째 Baseline model에서 사용된 데이터 columns: 총 17개
 
@@ -914,7 +901,7 @@ fig.update_layout(height=750, title_text='Mutual Information Scores',
                  title_font=dict(size=29, family="Lato, sans-serif"), xaxis={'categoryorder':'category ascending'}, margin=dict(t=80))
 ```
 
-![Untitled 19](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/27405aac-d062-467c-9117-0f8e57704b30)
+![Untitled 19](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/a02f9ec4-99e9-459b-99ea-df5e7cda27f8)
 
 <br>
 
@@ -938,8 +925,7 @@ X = df_train.drop(['congestion', 'row_id'], axis=1)
 y = df_train['congestion']
 ```
 
-![Untitled 20](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/ce27af5b-fb19-498e-b784-793dac6abe23)
-
+![Untitled 20](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/d41d9574-942f-4357-a109-36b6df148f10)
 
 여기서 ‘roadway’ feature에 대해서도 label encoding을 해주었는데, 이게 가장 베스트인지는 잘 모르겠다. 그렇다고 one-hot encoding하기에는 64개나 되기에 많은 column 수를 차지하게 될 것이고, 그렇다고 도로 간에 순서가 있는 것도 아니라서… 고민을 좀 더 해봐야할 것으로 보인다.
 
@@ -1023,11 +1009,9 @@ if allow_optimize:
             eval_set=[(X_valid_tmp, y_valid_tmp)], early_stopping_rounds=35)
 ```
 
-![Untitled 21](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/b09d11bc-d9b9-42b0-acf6-706d3d5fd288)
+![Untitled 21](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/c8a89987-1270-42ac-a5cc-b83ad0532a12)
 
-
-![Untitled 22](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/8eafb0b5-cc88-4abe-9ce0-2c08989865cd)
-
+![Untitled 22](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/666df8ac-01dd-414a-b0b2-4f7219814225)
 
 Optuna 프레임워크를 활용하여 반복하면서 최적의 hyperparameter 찾는 과정
 
@@ -1050,14 +1034,13 @@ else:
     task_type='GPU', loss_function='MAE', eval_metric='MAE').fit(X, y)
 ```
 
-![Untitled 23](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/c1ace50b-72bd-466e-9ed3-4a07d66a797c)
-
+![Untitled 23](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/13333c6c-d730-4984-bbfb-92fa51f94a3b)
 
 ```python
 plot_feature_importance(model.get_feature_importance(), X.columns, 'CatBoost')
 ```
 
-![Untitled 24](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/59d5daa3-818b-4e59-8f96-b6076df6cf4e)
+![Untitled 24](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/254b83f1-0bdb-4dfa-b81c-6a49b5dd7cc6)
 
 <br>
 
@@ -1071,7 +1054,7 @@ submit_cat = submit_cat.reset_index().drop('time', axis=1).set_index('row_id')
 submit_cat
 ```
 
-![Untitled 25](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/7b2b61c1-a596-4190-876c-e7eeecb35635)
+![Untitled 25](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/b3c0fdb7-b364-4a25-91fd-e1ea39a0d20b)
 
 <br>
 
@@ -1115,7 +1098,7 @@ if allow_optimize:
     print(CV_regressor.best_params_)
 ```
 
-![Untitled 26](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/f21bb050-4410-4c1c-8eb2-b77928148ba7)
+![Untitled 26](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/a36b50f1-2628-4804-8fae-1ec250847975)
 
 <br>
 
@@ -1129,14 +1112,13 @@ else:
 CV_regressor.fit(X, y)
 ```
 
-![Untitled 27](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/879d29d0-01d3-4ba4-abdb-ec546c7fed18)
-
+![Untitled 27](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/1b0508de-43c7-4a03-9fd1-f866f6e4da9b)
 
 ```python
 plot_feature_importance(CV_regressor.feature_importances_, X.columns, 'XGBoost')
 ```
 
-![Untitled 28](https://github.com/mylife3904/mylife3904.github.io/assets/70688382/52309573-4368-40be-8df4-2981e786d971)
+![Untitled 28](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/6941fb98-accc-45ea-8d40-70b3a9235220)
 
 <br>
 
@@ -1153,8 +1135,7 @@ submit_xgb = submit_xgb.reset_index().drop('time',axis=1).set_index('row_id')
 ## 4.3 Blending and Submitting
 
 Blending: 앙상블의 한 종류, validation set의 예측 결과들을 원래 feature에 붙여 새로운 dataset을 만든 후 Final prediction model을 적합시켜 test_set에 대한 예측 수
-
-- 여기서 [Martynov Andrey special value dataset](https://www.kaggle.com/martynovandrey/tps-mar-22-don-t-forget-special-values/data)의 정체는?~~
+- 실제로 다른 모델은 성능이 그닥이라 블렌딩하지 않고 제출
 
 ```python
 submit = pd.DataFrame({'congestion': submit_cat['congestion']+0*submit_xgb['congestion']})
