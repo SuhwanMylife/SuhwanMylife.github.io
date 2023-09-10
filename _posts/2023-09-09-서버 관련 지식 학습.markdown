@@ -8,5 +8,5 @@ title: "서버 관련 지식 학습"
 개발환경 세팅 툴로 보통은 Anaconda를 처음 접하기 마련인데, 저는 우연찮게 Docker를 먼저 접하게 되었습니다. 처음 서버를 Docker로 다루다보니 어려운 점이 많았지만 그만큼 유익했고, 지금은 구축하고자 하는 개발환경 세팅에는 거의 문제가 없을 정도로 익힌 상태입니다. 다만, Docker를 초기에 세팅하는 부분은 제가 하지 않았기 때문에 이 부분은 시간이 난다면 배우고 싶은 것 중 하나입니다. 
 
 - [Docker 활용하여 Tensorflow 구버전(1.15)으로 구현된 코드 돌리기](https://suhwanmylife.github.io/Tensorflow-%EA%B5%AC%EB%B2%84%EC%A0%84(1.15)%EC%9C%BC%EB%A1%9C-%EA%B5%AC%ED%98%84%EB%90%9C-%EC%BD%94%EB%93%9C-%EB%8F%8C%EB%A6%AC%EA%B8%B0/)
-- 컨테이너 속성 변경하고 싶을 때
+- [컨테이너 속성 변경하고 싶을 때](https://suhwanmylife.github.io/%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88-%EC%86%8D%EC%84%B1-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B3%A0-%EC%8B%B6%EC%9D%84-%EB%95%8C/)
 
