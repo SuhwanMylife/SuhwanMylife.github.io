@@ -1,0 +1,38 @@
+---
+layout: post
+title: "컨테이너 속성 변경하고 싶을 때"
+---
+
+<br>
+
+이미 만들어진 컨테이너에 대해 docker run 명령 시 설정한 옵션을 변경하고자 할 때 docker에서 지원하는 기능이 제한적인 것을 확인했다.
+
+- 컨테이너 이름 변경 시
+    
+    ```docker
+    docker rename <target ID or name> <new name>
+    ```
+    
+- 컨테이너 재시작 정책 변경 시
+    
+    ```docker
+    docker update --restart unless-stopped demo_container
+    ```
+    
+- 하드웨어 리소스 제한 변경 시
+    
+    ```docker
+    docker update --cpus 4 --memory 1024M first_container second_container
+    ```
+
+<br>
+
+항상 docker rm - docker run의 반복이었지 컨테이너의 속성을 변경하는 고민을 해본 적이 없는데, 컨테이너를 살리면서 옵션을 변경하는 일은 생각보다 복잡한 일로 보인다. 블로그 하나의 글만 봤지만, 하드웨어적인 접근이 필요한 부분으로 보인다. 추후에 더 찾아보는 걸로…!
+
+- 서버를 하드웨어적으로 접근하는 연습도 필요해 보임!!!
+
+<br>
+
+참고자료
+
+[실행 중인 Docker 컨테이너의 구성을 수정하는 방법 Docker 컨테이너 간에 데이터를 공유하는 방법 GitLab CI의 공유 캐시로 Minio를 구성하는 방법 TLS를 사용하여 Docker의 TCP 소켓을 보호하는 방법 명령줄에서 Github 리포지토리를 생성 및 관리하는 방법 업데이트 방법 Git Commit Diffs를 다른 파일에 적용하는 방법 - 최신](http://choesin.com/%EC%8B%A4%ED%96%89-%EC%A4%91%EC%9D%B8-docker-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88%EC%9D%98-%EA%B5%AC%EC%84%B1%EC%9D%84-%EC%88%98%EC%A0%95%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95-docker-%EC%BB%A8%ED%85%8C)
