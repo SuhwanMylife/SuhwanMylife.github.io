@@ -11,6 +11,8 @@ tags:
 1. Embedding 퀄리티를 높일 수 있는 방법은 뭘까요?
 2. Deepwalk와 Node2vec의 차이점은 무엇일까요?
 
+<br>
+
 ```python
 # 필요한 모든 라이브러리 임포트
 import torch
@@ -35,13 +37,19 @@ edges = edge_index.t().numpy()
 G = nx.from_edgelist(edges, create_using=nx.Graph())
 ```
 
+<br>
+
 # Node2vec이란?
 
 DeepWalk와 마찬가지로 Random Walk와 Word2Vec 알고리즘을 동일하게 사용한다.
 
+<br>
+
 **그럼 DeepWalk랑 뭐가 다른데?**
 
 Random Walk시의 Bias 유뮤
+
+<br>
 
 **Walk에 Bias 부여하는 것이 미치는 영향**
 
@@ -52,6 +60,8 @@ Graph의 본질은 Relation이기에, 우리는 어떤 노드까지가 실제로
     - DFS, BFS
     - BFS: 이전에 보았던 것과 비슷한 주변 노드들을 둘러보는 전략. 가장 가까운 노드를 먼저 방문하고 그 다음으로 가까운 노드를 방문하는 식으로 샘플링
     - DFS: 이전에 본 적 없는 Node들을 둘러보는 전략. 한 뱡향으로 최대한 깊게 탐색하고, 더 이상 방문할 노드가 없으면 이전 노드로 돌아와 다른 방향을 탐색하는 식으로 샘플링
+
+<br>
 
 **Search Bias Probability**
 
@@ -65,6 +75,8 @@ DFS, BFS를 적절히 조정하여 최적의 여행 계획을 세울 수 있음:
     
     타겟 노드의 이웃이 아닌 노드로 이동하는 확률을 제어. 이 값이 크면 타겟 노드의 주변을 탐색하며 너무 멀리 가지 않게 되고, 반대로 작아지면 간접적으로 연결되어 있는 노드를 방문하며 먼 범위까지 탐색.
     
+
+<br>
 
 ```python
 # torch_geometric의 데이터를 NetworkX 그래프로 변환
@@ -111,6 +123,8 @@ plt.show()
 
 이렇게 Node Sampling 전략 수립 끝! 이제 여행의 방향을 주체적으로 정해봅시다.
 
+<br>
+
 # Social Network Concept
 
 잠시 다른 이야기로, 두 가지 컨셉을 짚고 넘어갑시다: Structural Equivalence, Homophily
@@ -118,11 +132,15 @@ plt.show()
 - 두 개념은 유저의 선호도를 추론하고, 관심을 가질 만한 항목을 예측하는 데 중요한 역할
     - 우리가 이후에 구현할 추천 시스템의 효율성과 정확성을 위해 미리 알아봅시다!
 
+<br>
+
 **Structural Equivalence**
 
 두 개 이상의 노드가 유사한 연결 패턴을 가지고 있는지 판단할 때 사용
 
 - 노드 A와 B의 neighbor nodes 체크했을 때 겹치는 노드가 많다면 Structural Equivalent하다고 말할 수 있음
+
+<br>
 
 **Homophily**
 
@@ -130,10 +148,14 @@ plt.show()
 
 - 노드 C와 D의 Attribute가 비슷하다면, 두 노드가 neighborhood일 가능성(Edge로 연결되어 있을 가느성)이 높다고 할 수 있음
 
+<br>
+
 그렇다면, 두 개념은 상호 배타적?
 
 - 그렇지 않습니다. 두 개념이 서로 연관될 수는 있지만, 반드시 서로에게 직접적인 영향을 미치는 것은 아니다.
     - 예) 서로 동일한 선호나 취향을 가진다고 해서 비슷한 사회적 위치나 인간관계를 가지고 있다는 법은 없다.
+
+<br>
 
 이제 새로운 전략을 가지고 더 복잡한 그래프를 만나봅시다.
 
@@ -180,6 +202,8 @@ plt.show()
 어디까지 이웃 노드로 고려하는 게 좋을지 제어하는 것은 Graph 학습에서 굉장히 중요한 문제이다. walk 자체가 sequence, 즉 embedding에 관여하기 때문이다.
 
 파라미터 p와 q를 적절히 조정함으로써 random walk가 node 1454까지 닿게 할 수도 있고, node 48의 주변 노드들만 돌아다닐 수도 있다!
+
+<br>
 
 # Node2Vec 구현
 
@@ -241,6 +265,8 @@ def generate_walks(G, num_walks, walk_length, p=1, q=1):
 
 ![Untitled 2](https://github.com/SuhwanMylife/SuhwanMylife.github.io/assets/70688382/633ab4fc-228b-45e3-b66e-8a8ab45b44af)
 
+<br>
+
 이제 위 함수와 Word2Vec 알고리즘을 결합해 봅시다. 이제 DeepWalk에서 한 층 더 발전된 Node2Vec 모델이 될 겁니다!
 
 ```python
@@ -272,6 +298,8 @@ vector
 - 임베딩은 ML 모델의 input으로 사용되기도 한다.
     - 노드 분류, 링크 예측, 클러스터링 등의 task를 풀기 위한 앙상블이 가능
     
+<br>
+
 ```python
 # 레이블이 있는 노드만 선택
 labels = data.y.numpy()
@@ -296,6 +324,8 @@ p와 q를 임의로 숫자를 조정해 가면서 베이스라인 모델의 성�
 
 - CORA dataset은 homophilic한 컨셉을 가진 graph라는 것과 마찬가지
     - 유사한 특성을 가진 노드들이 서로 연결되는 경향이 있는 것이다. 이를 random walk의 bias로 반영했을 때 성능이 더 좋아진다는 것인데, 잘 생각해보면 CORA dataset이 논문 인용관계를 담고 있었기 때문에 어찌보면 당연한 결과이다.
+
+<br>
 
 DeepWalk 알고리즘의 성능은 이미 꽤나 좋은 것으로 검증되어 있다. 때문에 Baysian optimizing(베이지안 최적화)로 파라미터 튜닝을 해봅시다.
 

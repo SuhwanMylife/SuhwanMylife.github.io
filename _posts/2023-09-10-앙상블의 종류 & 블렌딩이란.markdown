@@ -7,10 +7,6 @@ title: "앙상블의 종류 / 블렌딩이란?"
 
 시계열 예측 목적으로 이런 자료들을 보고 있는데, 특히 스태킹은 시계열 예측과는 맞지 않는 것 같아 일단 보류한다. 추후에 앙상블을 사용한 사례가 등장하면 추가적으로 정리해 볼 예정이다.
 
-참고자료
-
-[https://tyami.github.io/machine learning/ensemble-1-basics/](https://tyami.github.io/machine%20learning/ensemble-1-basics/)
-
 <br>
 
 **Voting의 종류: 하드 보팅(Hard voting), 소프트 보팅(Soft voting)**
@@ -84,3 +80,8 @@ weak learner들의 예측 결과를 바탕으로 meta learner로 학습시켜 �
 
 [머신러닝 스태킹 앙상블(stacking ensemble)이란? - CV(Kfold) 기반 stacking ensemble](https://lsjsj92.tistory.com/559)
 
+<br>
+
+참고자료
+
+[https://tyami.github.io/machine learning/ensemble-1-basics/](https://tyami.github.io/machine%20learning/ensemble-1-basics/)

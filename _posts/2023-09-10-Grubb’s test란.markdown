@@ -6,14 +6,6 @@ use_math: true
 
 <br>
 
-참고자료
-
-[Grubb's test 이상치 탐지](https://exmemory.tistory.com/19)
-
-[Grubbs's test](https://en.wikipedia.org/wiki/Grubbs's_test)
-
-<br>
-
 가정: 모집단이 정규분포임을 가정
 
 ⇒ 정규성 가정에 기반을 두고 있으며, 테스트 이전에 정규분포를 따르는지 반드시 확인해야 한다.
@@ -63,4 +55,12 @@ Grubb’s test의 **Critical Value(임계치)**
 - 자유도: N-2, 유의 수준: α/(2*N*)
     - 자유도가 뭐임?
     - 유의 수준: 통계적인 가설검정에서 사용되는 기준값. 일반적으로 유의 수준을 α로 표시하고, 95%의 신뢰도를 기준으로 한다면 0.05값이 유의수준 값이 된다.
+
+<br>
+
+참고자료
+
+[Grubb's test 이상치 탐지](https://exmemory.tistory.com/19)
+
+[Grubbs's test](https://en.wikipedia.org/wiki/Grubbs's_test)
 

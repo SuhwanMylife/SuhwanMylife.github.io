@@ -14,6 +14,8 @@ tags:
 
 - 논문 인용 네트워크를 나타내는 데이터셋
 
+<br>
+
 **인접 행렬(Adjecency Matrix)의 중요성**
 
 인접 행렬: Graph의 기본적인 Structure Information 제공
@@ -21,6 +23,8 @@ tags:
 큰 그래프의 복잡한 구조 탐색하고 이해하기 위해서 Adjecency Matrix의 도움 필요
 
 - 정확히는 Random Walk라는 알고리즘이 Adjecency Matrix의 Graph Structure information을 활용하도록 해야 함
+
+<br>
 
 # **Random Walk**
 
@@ -32,11 +36,15 @@ Random Walk: Graph의 특정 Node에서 시작해 임의의 Direction으로 이�
 - Network homophily hypothesis 네트워크 동질성 가정
     - 가까운 거리에 있는 Node들은 서로 비슷한 Attribute(특성, Feature)를 갖는다
 
+<br>
+
 **Random Walk 작동 방식**
 
 1. Start Node(시작 노드) 선택
 2. 현재 노드에 연결된 이웃 노드 중 하나를 random하게 선택해 그 방향으로 이동
 3. 일정 횟수 혹은 조건을 만족할 때까지 2번 과정 반복
+
+<br>
 
 Random Walk 구현 코드
 
@@ -55,10 +63,14 @@ def random_walk(G, start_node, walk_length):
     return walk
 ```
 
+<br>
+
 random walk의 세부 동작 방식이나 사용 목적에 따라 Startnode의 선택이나 walk의 수 등을 다르게 설정
 
 - 일부 노드만 중점적으로 분석하고자 하는 경우 그 노드들에서만 random walk 수행
 - or 일부 노드를 샘플링해 random walk 수행
+
+<br>
 
 random walk 개념 차용하여 local information 사용하는 것은 전체 그래프를 분석하는 것보다 효율적인 방법을 제공
 
@@ -75,6 +87,8 @@ print(random_walk(G,0,20))
 
 - 빈번하게 출력되는 만큼 특정 노드가 그래프 내에서 중요한 역할을 하는 것일 수 있음!
 
+<br>
+
 이제 좀 더 어려운 개념으로…
 
 Random Walk는 Node Embedding 생성에 사용되는 **DeepWalk**, Node2Vec같은 알고리즘의 기반임!
@@ -82,9 +96,13 @@ Random Walk는 Node Embedding 생성에 사용되는 **DeepWalk**, Node2Vec같�
 - Node 사이의 경로를 sampling하는 데에 Random walk 사용
 - 두 알고리즘은 Node similarity를 capture한 Vector Representation(Embedding)을 학습
 
+<br>
+
 여기서 **임베딩(embedding)**이란?
 
 고차원 공간에서 단어나 이미지와 같은 데이터 조각을 수학적으로 표현한 벡터뭉치
+
+<br>
 
 # **Deep Walk**
 
@@ -95,6 +113,8 @@ Deep Walk: Graph Embedding을 생성하는 알고리즘 중 하나
 
 Deep Walk 이해를 위해 Random Walk와 비교해봅시다.
 
+<br>
+
 ### **Random vs Deep**
 
 Random walk: 그래프 상의 노드들을 무작위로 순회하는 가장 베이직한 방법론
@@ -102,6 +122,8 @@ Random walk: 그래프 상의 노드들을 무작위로 순회하는 가장 베�
 DeepWalk: Random walk를 사용하여 Node를 Vector Space에 투영하는 방법론
 
 - DeepWalk = Random walk + Word2Vec?
+
+<br>
 
 **Random Walk의 역할**: Random walk의 실행결과로 Node Sequence(일종의 문장)를 생성. Sequence에 포함되는 각 Node는 ‘단어’에 해당
 
@@ -111,6 +133,8 @@ DeepWalk: Random walk를 사용하여 Node를 Vector Space에 투영하는 방�
 - 최종적으로 모델 임베딩은 단어 사이의 의미적 관계를 반영
 
 ⇒ 생성된 sequence(문장)를 활용하여 Word2Vec(특히 **Skip-gram** 아키텍처) 모델이 각 노드의 **Vector Representation**(벡터 표현, Embedding)을 학습
+
+<br>
 
 여기서 **skip-gram** 아키텍처, **Vector Representation**이 뭔데?
 
@@ -124,12 +148,16 @@ DeepWalk: Random walk를 사용하여 Node를 Vector Space에 투영하는 방�
 
 ⇒ Deep Walk의 목표: **Feature Representations of Nodes(=embedding, Vector Representation)**를 만들어내는 것
 
+<br>
+
 지금부터의 과정
 
 1. Unbiased Random Walk 구현
 2. Word2Vec을 통해 Node Embedding 학습
 3. 임베딩을 t-SNE를 통해 2차원으로 축소하여 시각화
 4. Random Forest 모델로 분류 작업 수행
+
+<br>
 
 random walk
 
@@ -149,6 +177,8 @@ walks = [unbiased_random_walk(G, node, 10) for node in range(data.num_nodes) for
 
 위 코드에서 Biased random walk 함수 정의하고 walk 추출, 이를 10번 반복
 
+<br>
+
 ```python
 # String 형태로 변환 (Word2Vec 입력을 위해)
 walks = [[str(node) for node in walk] for walk in walks]
@@ -164,6 +194,8 @@ Word2Vec 학습을 위해 walks 내의 모든 노드를 문자열로 변환
 
 Word2Vec 모델 학습 결과로 Node가 걸어간 경로들로 Embedding 추출
 
+<br>
+
 ```python
 # t-SNE를 통한 시각화
 embeddings_2d = TSNE(n_components=2).fit_transform(embeddings)
@@ -177,11 +209,14 @@ t-sne: 복잡한 고차원을 2~3차원으로 축소
 
 - 노드 간의 관계 이해에 도움
 
-임베딩이 잘 학습되었는지, 원하는 attribute를 잘 capture하고 있는지 확인
+임베딩이 잘
+<br>
 
 한 가지 궁금증, 임베딩 시 train_set과 test_set 노드를 합쳐서 random walk 수행 후 임베딩하는 것이 모델링 과정에서 전혀 상관없는 것인가?
 
 - 이후 모델 훈련 과정까지 쭉 보니 train_set과 test_set 노드를 합쳐 임베딩하고 있는 것 같은데, 내가 정확하게 본 것인지, 이렇게 해도 문제가 없다면 왜 문제가 없는지가 궁금함. 아마도 튜토리얼이니까 그냥 합쳐서 한 것일지도?
+
+<br>
 
 # Node Classification
 
@@ -193,11 +228,15 @@ Node Classification: 그래프 내의 각 노드를 특정 카테고리나 클�
 - 여기서 GNN의 포인트: 그래프를 구성하는 Node의 Attribute(=Feature, 특성)을 학습
     - 학습 과정에서 target node의 정보뿐 아니라 연결되어 있는 neighborhood nodes의 정보도 함께 고려
 
+<br>
+
 다음의 과정을 통해 이번 여행 마무리
 
 1. RandomForestClassifier에 Embedding 학습
 2. Node classification 진행
 3. 분류 보고서 확인
+
+<br>
 
 ```python
 # 레이블이 있는 노드만 선택
@@ -231,6 +270,8 @@ class 2: precision과 recall이 모두 높아 잘 분류되고 있는 걸로 보
     
     ⇒ 모델 개선 시 class별 성능 차이를 줄이는 데에 집중하는 게 좋겠음
     
+
+<br>
 
 1번 튜토리얼에서 봤던 하늘색 점 뭉치를 이번에는 label 정보를 포함해서 다시 출력해보자.
 
