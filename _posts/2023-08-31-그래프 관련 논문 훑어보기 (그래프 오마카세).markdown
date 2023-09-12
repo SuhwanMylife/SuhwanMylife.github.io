@@ -529,6 +529,49 @@ Graph 관련 연구 동향 파악 목적으로 작성했습니다. 주요 키워
 <summary><b>23년 3월 1주차</b></summary>
 <div markdown="1">
 
+  **Identifying critical nodes in complex networks by graph representation learning** [https://arxiv.org/pdf/2201.07988.pdf](https://arxiv.org/pdf/2201.07988.pdf?ref=graphusergroup.com)
+  
+  방대한 데이터 속에서 중요한 노드를 찾기 위해 컷팅(샘플링)과 같은 휴리스틱적인 방식 적용하곤 함
+  
+  본 논문에서는 그래프 임베딩 방식과 휴리스틱을 조합한 방식을 통해 네트워크 데이터에서 중요한 노드를 추출하는 아이디어를 제시: **influence maximization**
+  
+  - network critical node identifiy 를 위해 복잡계 네트워크 연구자들이 어떤 방식을 적용했었는지에 대한 히스토리들이 잘 정리되어있어서 몰랐었던 지식을 충전하는 느낌이라 굉장히 흥미로웠었던 논문
+  - VoteRank, EnRenew, Improved Kshell and NCVoteRank 라는 methodology 들에 대해 알게되어 한 층 성장한 느낌
+  
+  **LINK PREDICTION WITH NON-CONTRASTIVE LEARNING** [[https://arxiv.org/abs/2211.14394](https://arxiv.org/abs/2211.14394?ref=graphusergroup.com)]
+  
+  contrastive-learning , positive sample 과 negative sample를 조합해서 임베딩을 더 잘해보려는 방식
+  
+  - Link prediction 특히 recommender system 에서 많이 활용되고 있는 방식
+  - 저자는 이 방식에 1. Negative sampling cost 2. Overfitting 문제가 있다고 주장. 저자는 non-contrastive learning 방식을 활용.
+  
+  Simple corrpution function 을 통해 negative sampling 진행하여 expensive cost 를 cheap cost로 전환하려는 아이디어를 제안
+  
+  - Cold-start problem , graph SSL 등이 화두가 되며 contrastive learning 의 관심이 부쩍 올라가고 있는 추세
+  
+  **Global Context Enhanced Graph Neural Networks for Session-based Recommendation** [[https://arxiv.org/pdf/2106.05081.pdf](https://arxiv.org/pdf/2106.05081.pdf?ref=graphusergroup.com)]
+  
+  논문 핵심: “session 마다 context가 발생할 텐데 이를 global과 session으로 구분지어 임베딩한다.”
+  
+  global graph가 결국 새로운 관점이자, 논문의 주 아이디어
+  
+  - global graph를 만드는 방식
+  - 추천시스템에서 왜 유저의 전후맥락이 중요할까?라는 의문을 가지면서 보시면 좋을 논문
+  
+  **LT-OCF: Learnable-Time ODE-based Collaborative Filtering** [[https://arxiv.org/pdf/2108.06208.pdf](https://arxiv.org/pdf/2108.06208.pdf?ref=graphusergroup.com)]
+  
+  미분 방정식과 graph smoothness의 조합이 왜 협업 필터링(CF)에서 유의미한지에 대해 이야기
+  
+  본 논문의 장점 두 가지
+  
+  1. 미분방정식을 활용해 parameter를 많이 줄였다.
+  2. discrete 형식의 time value를 continous하게 변형하여 활용한다.
+  - 수학적 테크닉과 시간의 흐름에 따른 추천시스템에 대해 궁금하신분들께서 보시면 좋을 논문
+  
+  **Hardy가 k8s 에 관심을 가지게 된 이유**
+  
+  MLops with graph machine learning 으로부터 k8s에 대해 관심
+
   <br>
 </div>
 </details>
@@ -537,6 +580,38 @@ Graph 관련 연구 동향 파악 목적으로 작성했습니다. 주요 키워
 <summary><b>23년 3월 2주차</b></summary>
 <div markdown="1">
 
+  **Graph Rewiring: From Theory to Applications in Fairness** [https://github.com/ellisalicante/GraphRewiring-Tutorial](https://github.com/ellisalicante/GraphRewiring-Tutorial?ref=graphusergroup.com)
+      
+  GNN 고질적인 문제인 ‘over-smoothing , over-squashing and under-reaching 을 어떻게 네트워크 이론으로 해결해볼것인가’라는 관점이 담겨있는 튜토리얼
+
+  - 해당 graph rewiring function들을 어떤식으로 구성할지에 대해 기초지식(spectral theroy) 부터 transductive, inductive sampling 관점으로 접근
+  - graph fairness까지 이론부터 실무적용 관점까지 올인원으로 다룬 튜토리얼
+
+  **On Generalized Degree Fairness in Graph Neural Networks** [https://arxiv.org/pdf/2302.03881.pdf](https://arxiv.org/pdf/2302.03881.pdf?ref=graphusergroup.com)
+
+  GNN는 degree에 따라 정보의 전달량이 달라지고 그 정보의 전달에 따라 node의 smoothness가 달라지기 때문에, 이를 어떻게 적절히 배분하는지가 중요
+
+  여기에서는 degree fairness 관점으로 접근
+
+  **Learning Stance Embeddings from Signed Social Graphs** [https://arxiv.org/pdf/2201.11675.pdf](https://arxiv.org/pdf/2201.11675.pdf?ref=graphusergroup.com)
+
+  singed network: 노드간의 관계의 긍/부정을 직접 명시하기 위한 그래프
+
+  'singed network'에서 긍정/부정 관계를 분석하는 것을 넘어서, 각 트윗이 어떤 주제에 대한 긍정/부정을 포함하는지를 고려하여 임베딩하는 방법 제안
+
+  - 그래프 기술의 기초인 random-walk 와 societal practical perceptive 가 잘 어울러진 논문
+  - 어떻게 소셜관점과 그래프관점을 잘 접목했는지에 대한 호기심을 기반으로 보시면 굉장히 재밌을 논문
+  - 사회과학쪽에서 그래프를 활용하실 분들께 추천
+
+  **DemoMotif: Demographic Inference from Sparse Records of Shopping Transactions based on Motif Patterns**
+
+  고객들의 영수증과 같은 일련의 구매 행위들을 기반으로 고객의 인구통계학적정보를 유추하는 논문
+
+  - 본 방법론은 행위들을 heterogeneous graph motif로 구성하여 motif 패턴 임베딩 최적화에 초점
+  - 기존에는 모든 정보들을 심플하게 노드의 feature로 담아서 parameter update하는 맥락이였다면, 이를 행위 노드로 간주하여 그래프로 모델링 한 후 motif embedding 하는 맥락
+  - 그래프 모델링에 휴리스틱이 들어가겠으나 목적에 걸맞게 디자인한다면 그 핸디캡은 충분히 감안할 수 있지 않을까 라고 시야를 넓혀준 좋은 논문
+
+  **Some Techniques To Make Your PyTorch Models Train (Much) Faster** [https://sebastianraschka.com/blog/2023/pytorch-faster.html](https://sebastianraschka.com/blog/2023/pytorch-faster.html?ref=graphusergroup.com)
   <br>
 </div>
 </details>
@@ -545,6 +620,39 @@ Graph 관련 연구 동향 파악 목적으로 작성했습니다. 주요 키워
 <summary><b>23년 3월 3주차</b></summary>
 <div markdown="1">
 
+  **Weighted flow diffusion for local graph clustering with node attributes: an algorithm and statistical guarantees** [[https://arxiv.org/pdf/2301.13187.pdf](https://arxiv.org/pdf/2301.13187.pdf?ref=graphusergroup.com)]
+    
+  attribute 활용하기 위해 flow diffusion model 차용
+  
+  - 노드간 전달되는 load를 weighted graph 형태로 적용하며, 노드간 proximity 반영
+  - • graph clustering 방법론들은 노드 , 엣지의 구조만을 활용한 방식들이 대다수입니다. large graph 에서 conductance 라는 서브 그래프간 tightly connected 를 측정하는 지표를 토대로 clustering 이 잘 되었는지 되지 않았는지를 판단하곤 했죠. 하지만, 그래프 구조 정보만을 얻고 , 활용할 수 있었던 이전과 다르게 현재는 node , edge attributes 과 같은 정보또한 얻고 활용할 수 있기에 그래프 구조만을 토대로 Clustering 하는 기존 방법론들은 old-fashioned 한 경향을 보입니다.
+  - clustering + attribute 를 diffusion operator 네트워크 이론 측면으로 접근했다는 측면에서 굉장히 재밌었습니다. good attributes 기준을 어떻게 설정하는지에 대해서도 이야기가 나와있으니, node feature engineering 에 대한 고민이 있으신 분들에게 도움
+  
+  **LazyGNN: Large-Scale Graph Neural Networks via Lazy Propagation** [[https://arxiv.org/pdf/2302.01503.pdf](https://arxiv.org/pdf/2302.01503.pdf?ref=graphusergroup.com)]
+  
+  spectral 관점에서 발생하는 Diffusion information을 효율적으로 다룸으로써 그래프 임베딩의 고질적인 문제인 ‘over-smoothing’ 해결하는 방안 제시
+  
+  - graph node 간 발생하는 load (message)의 기울기 정보를 초기화 하지 않고 재활용하여 layer 수를 줄이고 그에 따라 load에서의 최적의 정보만을 활용
+  
+  논문의 핵심: 기울기 정보와 그래프 확산 이론을 결합한 아이디어
+  
+  - 딥러닝의 핵심인 순전파와 역전파의 흐름에 대한 이해와 그래프 정보 이론에 이해가 있는 분들이 이 논문을 쉽게 볼 수 있을 것
+  - 또한 메시지 패싱에서 파라미터가 어떻게 업데이트되는지, 그리고 그 파라미터가 속도와 정확도에 어떤 영향을 미치는지 궁금해하시는 분들에게 이 논문을 추천
+  - 현업에서 GNN을 활용하고 싶지만 대용량 데이터 모델로 인해 고민하는 분들에게도 도움
+  
+  **Attending to Graph Transformers** [[https://arxiv.org/pdf/2302.04181.pdf](https://arxiv.org/pdf/2302.04181.pdf?ref=graphusergroup.com)]
+  
+  GT(Graph Transformer)의 Encoding, input feature, tokenize, propagation 4가지 요소들에 따라 각 task들에 어떤 영향을 미치는가에 대한 Research question을 answering
+  
+  globally, locally attention을 진행하기 때문에 over-smoothing과 over-squashing 문제에 직면하게 되는데 이를 어떻게 해결하는지에 대한 실험과 실험결과에 대한 해석
+  
+  - 머지않아 Graph 데이터 에서도 Transformer의 시대가 오지않을까 하는 생각이 드네요. Graph Transformer 모델 활용전, 시행착오를 줄이기에 좋은 지침서가 될 논문
+  
+  **Why (Graph) DBMSs Need New Join Algorithms: The Story of Worst-case Optimal Join Algorithms** [[https://kuzudb.com/blog/wcoj.html](https://kuzudb.com/blog/wcoj.html?ref=graphusergroup.com)]
+  
+  wcoj(worst-case optimal join algorithm) 알고리즘에 대한 설명
+  
+  - 그래프 데이터 베이스 효율성은 결국 Join speed , large dataset handling 이라고 볼 수 있습니다. 결국 실시간성 데이터가 많아지는 요즘 그 데이터들을 어떻게 잘 소화시키는지가 핵심인데요. 그 효율성의 기조가 되는 기술들에 대해 궁금하셨던 분들에게 좋을 자료
   <br>
 </div>
 </details>
@@ -553,6 +661,49 @@ Graph 관련 연구 동향 파악 목적으로 작성했습니다. 주요 키워
 <summary><b>23년 3월 4주차</b></summary>
 <div markdown="1">
 
+  **Social network analysis of Japanese manga: similarities to real-world social networks and trends over decades** [[https://arxiv.org/pdf/2303.07208.pdf](https://arxiv.org/pdf/2303.07208.pdf?ref=graphusergroup.com)]
+    
+  일본 만화에서 등장인물간의 관계를 그래프로 표현
+  
+  두 가지 가설 기반 접근
+  
+  1. 70년간 등장한 만화 캐릭터들을 분석해서 지금과 그때의 트렌드는 시스템적으로 다를 것이며,
+  2. 이 분포들은 real-social network와 비슷할 것이다.
+  
+  결과: 인간의 소셜 네트워크와 유사하게 만화의 등장인물들도 다양한 연결 관계 가지고 있다.
+  
+  - 다양한 페이지에 불균형적으로 자주 나타나는 소수의 등장인물들이 등장함으로써 네트워크를 이끌어 간다.
+  - 이를 네트워크 정량화 지표 strength, average degree, bipartite → one-mode network and analysis, assortativity 등을 활용하여 그 결과들을 해석
+  
+  SI 모델을 활용해서 Inter-Event Time (IET) distribution 을 분석하는 섹션이 흥미로움
+  
+  접근 방법론을 벤치마크하여 현업에서 HR하시는 분들이 적용해보시면 재밌는 결과가 나오지 않을까
+  
+  **PyG 2.3.0** [[https://github.com/pyg-team/pytorch_geometric/releases/tag/2.3.0](https://github.com/pyg-team/pytorch_geometric/releases/tag/2.3.0?ref=graphusergroup.com)]
+  
+  PyG is a library built upon PyTorch to easily write and train Graph Neural Networks for a wide range of applications related to structured data.
+  
+  **Compiled Graph Neural Networks** [https://pytorch-geometric.readthedocs.io/en/latest/tutorial/compile.html](https://pytorch-geometric.readthedocs.io/en/latest/tutorial/compile.html?ref=graphusergroup.com)
+  
+  compile 기능: torch code를 jittable(just-in-time)하게 해줌
+  
+  - interprete → compile로 변환해줌으로써 좀 더 기계가 읽기 쉽게 코드를 번역해 줌
+  - 무려 300배 가까이 성능 개선을 이뤄냈다고 합니다.
+  
+  **ReFresh: Reducing Memory Access from Exploiting Stable Historical Embeddings for Graph Neural Network Training** [[https://arxiv.org/pdf/2301.07482.pdf](https://arxiv.org/pdf/2301.07482.pdf?ref=graphusergroup.com)]
+  
+  GNN 에서 cost 가 많이 발생하는 여러 요소들 중 하나인 mini-batching 을 개선하고자 embedding마다 tagging(cache)을 활용해서 cost를 줄이고자 시도한 논문
+  
+  - difficulty in training large-scale GNN, motivation부터 어떻게 해결할것인가에 대해 논리 전개가 잘 되어 있는 논문
+  - 한 번 통독해보시는것을 강력 추천
+  
+  **Finally, a Fast Algorithm for Shortest Paths on Negative Graphs** [[https://www.quantamagazine.org/finally-a-fast-algorithm-for-shortest-paths-on-negative-graphs-20230118](https://www.quantamagazine.org/finally-a-fast-algorithm-for-shortest-paths-on-negative-graphs-20230118?ref=graphusergroup.com)]
+  
+  현재 graph가 가장 잘 활용되는 분야 중 하나가 바로 navigation 분야. 출발 지점과 도착 지점 사이의 최적거리를 찾는게 바로 shortest path of graph theory 문제로도 바라 볼 수 있기 때문.
+  
+  edge의 weight값 설정 시 양과 음에 대해 모두 고려해야하는 상황까지 고려 가능한 알고리즘 제시
+  
+  - 저밀도 분해(tightly-connected) 와 유사한 방향 그래프에 대한 프랙처링 절차를 개발
   <br>
 </div>
 </details>
@@ -561,9 +712,33 @@ Graph 관련 연구 동향 파악 목적으로 작성했습니다. 주요 키워
 <summary><b>23년 3월 5주차</b></summary>
 <div markdown="1">
 
+  **The dynamic nature of percolation on networks with triadic interactions**
+    
+  네트워크 과학에서 퍼콜레이션(percolation)은 노드 또는 에지가 제거되거나 추가될 때 네트워크의 동작을 참조하는 개념입니다. 특히, 침투 이론은 네트워크에서 노드 또는 에지를 제거하는 것이 네트워크에서 가장 큰 연결 구성 요소의 크기와 연결에 어떻게 영향을 미치는지 연구합니다.
+  
+  - percolation하면 떠오르는 분야가 다양하겠지만, 저는 그 중 이커머스가 가장 먼저 떠오르네요. 필수재인 휴지 물 등과 같은 물품들은 수요공급이 일정하다고 볼 수 있는 반면, 유행에 많이 좌지우지 되는 물품 같은 경우에는 수요공급 변동성이 크기에 이를 빠르게 파악해서 준비하는게 기업의 핵심 역량이라 볼 수 있습니다. 이 흐름을 이커머스 그리고 추천시스템에 적용을 해본다면, 유저들의 언급이 많아지는 아이템(percolation이 높은 아이템)을 가중치로 딥러닝 계층에 추가해준다면 성능 개선이 도움이 되지 않을까 하는 생각이 드네요.
+  
+  **Creating generalizable downstream graph models with random projections** [[https://mlog-workshop.github.io/papers/wsdm23/2023-WSDM-MLoG-Creating_Generalizable_Downstream_Graph_Models_with_Random_Projections.pdf](https://mlog-workshop.github.io/papers/wsdm23/2023-WSDM-MLoG-Creating_Generalizable_Downstream_Graph_Models_with_Random_Projections.pdf?ref=graphusergroup.com)]
+  
+  feature를 고려치 않고 그래프 구조만을 가지고 임베딩을 하게 된다면 앞서 말씀드린 task-agnostic available이 가능할까요? 본 논문에서는 그 질문에 대해 답해보고자 1.graph structural algorithm 2. graph invariant feature 3. graph neural network 각각 세가지 관점으로 접근
+  
+  - 데이터 분석대회에서 베이스라인으로 활용하던 node2vec의 성능을 향상시킬수 있는 방안이 담겨있습니다.
+  - conv1d 의 장점을 활용하여 clssifier 로써 활용해보았습니다. signal processing classifier 에서 주로 활용되던 conv1d 를 invariant , spectral 관점에서 접근하면 좋은 성능을 보일것이라는 상상이 현실로 되는 논문이였다고 생각합니다.
+  
+  **Efficiently Leveraging Multi-level User Intent for Session-based Recommendation via Atten-Mixer Network** [[https://arxiv.org/pdf/2206.12781.pdf](https://arxiv.org/pdf/2206.12781.pdf?ref=graphusergroup.com)]
+  
+  요약: Session permutation invariant 를 위해 활용한 Deepset algorithm
+  
+  Session-based GNN 알고리즘의 주 특성이라 볼 수 있는 module by module weight flow에 대해 실증분석 한 후, 그 분석으로 부터 얻은 인사이트를 기반으로 Atten-Mixer라는 아이디어를 구현
+  
+  - 핵심 문제인 Sparsification를 완화시키려는 시도
+  - session-based recommender system 관련해서 다들 궁금해하셨을만한 주제들에 대해 잘 다루어 놓은 논문이라 생각. 서베이 논문을 보기보다 본 논문을 보며 session GNN에 관해 접근하시면 훨씬 방향성 잡기에 수월하지 않을까 싶습니다.
   <br>
 </div>
 </details>
+
+현재 여기까지 훑어본 상태입니다.
+<br>
 
 <details>
 <summary><b>23년 4월 1주차</b></summary>
