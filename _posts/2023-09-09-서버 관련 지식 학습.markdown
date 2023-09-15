@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "서버 관련 지식 학습"
+title: "Docker를 활용한 개발환경 구축"
 ---
 
 <br>
